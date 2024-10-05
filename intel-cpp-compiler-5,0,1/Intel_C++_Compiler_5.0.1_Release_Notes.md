@@ -1,4 +1,6 @@
-[[Go back]](../README.md) Below is the release notes that I believe lives somewhere in the installed dirs. Can also be seen here: http://laplace.phas.ubc.ca/Doc/intel50/CRelnotes.htm
+[[Go back]](../README.md) 
+
+Below is the release notes that I believe lives somewhere in the installed dirs. Can also be seen [here](http://laplace.phas.ubc.ca/Doc/intel50/CRelnotes.htm).
 
 ---
 
