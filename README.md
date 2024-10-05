@@ -82,8 +82,6 @@ FEATURE l_cpp intelpto 5.01 permanent uncounted 4AE8033BCA13B HOSTID=ANY
 
 ## Addtl resources
 
----
-
 https://gbppr.net/greythorne/crackz/Flexlm.htm
 
 The above website seems to be the single-biggest repository of still-alive links to essays and tools around the subject. Most of the tools are Windows tools, and I am unable to source a Windows version of ICC 5.0.1's installation media so I've been unable to pursue most of this. But I have tried some and I'm just not sure I'm hunting for the right things, I've been at this mercilously for a week now and it's robbed me of my sanity. 
