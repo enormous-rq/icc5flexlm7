@@ -6,7 +6,7 @@ This is the compiler that we can't get going. Against all odds we were able to s
 [cc010911rh71.tar](intel-cpp-compiler-5,0,1) 
   [See Release Notes](intel-cpp-compiler-5,0,1/Intel_C++_Compiler_5.0.1_Release_Notes.md)
 
-We were able to successfully install it on a redhat 7.1 UTM/QEMU emulation using the bundled install script. Not entirely sure using that old of an environment is even necessary, but I would imagine something 32bit would probably be key. After install, there's a variable setting script that can be run. All of the good setup-related stuff is outlined in [this document](intel-cpp-compiler-5,0,1/iccinstructions.md) I translated from a Japanese page. It includes
+We were able to successfully install it using the bundled install script on a redhat 7.1 UTM/QEMU emulation. Not entirely sure using that old of an environment is even necessary, but I would imagine something 32bit would probably be key. After install, there's a variable setting script that can be run. All of the good setup-related stuff is outlined in [this document](intel-cpp-compiler-5,0,1/iccinstructions.md) I translated from a Japanese page. It includes
 
 - Install instructions
 - Sample license (very useful here to see what the license is supposed to look like)
