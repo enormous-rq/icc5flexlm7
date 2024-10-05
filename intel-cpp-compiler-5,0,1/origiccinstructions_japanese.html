@@ -1,0 +1,264 @@
+<html>
+<head>
+<title>インテルのコンパイラをRedHat Linuxで動かしましょう</title>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+</head>
+<body>
+
+インテルのコンパイラをRedHat Linuxで動かしましょう
+<hr>
+インテルがlinux用のC++とfortranのコンパイラを無料配布しています。<br>
+(サポート無しの非商用バージョンに限る)<br>
+コンパイラとしての性能は良いはずなので、大変魅力的な話です。<br>
+タダなのを知ってすぐにダウンロードしましたが、<br>
+動かすまでが結構大変だったので、覚書を残すことにしました。<br><br>
+<a href="#v5">version 5</a><br>
+<a href="#v6">version 6</a><br>
+<hr>
+
+<a name="v5">
+<pre>
+0. マシンの構成
+
+   Pentium 4 1.7GHz
+   memory 512MB
+   HDD  60GB
+   OS RedHat 7.1 (english version)
+
+   作業はすべてrootで行った。
+
+
+1. まずはダウンロード。
+
+   http://www.intel.co.jp/jp/developer/software/products/eval/index.htm
+
+   に行って、名前とメールアドレスを書くとパッケージのダウンロードができる。
+   僕が落としたのは次の二つ。
+
+   C++     : cc010911rh71.tar
+   fortran : fc010821rh71.tar
+
+   同時に、登録したメールアドレスにライセンスファイルが送られてくる。
+
+   C++     : l_cpp.lic
+   fortran : l_for.lic
+
+   でライセンスファイルの中身はこんな感じ。各自確認すること。
+   (ただし、ライセンスの中身は一部変えてあります)
+
+   ***l_cpp.lic***
+   FEATURE l_cpp intelpto 5.01 permanent uncounted BXXXXBBXXXX1 \
+          HOSTID=ANY SN=NCOfxwpmb SIGN=DXXXX9EXXXX6
+   ***************
+
+   ***l_cpp.lic***
+   FEATURE l_for intelpto 5.01 permanent uncounted 3YYYY55YYYYB \
+          HOSTID=ANY SN=NCOfxwpmb SIGN=7YYYY2BYYYY0
+   ***************
+
+
+2. コンパイラのインストール
+
+   まずはファイルの解凍。適当なディレクトリで
+   
+   % tar xfv cc010911rh71.tar
+   
+   等としてファイルを解凍すると、
+
+   clicense
+   install
+   intel-icc-5.0.1-129.i386.rpm
+   intel-ldb-5.0.1-119.i386.rpm
+   intel-subh-5.0.1-118.i386.rpm
+   intel-xenv64-5.0.1-35.ia64.rpm
+   intel-ecc64-5.0.1-71.ia64.rpm
+   lgpltext
+
+   が出来上がる。おもむろに
+   
+   % ./install
+   
+   すると、
+   
+   Which of the following would you like to install?
+   1. Intel(R) C++ Compiler for 32-bit applications, Version 5.0.1   Build 010730D0
+   2. Linux Application Debugger, Version 5.0.1, Build 20010720.
+   x. Exit.
+
+   と聞いてくるので、もちろん 1 を選択。
+   注意書きをよく読んで"accept"して、すべてデフォルト設定。
+   ついでにデバッガもインストールしておく。
+   
+   /opt/intel/compiler50
+   /opt/intel/licenses
+   
+   が展開されていることを確認する。
+   同様にしてfortranもインストールしてしまう。
+
+3. 環境変数の設定
+
+   シェルはtcshだと言うことを仮定。
+   ~/.cshrc に次の２行を加える。
+   
+   setenv PATH ${PATH}:${HOME}:/usr/local/bin:/opt/intel/compiler50/ia32/bin
+   source /opt/intel/compiler50/ia32/bin/iccvars.csh
+   
+   ここで注意！<font color="#ff0000">iccvars.csh の最後の一行が間違っているかもしれません。</font>
+   
+   間違い） setenv INTEL_FLEXLM_LICENSE=/opt/intel/licenses
+   正しい） setenv INTEL_FLEXLM_LICENSE /opt/intel/licenses
+   
+   と訂正する（作った人がbashと混同したのかも知れない）。
+   また、マニュアルによると
+   
+   setenv INTEL_FLEXLM_LICENSE /opt/intel/licenses/license.dat
+   
+   とフルネーム書くのが普通のようです。
+   (FLEXlm End Users Guide "3.1.2 Setting the Path with an Environment Variable")
+   bash はよく分からないので割愛。愛・・・
+   
+
+4. ライセンスファイルの設置
+
+   このコンパイラはフリーではあるが、ライセンスプログラムをデーモンとして走らせつつ
+   使用しなければならない。そこで、メールで送られてきたファイルがここで使われる。
+   しかし、送られてきたままでは使えない。
+   
+   http://www.intel.co.jp/jp/developer/software/products/compilers/c50/linux/index.htm
+   
+   にある「FLEXlm エンド・ユーザーズ・ガイド (英語)」と言うものをよく読むと
+   次の二行を追加しなければならない事がわかる。
+   (FLEXlm End Users Guide "3.3 Sample License File")
+   
+   SERVER マシンの名前 マックアドレス 適当なポート番号
+   DAEMON intelpto /opt/intel/compiler50/flexlm/intelpto
+   
+   で、要するに/opt/intel/licenseにlicense.datと言うものを作った。
+   
+   ***license.dat***
+   SERVER coffee BBAABBAABBAA 12000
+   DAEMON intelpto /opt/intel/compiler50/flexlm/intelpto
+   FEATURE l_cpp intelpto 5.01 permanent uncounted BXXXXBBXXXX1 HOSTID=ANY SN=NCOfx wpmb SIGN=DXXXX9EXXXX6
+   FEATURE l_for intelpto 5.01 permanent uncounted 3YYYY55YYYYB HOSTID=ANY SN=NCOfx wpmb SIGN=7YYYY2BYYYY0
+   *****************
+   
+   この場合、マシン名は coffee で、そのMACアドレスは BB:AA:BB:AA:BB:AA である。
+   ポート番号は他と競合しないように、適当に割り振ること。また、fortranも使うので
+   そのライセンスファイルも連続して書いてしまった。書き方としてはこれで十分。
+   （FLEXlm End Users Guide "3.2 License File Format"）
+   
+   
+5. デーモンの起動(自動起動させる設定)
+
+   ライセンスプログラムはログインしてから
+   
+   % /opt/intel/compiler50/flexlm/lmgrd -c /opt/intel/licenses/license.dat -l /opt/intel/licenses/license.log
+   
+   と入力すればよいのだが、いちいち実行するのも面倒なので、
+   マシンの起動時に一緒に起動するようにしておく。つまり、
+   
+   /etc/rc.d/init.d
+   
+   にファイル lmgrd (chmod 755)を作り、runlevel 3 5 で起動させる。
+   lmgrd の中身。
+   
+***lmgrd***
+#! /bin/sh
+#
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# See how we were called.
+case "$1" in
+  start)
+        echo -n "Starting lmgrd: "
+        daemon /opt/intel/compiler50/flexlm/lmgrd -c /opt/intel/licenses/license.dat -l /opt/intel/licenses/license.log
+
+        echo
+        touch /var/lock/subsys/lmgrd
+        ;;
+  stop)
+        echo -n "Stopping lmgrd: "
+        killproc lmgrd
+
+        echo
+        rm -f /var/lock/subsys/lmgrd
+        ;;
+  status)
+        status lmgrd
+        ;;
+  restart|reload)
+        $0 stop
+        $0 start
+        ;;
+  *)
+        echo "Usage: lmgrd {start|stop|status|restart}"
+        exit 1
+esac
+
+exit 0
+***********
+
+   これを作ったら、
+   
+   /etc/rc.d/rc3.d
+   /etc/rc.d/rc5.d
+   
+   の二箇所で、
+   
+   % ln -s ../init.d/lmgrd  S98lmgrd
+   
+   とリンクを張る。S98と言うのは適当に競合を避ければよい。
+   
+   % /etc/rc.d/init.d/lmgrd start
+   
+   で、ps -ef でプロセスが走っていれば、ほぼ大丈夫。
+   自動でデーモンが走ったり、環境変数がちゃんと反映されるかチェックするために
+   ここら辺でリブートする。
+
+
+6. 使ってみよう。
+
+   一度ここまでやれば、ユーザーが増えたときには
+   「3. 環境変数の設定」
+   だけすればＯＫ
+   
+   あとは頑張ってください。
+</pre>
+
+<hr>
+
+<a name="v6">
+<pre>
+version 6.0 の場合
+
+2. までは一緒
+
+3. 環境変数の設定
+
+   ~/.cshrc に追加
+   
+   setenv PATH ${PATH}:${HOME}:/usr/local/bin:/opt/intel/compiler60/ia32/bin
+   source /opt/intel/compiler60/ia32/bin/iccvars.csh
+
+4. ライセンスファイル
+
+   メールに添付して送られてきたライセンスファイルコピーして終わり
+   
+   % cp l_cpp_01234567.lic /opt/intel/licenses
+   % cp l_for_76543210.lic /opt/intel/licenses
+
+
+デーモンなども気にしなくて良いみたいです。
+ずいぶん簡単になりました・・・
+
+</pre>
+
+<p>
+間違いなどあった時は<a href="mailto:ueken@spring8.or.jp">うえすぎ</a>まで。
+</p>
+
+</body>
+</html>
+

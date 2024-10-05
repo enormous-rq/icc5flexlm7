@@ -1,0 +1,279 @@
+<HTML>
+<HEAD>
+<TITLE>FLEXlm Frequently Asked Questions: Q5.     Using FLEXlm</TITLE>
+</HEAD>
+<BODY>
+<P><A HREF="TOC.htm">Table of Contents</A>
+ * <A HREF="chap5.htm">Previous Chapter</A>
+ * <A HREF="chap7.htm">Next Chapter</A>
+</P>
+<P>&nbsp;
+</P>
+<H1>Q6.     Using FLEXlm</H1>
+<HR>
+<A NAME="Q6.1"></A>
+<H2>Q6.1  How do I install a FLEXlm license file?</H2>
+<P>
+The simplest thing to do is put the license file where the vendor suggests putting it. If you've 
+received the file via e-mail, you can use the email message itself as the license file, since all lines 
+not beginning with FLEXlm keywords are considered comments. 
+</P>
+<P>
+Normally, the only things you can change in a license file are
+</P>
+<OL>
+<LI>The hostname (not the hostid!). 
+</LI>
+<LI>The port number on the SERVER line. This number may already be in use (lmgrd will 
+report `Address In Use' if the port is in use).</LI>
+<LI>The path to the vendor daemon executable on the DAEMON/VENDOR line.</LI>
+</OL>
+<A NAME="Q6.2"></A>
+<H2>Q6.2  How do I start the FLEXlm license server?</H2>
+<P>
+<FONT SIZE="+2">On <A NAME="IX36">Unix</A>:</FONT></P>
+<P>
+We strongly recommend that lmgrd not be run as root, since any process run by root is a 
+potential OS security risk.
+</P>
+<PRE>% lmgrd -c <I>license_file_path</I> -l logfile &amp;</PRE>
+<P>
+If you run lmgrd from a boot startup script, you can run it as a regular user using the 
+su 
+command:
+</P>
+<PRE>su username -c 'umask 022; /path/lmgrd -c /path/license.dat -l /path/log'</PRE>
+<DL>
+<DT>Where</DT>
+</DL>
+<DL>
+<DT><I>username</I></DT>
+<DD>is a non-privileged user</DD>
+<DT><I>path</I></DT>
+<DD>correct path to lmgrd, license.dat and log file</DD>
+</DL>
+<P>
+Note that as of v4, lmgrd automatically runs in the background on Unix.
+</P>
+<P>
+<FONT SIZE="+2">On <A NAME="IX37">Windows/NT</A>:
+</FONT></P>
+<P>
+You can start lmgrd in a DOS window, but you MUST add 
+-app to the command line. If you don't add -app, it will hang for 20 seconds, and then exit, with no error message.
+</P>
+<PRE>c:\flexlm\i86_n3\lmgrd -app -c <I>license_file_path</I> -l logfile</PRE>
+<P>OR</P>
+<P>You can use the &quot;FLEXlm License Manager&quot; icon in the Control Panel. 
+</P>
+<PRE>Make sure you have the correct paths for &quot;lmgrd.exe&quot; and &quot;license.dat&quot;. 
+Then click on the &quot;START&quot; button.</PRE>
+<P>
+
+You also have the option of setting up lmgrd as a <A NAME="IX38">service </A>from the FLEXlm control panel (if your vendor included it).  To do this open the control panel and specify the path to lmgrd, the license file and the logfile.  Then click on the &quot;Use NT Services&quot; and the &quot;Start on Power-up&quot; check boxes and lmgrd will run as an NT service, starting on power-up.
+</P>
+<P>
+The Control Panel can also be used Windows 95/98.  You can not run it as a service, but you can have lmgrd start on power-up.  It works the same as on NT.</P>
+
+<P>
+  To install as a service, use the 
+INSTALL.EXE command provided by FLEXlm. For example:</P>
+<PRE>C:\FLEXLM&gt; installs C:\flexlm\lmgrd.exe </PRE>
+<P>&nbsp;
+</P>
+<A NAME="Q6.3"></A>
+<H2>Q6.3  I'm having trouble starting the license server in the Unix system bootup files. How can I get this to work? </H2>
+<P>
+For reasons unknown some /etc/rc (/etc/rc2.d, /sbin/rc2.d, etc.) files refuse to run lmgrd with the 
+simple command listed above. There are 3 workarounds we know to work - either or both 
+should fix the problem: 
+</P>
+<OL>
+<LI>Use 'nohup su 
+username -c `umask 022; lmgrd -c ...''. (It's not recommended to run 
+lmgrd as root; the su 
+username is used to run lmgrd as a non-privileged user.)</LI>
+<LI>Add 'sleep 2' after the lmgrd command. 
+
+</LI>
+<LI>To start the license manager daemon (lmgrd<I></I>) execute a command similar to the 
+following.
+<UL>
+<LI>If you are running in the C shell:</LI>
+</UL>
+<PRE>% <I>lmgrd_path</I><TT> -c </TT><I>license_file_path</I><TT> </TT>&gt;&amp; <I>log_path</I> &amp;</PRE>
+<UL>
+<LI>If you are using either the Korn or Bourne shell:</LI>
+</UL>
+<PRE>$ nohup <I>lmgrd_path</I> -c <I>license_file_path</I> &gt; <I>log_path</I> 2&gt;&amp;1 &amp;</PRE>
+</LI>
+</OL>
+<P>
+On Unix, edit the appropriate boot script, which may be 
+<TT>/etc/rc.boot</TT>, 
+<TT>/etc/rc.local, /etc/rc2.d/Sxxx, /sbin/rc2.d/Sxxxx, etc.</TT> 
+Remember that these scripts are run in /bin/sh, so do not use the 
+<I>csh</I> `&gt;&amp;' redirection 
+syntax.
+</P>
+<P>
+Each Unix operating system can have some quirks in doing this, but the following 
+script has been successfully tested for HP700 systems. See the notes following for a 
+full explanation.
+</P>
+<PRE>	/bin/su daniel -c 'echo starting lmgrd &gt; \
+		/home/flexlm/v5.12/hp700_u9/boot.log'
+	
+	/bin/nohup /bin/su daniel -c 'umask 022; \
+		/home/flexlm/v5.12/hp700_u9/lmgrd -c \
+		/home/flexlm/v5.12/hp700_u9/license.dat &gt;&gt; \
+		/home/flexlm/v5.12/hp700_u9/boot.log'
+
+	/bin/su daniel -c 'echo sleep 5 &gt;&gt; \
+		/home/flexlm/v5.12/hp700_u9/boot.log'
+	/bin/sleep 5</PRE>
+<PRE> </PRE>
+<PRE>	/bin/su daniel -c 'echo lmdiag &gt;&gt;\
+		/home/flexlm/v5.12/hp700_u9/boot.log'
+
+	/bin/su daniel -c '/home/flexlm/v5.12/hp700_u9/lmdiag -n -c\
+		/home/flexlm/v5.12/hp700_u9/license.dat &gt;&gt; \
+		/home/flexlm/v5.12/hp700_u9/boot.log'
+	/bin/su daniel -c 'echo exiting &gt;&gt;\
+		/home/flexlm/v5.12/hp700_u9/boot.log'</PRE>
+<P>
+Please note the following about how this script was written:
+</P>
+<UL>
+<LI>All paths are specified in full, since no paths can be assumed at boot time.</LI>
+<LI>Since no paths are assumed, the vendor daemon must be in the same directory as 
+lmgrd, or the 
+VENDOR lines must be edited to include the full path to the vendor-daemon binary file.</LI>
+<LI>The `su' command is used to run lmgrd as a non-root user, `daniel'. We 
+recommend that lmgrd not be run as root, since it can be a security risk to run any 
+program that does not require root permissions, and lmgrd does not require root 
+permissions.</LI>
+<LI>Daniel has a csh login, so all commands executed as daniel must be in csh syntax. 
+All commands not executed as daniel must be in /bin/sh syntax, since that's 
+what's used by the boot scripts.</LI>
+<LI>The use of `nohup' and `sleep' are required on some operating systems, notably 
+HPUX and Digital Unix, for obscure technical reasons. These are not needed on 
+Solaris and some other operating systems, but are safe to use on all.</LI>
+<LI>lmdiag is used as a diagnostic tool to verify that the server is running and serving 
+licenses.</LI>
+</UL>
+<P>
+Finally, on RS-6000 systems, you have to use /etc/inittab to start the license server. The reason 
+is that AIX has not started TCP networking when /etc/rc is run, and lmgrd requires TCP 
+networking. 
+<A NAME="Q6.4"></A></P>
+<H2>Q6.4  My server refuses to start. I get the message `No licenses to serve'. </H2>
+<P>
+That's because the license file has only `uncounted' licenses, and these don't require a server. 
+Uncounted licenses have a '0' or 'uncounted' in the `number-of-licenses' field on the FEATURE line. 
+</P>
+<P>
+Note that in v5, uncounted licenses will also be supported, so long as the client application uses 
+port@host or USE_SERVER.
+<A NAME="Q6.5"></A></P>
+<H2>Q6.5  Does FLEXlm work across the<A NAME="IX39"> internet</A>?</H2>
+<P>
+Yes. A server on the internet will serve licenses to anyone else on the internet.  
+ You can limit usage with the INCLUDE and EXCLUDE options in the daemon 
+option file to allow (or deny) access to clients running on a range of internet addresses.
+<A NAME="Q6.6"></A></P>
+<H2>Q6.6  Does FLEXlm work with Internet <A NAME="IX40">firewalls</A>?</H2>
+<P>
+Many firewalls require that port numbers be specified to the firewall. Current lmgrds 
+support this. Add &quot;PORT = <I>number</I>&quot; to each DAEMON line. Also allow firewall access to all port numbers and the port number on the SERVER line.
+<A NAME="Q6.7"></A></P>
+<H2>Q6.7  If my client dies, does the server free the license? </H2>
+<P>
+Yes, unless the client's whole system crashes. Assuming communications is TCP, the license is 
+automatically freed immediately. If the whole system crashes, then 
+the license is not freed, and you should use lmremove to free the license.
+</P>
+<P>
+If the whole system running the client application crashes or is disconnected before the license is checked in, 
+the license will NOT be freed automatically. (This is most common on a PC.) To free the license, 
+use 
+ 
+lmutil lmremove or stop and restart the server.
+<A NAME="Q6.8"></A></P>
+<H2>Q6.8  What happens when the license server dies? </H2>
+<P>
+FLEXlm applications send periodic heartbeats to the server to discover if it has died. What 
+happens when the server dies is then up to the application. Some will simply continue 
+periodically attempting to re-checkout the license when the server comes back up. Some will 
+attempt to re-checkout a license a few times, and then, presumably with some warning, exit. 
+Some GUI applications will present pop-ups to the user periodically letting them know the 
+server is down and needs to be re-started. 
+<A NAME="Q6.9"></A></P>
+<H2>Q6.9  I'm getting the error 'encryption code in license file is inconsistent' or 'invalid license key'. What does this mean? </H2>
+<P>
+The license file was typed in incorrectly, or it was changed by the user. Use the '<A NAME="IX41">lmcksum</A>' utility 
+to verify the license file. If the file has 'ck=<I>nnn</I>', lmcksum will report simply OK or 
+BAD for each line. Otherwise, you'll have to compare the numbers lmcksum reports with a 
+good file, presumably run by your application's vendor. 
+</P>
+<H2>
+Q6.10  How do you tell if a port is already in use? </H2>
+<P>
+99.44% of the time, if it's in use, it's because lmgrd is already running on the port - or was 
+recently killed, and the port isn't freed yet. Assuming this is not the case, then use 'telnet host 
+port' -  if it says `can't connect', it's a free port.  You can also ping to the port and see if it's in use.
+</P>
+<P>If you use v6+ lmgrd, it will automatically detect that another lmgrd for this license is already running.</P>
+<A NAME="Q6.11"></A>
+<H2>Q6.11  On Solaris 2.4, why does it take 4 minutes to restart lmgrd?</H2>
+<P>
+This is a tunable parameter on the Solaris OS, we suggest changing it so the port is freed in 2 
+seconds rather than 4 minutes. To change the setting, as root:
+</P>
+<PRE>ndd /dev/tcp -set tcp_close_wait_interval &lt;interval&gt;</PRE>
+<P>
+where interval is in milliseconds.  The default is 240000 (4 minutes). We recommend a setting 
+&gt; 2000.
+<A NAME="Q6.12"></A></P>
+<H2>Q6.12  Does FLEXlm require root permissions?</H2>
+<P>
+No. There is no part of FLEXlm, lmgrd, vendor daemon or application, that requires root 
+permissions. In fact, it is 
+strongly recommended that you do not run the license server (lmgrd) 
+as root, since root processes can introduce security risks. If lmgrd must be started from the root 
+user (for example, in a system boot script), we recommend that you use the 
+su command to run 
+lmgrd as a non-privileged user:
+</P>
+<PRE>su username -c&quot;/path/lmgrd -c /path/license.dat -l /path/log&quot;</PRE>
+<P>
+where 
+username is a non-privileged user, and 
+<I>path</I> is the correct paths to lmgrd, license.dat and 
+debug log file. You will have to ensure that the vendor daemons listed in 
+/path-to-license/license.dat have execute permissions for 
+username. The paths to all the vendor daemons 
+in the license file are listed on each DAEMON line.
+<A NAME="Q6.13"></A></P>
+<H2>Q6.13  Is it ok to run <I>lmgrd</I> as `root' (Unix only)?</H2>
+<P>
+It is not prudent to run any command, particularly a daemon, as root on Unix, as it may pose a 
+security risk to the Operating System. Therefore, we recommend that 
+<I>lmgrd</I> be run as a non-privileged user (not `root'). If you are starting lmgrd from a boot script, we recommend that
+you use 
+
+</P>
+<PRE>su username -c&quot;umask 022; command&quot;</PRE>
+<P>
+to run 
+<I>lmgrd</I> as a non-privileged user.</P>
+<P>
+<HR>
+<A HREF="TOC.htm">Table of Contents</A>
+ * <A HREF="chap5.htm">Previous Chapter</A>
+ * <A HREF="chap7.htm">Next Chapter</A>
+</P>
+<P>&nbsp;
+</P>
+</BODY>
+</HTML>

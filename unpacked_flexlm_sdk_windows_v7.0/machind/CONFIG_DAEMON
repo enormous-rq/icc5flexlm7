@@ -1,0 +1,1202 @@
+#!/bin/csh -f
+#******************************************************************************
+#
+#	    COPYRIGHT (c) 1988-1994 by Globetrotter Software Inc.
+#	This software has been provided pursuant to a License Agreement
+#	containing restrictions on its use.  This software contains
+#	valuable trade secrets and proprietary information of 
+#	Globetrotter Software Inc and is protected by law.  It may 
+#	not be copied or distributed in any form or medium, disclosed 
+#	to third parties, reverse engineered or used in any manner not 
+#	provided for in said License Agreement except with the prior 
+#	written authorization from Globetrotter Software Inc.
+#
+#******************************************************************************
+#
+#	CONFIG_DAEMON - Configure Flexible License Manager vendor daemons
+#
+#	M. Christiano
+#	9/2/88
+#	Module:	CONFIG_DAEMON v3.45.0.0
+#	Last changed:  9/17/97
+#
+set nonomatch
+set OUTFILE = daemon.dat
+set TEMP = /tmp/FLEXlm_TEMP
+set TEMP2 = /tmp/FLEXlm_TEMP2
+set TEMP3 = /tmp/FLEXlm_TEMP3
+set TEMPLATE = lsvendor.c
+set crypt = "12345678"
+set q = \"
+if (-e machind) then
+	set KITDIRS = ([a-z]*_?? [a-z]*_???)
+	set SDIR = machind
+else
+	if (! -e lm_code.h) then
+		echo "DEMO_INSTALL must be from the FLEXlm install directory"
+		echo "	exiting..."
+		exit
+	endif
+	set KITDIRS = (../[a-z]*_?? ../[a-z]*_???)
+	set SDIR = ../machind
+endif
+
+set here = `pwd`
+
+set EXTENDED = FALSE
+if ($#argv >= 1 && ("$1" == "-x" || "$1" == "-X")) then
+	set EXTENDED = TRUE
+endif
+
+if ($#argv >= 1 && ("$1" == "demo")) then
+	set demo = TRUE
+else
+	set demo = FALSE
+endif
+
+#
+#	Defaults
+#
+set READ_WAIT_DEFAULT = 10
+
+umask 0
+rm -f $TEMPLATE
+cp $SDIR/ls_vendor.tpl $TEMPLATE
+
+echo ""
+echo "Flexible License Manager vendor daemon configuration."
+echo "Copyright (C) 1988, 1993 Globetrotter Software, Inc."
+echo ""
+
+#
+#	Check for existing lm_code.h and lsvendor.c files...
+#
+if (-e $SDIR/../machind.old) then
+	echo ""
+	echo "There is machind.old directory, indicating the product"
+	echo "has already been installed.  Do you want to use the"
+	echo -n "previous installation information (y/n)? [default Y] "
+	set resp = y
+	set resp = ($<)
+	echo $resp | grep -i '^n' >& /dev/null
+	if ($status != 0) then
+		echo "Using previous installation information ..."
+		rm -f $SDIR/lm_code.h
+		cp $SDIR/../machind.old/lm_code.h $SDIR/lm_code.h
+		rm -f $SDIR/lsvendor.c
+		rm -f $SDIR/ls_vendor.c
+		cp $SDIR/../machind.old/lsvendor.c $SDIR/lsvendor.c
+		#
+		# the sed command saves only what's in quotes 
+		#
+		set daemon = \
+		`grep VENDOR_NAME $SDIR/lm_code.h | sed 's/.*"\(.*\)"/\1/'`
+		foreach makefile ($SDIR/../*/makefile)
+			grep  $daemon $makefile >& /dev/null
+			if ($status != 0) then
+				cp $makefile /tmp/$$.mak
+				mv $makefile $makefile.sav
+				sed 's/demo/'$daemon'/' < /tmp/$$.mak > $makefile
+				rm -f /tmp/$$.mak
+			endif
+		end
+		goto buildit2
+	endif
+endif
+
+#
+
+
+echo "This script will configure and build your vendor daemon, and"
+echo "leave the resulting configuration information in the file"
+echo "$OUTFILE.  To get the default value for any selection, simply"
+echo "enter <CR>."
+echo ""
+
+#
+#	Daemon name
+#
+if ("$demo" == FALSE) then
+	echo "Your daemon must have a DAEMON name.  This name will appear in"
+	echo "the license file that you generate for your customers as the"
+	echo "name in the DAEMON line.  The name will also appear in the"
+	echo "executable for the daemon, in order for the Flexible License"
+	echo "Manager to do consistency checking."
+	echo ""
+	echo The daemon name for an evaluation kit MUST BE \"demo\".
+
+daemon_name:
+	echo ""
+	echo -n "Please enter your daemon's DAEMON name: "
+	set DAEMON = ($<)
+	if ("$DAEMON" == "") then
+		goto daemon_name
+	endif
+	echo "DAEMON $DAEMON" > $OUTFILE
+	foreach i ($KITDIRS)
+		if ("$i" != "../scoinfo.o" && -e $i) then
+			foreach j ($i/makefile)
+				echo Updating $j for daemon name \"$DAEMON\"
+				sed "/^DAEMON/s/=.*/= $DAEMON/" < $j > $TEMP
+				rm -f $j
+				cp $TEMP $j
+			end
+			foreach j ($i/license.dat)
+				sed "s/demo/$DAEMON/g" < $j > $TEMP
+				rm -f $j
+				cp $TEMP $j
+			end
+		endif
+	end
+	rm -f $TEMP $TEMP2
+else
+	set DAEMON = demo
+endif
+
+#
+#	Encryption codes
+#
+set nocodes = true
+echo ""
+#echo "Your daemon ($DAEMON) will support some number of product features."
+
+if ($demo == FALSE) then
+	if ("$EXTENDED" == "FALSE" ) then
+
+	echo "Please enter your encryption seeds (ENCRYPTION_SEED1 and "
+	echo "ENCRYPTION_SEED2) at the following pair of prompts. "
+	echo "These 2 numbers, which are then stored in machind/lm_code.h are"
+	echo "numbers which are key to FLEXlm security.  By default, they are"
+	echo ""
+	echo "	#define ENCRYPTION_SEED1 0x87654321"
+	echo "	#define ENCRYPTION_SEED2 0x12345678"
+	echo ""
+	echo "Each vendor must ensure that these with numbers are replaced with"
+	echo "numbers which are unique to your company and are kept secret.  "
+	echo "Only someone with access to these numbers can generate license"
+	echo "files that will work with your application.  MAKE SURE the numbers"
+	echo "are not left to the defaults."
+
+
+	else 
+
+	echo "Your product features can all use the same encryption"
+	echo "code, or they can use different codes.  Your daemon will"
+	echo "support only the features listed in the license file that"
+	echo "encrypt correctly with one of the codes you build into"
+	echo "your daemon.  If more than one encryption code is desired,"
+	echo "enter more codes at the following prompts.  When the list"
+	echo "is complete, just type <CR> to the 'Encryption code' prompt." 
+	endif
+endif
+
+while (1 && $demo == FALSE)
+ec:
+	if ($nocodes != "true") then
+		echo ""
+		echo "If you want an additional set of encryption codes, enter them here."
+		echo "If you are done, enter a <CR>."
+	endif
+	echo ""
+	echo -n "Encryption code first 32-bits (data[0]) [hexadecimal, <CR> to quit]: "
+	set resp = ($<)
+	if ("$resp" == "-") continue
+	echo $resp | grep "[^0-9a-fA-Fx]" >& /dev/null
+	if ($status == 0) then
+		echo "Invalid Hex number"
+		goto ec
+	endif
+	if ("$resp" != "") then
+		set crypt0 = $resp
+	else
+		if ($nocodes == "true") then
+			echo "You must specify at least one encryption code."
+			continue
+		else
+			break
+		endif
+	endif
+ec1:
+	echo -n "Encryption code second 32-bits (data[1]) [hexadecimal]: "
+	set resp = ($<)
+	if ("$resp" == "-") continue
+	echo $resp | grep "[^0-9a-fA-Fx]" >& /dev/null
+	if ($status == 0) then
+		echo "Invalid Hex number"
+		goto ec1
+	endif
+	if ("$resp" != "") then
+		set crypt1 = $resp
+	else
+		set crypt1 = 0
+	endif
+
+	echo $crypt0 | grep '^0x' > /dev/null || set crypt0 = 0x$crypt0
+	echo $crypt1 | grep '^0x' > /dev/null || set crypt1 = 0x$crypt1
+
+	if ($nocodes == "true") then
+		set firstcrypt0 = $crypt0
+		set firstcrypt1 = $crypt1
+		set samecrypt = true
+	else
+		if ($crypt0 != $firstcrypt0 || $crypt1 != $firstcrypt1) then
+			set samecrypt = false
+		endif
+		echo "		{ VENDORCODE_4, $crypt0^VENDOR_KEY5, $crypt1^VENDOR_KEY5, VENDOR_KEY1, VENDOR_KEY2," >> $TEMP
+		echo "		  VENDOR_KEY3, VENDOR_KEY4, FLEXLM_VERSION, FLEXLM_REVISION }," >> $TEMP
+	endif
+	set nocodes = false
+	echo CRYPT_CODE $crypt0 $crypt1 >> $OUTFILE
+	if ("$EXTENDED" == "FALSE") then
+		break
+	endif
+end
+if ($demo == TRUE) then
+	set samecrypt = true
+	set firstcrypt0 = 0x87654321
+	set firstcrypt1 = 0x12345678
+endif
+
+#
+#	Finish up with the encryption codes
+#
+if (-e $TEMP) then
+	sed "/^[ 	]*FLEXLM_VERSION, /r $TEMP" <$TEMPLATE >$TEMP2
+	cp $TEMP2 $TEMPLATE
+	rm -f $TEMP $TEMP2
+endif
+set vc1 = ""
+set vc2 = ""
+set vc3 = ""
+set vc4 = ""
+set vc5 = ""
+echo ""
+echo "If you want to leave the FLEXlm vendor keys unchanged in"
+echo "lm_code.h", simply enter "<CR>" to the next prompt.
+echo ""
+vk1:
+echo -n "FLEXlm vendor key #1 for $DAEMON [hexadecimal]: "
+set vc1 = ($<)
+echo $vc1 | grep "[^0-9a-fA-Fx]" >& /dev/null
+if ($status == 0) then
+	echo "Invalid Hex number"
+	goto vk1
+endif
+echo $vc1 | grep '^0x' > /dev/null || set vc1 = 0x$vc1
+if ($vc1 != "") then
+	while ($vc2 == "")
+vk2:
+		echo -n "FLEXlm vendor key #2 for $DAEMON [hexadecimal]: "
+		set vc2 = ($<)
+		echo $vc2 | grep "[^0-9a-fA-Fx]" >& /dev/null
+		if ($status == 0) then
+			echo Invalid hex number
+			goto vk2
+		endif
+	end
+	echo $vc2 | grep '^0x' > /dev/null || set vc2 = 0x$vc2
+	while ($vc3 == "")
+vk3:
+		echo -n "FLEXlm vendor key #3 for $DAEMON [hexadecimal]: "
+		set vc3 = ($<)
+		echo $vc3 | grep "[^0-9a-fA-Fx]" >& /dev/null
+		if ($status == 0) then
+			echo "Invalid Hex number"
+			goto vk3
+		endif
+	end
+	echo $vc3 | grep '^0x' > /dev/null || set vc3 = 0x$vc3
+	while ($vc4 == "")
+vk4:
+		echo -n "FLEXlm vendor key #4 for $DAEMON [hexadecimal]: "
+		set vc4 = ($<)
+		echo $vc4 | grep "[^0-9a-fA-Fx]" >& /dev/null
+		if ($status == 0) then
+			echo "Invalid Hex number"
+			goto vk4
+		endif
+	end
+	echo $vc4 | grep '^0x' > /dev/null || set vc4 = 0x$vc4
+	while ($vc5 == "")
+vk5:
+		echo -n "FLEXlm vendor key #5 for $DAEMON [hexadecimal]: "
+		set vc5 = ($<)
+		echo $vc5 | grep "[^0-9a-fA-Fx]" >& /dev/null
+		if ($status == 0) then
+			echo "Invalid Hex number"
+			goto vk5
+		endif
+	end
+	echo $vc5 | grep '^0x' > /dev/null || set vc5 = 0x$vc5
+endif
+
+if ($samecrypt == false) then
+	echo ""
+	echo "If you use different encryption codes for your features you"
+	echo "may need multiple copies of makeconfig, and you will need to"
+	echo "modify your license creation software to use the appropriate"
+	echo "code.  We will now modify $SDIR/lm_code.h to use encryption codes:"
+	echo "			$firstcrypt0  $firstcrypt1"
+	if ($vc1 != "") then
+		echo "	and the vendor keys:"
+		echo "			$vc1 $vc2 $vc3 $vc4 $vc5"
+		echo "which were the first encryption codes/vendor keys you specified."
+	else
+		echo "which were the first encryption codes you specified."
+	endif
+	echo ""
+	echo "Modify the LM_CODE lines in makekey.c your license creation"
+	echo "program in order to support your other features."
+	echo ""
+endif
+rm -f $TEMP $TEMP2
+echo s\/^\#define ENCRYPTION_SEED1.\*\/\#define ENCRYPTION_SEED1 $firstcrypt0\/ > $TEMP
+echo s\/^\#define ENCRYPTION_SEED2.\*\/\#define ENCRYPTION_SEED2 $firstcrypt1\/ > $TEMP3
+if ($vc1 != "") then
+    echo s\/^\#define VENDOR_KEY1.\*\/\#define VENDOR_KEY1 $vc1\/ >> $TEMP3
+    echo s\/^\#define VENDOR_KEY2.\*\/\#define VENDOR_KEY2 $vc2\/ >> $TEMP3
+    echo s\/^\#define VENDOR_KEY3.\*\/\#define VENDOR_KEY3 $vc3\/ >> $TEMP3
+    echo s\/^\#define VENDOR_KEY4.\*\/\#define VENDOR_KEY4 $vc4\/ >> $TEMP3
+    echo s\/^\#define VENDOR_KEY5.\*\/\#define VENDOR_KEY5 $vc5\/ >> $TEMP3
+endif
+echo s\/^\#define VENDOR_NAME.\*\/\#define VENDOR_NAME \"$DAEMON\"\/ >> $TEMP3
+sed -f $TEMP < $SDIR/lm_code.h > $TEMP2
+rm -f $SDIR/lm_code.h
+sed -f $TEMP3 < $TEMP2 > $SDIR/lm_code.h
+
+if ("$EXTENDED" == "FALSE") then
+	goto buildit
+endif
+
+#
+#	Read wait
+#
+echo ""
+echo ""
+echo "When using redundant servers, vendor daemons will connect"
+echo "to each other to establish the quorum condition that is"
+echo "is required for licensing operations."
+echo "Once an initial connection is made between daemons, there is"
+echo "a time interval within which the connection must be completed"
+echo "by an exchange of data between the daemons.  This interval"
+echo "defaults to $READ_WAIT_DEFAULT seconds.  If you wish to change"
+echo "it, enter a new value here."
+echo ""
+
+read_wait:
+echo ""
+echo -n "Connection timeout value [default: $READ_WAIT_DEFAULT seconds]: "
+set READ_WAIT = ($<)
+if ("$READ_WAIT" == "") then 
+	set READ_WAIT = $READ_WAIT_DEFAULT 
+endif
+echo "READ_WAIT $READ_WAIT" >> $OUTFILE
+rm -f $TEMP2
+sed "/ls_read_wait/s/=.*;/= $READ_WAIT;/" < $TEMPLATE > $TEMP2
+cp $TEMP2 $TEMPLATE
+
+#
+#	User encryption routine
+#
+echo ""
+echo ""
+echo "If you wish to use your own encryption routine in place of"
+echo "the Flexible License Manager's default encryption, enter the"
+echo "name of your encryption routine here.  Please see the User's"
+echo "manual for a description of how to code your encryption routine."
+echo "If you wish to use the default encryption routine, simply enter"
+echo "a <CR> at the next prompt."
+echo ""
+
+encrypt_routine:
+echo ""
+echo -n "Encryption routine [<CR> for standard algorithm]: "
+set USER_CRYPT = ($<)
+if ("$USER_CRYPT" != "") then
+	echo -n You want \"$USER_CRYPT\" for the encryption "algorithm? [y/n, default: n]: "
+	set resp = ($<)
+#
+#	This tests for the first char in resp to be [Yy]
+#
+	echo $resp | grep -i '^y' >& /dev/null
+	if ($status != 0) goto encrypt_routine
+endif
+
+echo "USER_CRYPT $USER_CRYPT" >> $OUTFILE
+if ("$USER_CRYPT" != "") then
+	rm -f $TEMP2
+	sed "/(\*user_crypt)/s/=.*;/= $USER_CRYPT;/" < $TEMPLATE > $TEMP2
+	cp $TEMP2 $TEMPLATE
+	rm -f $TEMP $TEMP2
+	echo "" > $TEMP
+	echo "extern char *$USER_CRYPT();" >> $TEMP
+	sed "/^\/\* User encryption/r $TEMP" < $TEMPLATE > $TEMP2
+	cp $TEMP2 $TEMPLATE
+
+#
+#	User-specified encryption routines can use case-sensitive
+#	algorithms.
+#
+	echo ""
+	echo ""
+	echo "Since you specified your own encryption routine, you have the"
+	echo "option of using either case-sensitive or case-insensitive"
+	echo "encryption codes.  If you select case-insensitive codes, FLEXlm"
+	echo "will convert the encryption code in the license file to all"
+	echo "uppercase alpha characters before comparing with the result of"
+	echo "your encryption algorithm.  If you select case-sensitive codes,"
+	echo "FLEXlm will do no processing of the encryption code before doing"
+	echo "the compare."
+case_sensitive:
+	echo ""
+	echo -n "Do you want to use case-sensitive encryption codes? [y/n, default: n]: "
+	set resp = n
+	set resp = ($<)
+	echo $resp | grep -i '^y' >& /dev/null
+	if ($status == 0) then
+		set CASE_SENSITIVE = 1
+	else
+		set CASE_SENSITIVE = 0
+	endif
+	echo "CASE_SENSITIVE $CASE_SENSITIVE" >> $OUTFILE
+	rm -f $TEMP2
+	sed "/ls_crypt_case_sensitive/s/=.*;/= $CASE_SENSITIVE;/" < $TEMPLATE > $TEMP2
+	cp $TEMP2 $TEMPLATE
+else
+#
+#	Using standard encryption.  Set case_sensitive to 0
+#
+	set CASE_SENSITIVE = 0
+	echo "CASE_SENSITIVE $CASE_SENSITIVE" >> $OUTFILE
+	rm -f $TEMP2
+	sed "/ls_crypt_case_sensitive/s/=.*;/= $CASE_SENSITIVE;/" < $TEMPLATE > $TEMP2
+	cp $TEMP2 $TEMPLATE
+endif
+#
+#	User initialization routine(s)
+#
+echo ""
+echo ""
+echo "If you wish to have your own initialization routine that will"
+echo "be called at the beginning of the normal vendor daemon initializtion,"
+echo "then enter the name of your initializtion routine here."
+echo "If you do not require this initialization routine, simply enter"
+echo "a <CR> at the next prompt."
+echo ""
+
+echo ""
+echo -n "Vendor-daemon user initialization routine [START] [<CR> for none]: "
+set INIT_ROUTINE = ($<)
+
+echo "INIT_ROUTINE1 $INIT_ROUTINE" >> $OUTFILE
+if ("$INIT_ROUTINE" != "") then
+	rm -f $TEMP2
+	sed "/(\*ls_user_init1)/s/=.*;/= $INIT_ROUTINE;/" < $TEMPLATE > $TEMP2
+	cp $TEMP2 $TEMPLATE
+	rm -f $TEMP $TEMP2
+	echo "" > $TEMP
+	echo "extern void $INIT_ROUTINE();" >> $TEMP
+	sed "/^\/\* Vendor initialization/r $TEMP" < $TEMPLATE > $TEMP2
+	cp $TEMP2 $TEMPLATE
+endif
+
+echo ""
+echo ""
+echo "If you wish to have your own initialization routine that will"
+echo "be called at the end of the normal vendor daemon initializtion,"
+echo "then enter the name of your initializtion routine here."
+echo "If you do not require an initialization routine, simply enter"
+echo "a <CR> at the next prompt."
+echo ""
+
+echo ""
+echo -n "Vendor-daemon user initialization routine [END] [<CR> for none]: "
+set INIT_ROUTINE = ($<)
+
+echo "INIT_ROUTINE2 $INIT_ROUTINE" >> $OUTFILE
+if ("$INIT_ROUTINE" != "") then
+	rm -f $TEMP2
+	sed "/(\*ls_user_init2)/s/=.*;/= $INIT_ROUTINE;/" < $TEMPLATE > $TEMP2
+	cp $TEMP2 $TEMPLATE
+	rm -f $TEMP $TEMP2
+	echo "" > $TEMP
+	echo "extern void $INIT_ROUTINE();" >> $TEMP
+	sed "/^\/\* Vendor initialization/r $TEMP" < $TEMPLATE > $TEMP2
+	cp $TEMP2 $TEMPLATE
+endif
+
+echo ""
+echo ""
+echo "Vendor daemons can have vendor-defined checkout filtering,"
+echo "checkin filtering, and checkin callback routines.  The checkout"
+echo "and checkin filter routines are called before the checkout or"
+echo "checkin is performed, whereas the checkin callback is called"
+echo "after checkin processing is done."
+echo ""
+echo "Specify these three routines at the next set of prompts."
+echo "If you do not require a particular routine, simply enter"
+echo "a <CR> at the appropriate prompt."
+echo ""
+
+echo ""
+echo -n "Vendor-daemon checkout filter routine [<CR> for none]: "
+set OUT_FILTER = ($<)
+
+echo "OUT_FILTER $OUT_FILTER" >> $OUTFILE
+if ("$OUT_FILTER" != "") then
+	rm -f $TEMP2
+	sed "/(\*ls_outfilter)/s/=.*;/= $OUT_FILTER;/" < $TEMPLATE > $TEMP2
+	cp $TEMP2 $TEMPLATE
+	rm -f $TEMP $TEMP2
+	echo "" > $TEMP
+	echo "extern void $OUT_FILTER();" >> $TEMP
+	sed "/^\/\* Checkout filter/r $TEMP" < $TEMPLATE > $TEMP2
+	cp $TEMP2 $TEMPLATE
+endif
+
+echo ""
+echo -n "Vendor-daemon checkin filter routine [<CR> for none]: "
+set IN_FILTER = ($<)
+
+echo "IN_FILTER $IN_FILTER" >> $OUTFILE
+if ("$IN_FILTER" != "") then
+	rm -f $TEMP2
+	sed "/(\*ls_infilter)/s/=.*;/= $IN_FILTER;/" < $TEMPLATE > $TEMP2
+	cp $TEMP2 $TEMPLATE
+	rm -f $TEMP $TEMP2
+	echo "" > $TEMP
+	echo "extern void $IN_FILTER();" >> $TEMP
+	sed "/^\/\* Checkout filter/r $TEMP" < $TEMPLATE > $TEMP2
+	cp $TEMP2 $TEMPLATE
+endif
+
+echo ""
+echo -n "Vendor-daemon checkin callback routine [<CR> for none]: "
+set IN_CALLBACK = ($<)
+
+echo "IN_CALLBACK $IN_CALLBACK" >> $OUTFILE
+if ("$IN_CALLBACK" != "") then
+	rm -f $TEMP2
+	sed "/(\*ls_incallback)/s/=.*;/= $IN_CALLBACK;/" < $TEMPLATE > $TEMP2
+	cp $TEMP2 $TEMPLATE
+	rm -f $TEMP $TEMP2
+	echo "" > $TEMP
+	echo "extern void $IN_CALLBACK();" >> $TEMP
+	sed "/^\/\* Checkout filter/r $TEMP" < $TEMPLATE > $TEMP2
+	cp $TEMP2 $TEMPLATE
+endif
+
+echo ""
+echo ""
+echo "Vendor daemons can process messages of your own design from the"
+echo "client side which originate with the lm_vsend() routine."
+echo "The response to the lm_vsend() routine will be the string"
+echo "returned from the routine you specify here."
+echo ""
+echo "Specify this routine at the next prompt.  If you"
+echo "do not require this routine, simply enter a <CR>"
+echo ""
+
+echo ""
+echo -n "Vendor-daemon message-processing routine [<CR> for none]: "
+set VENDOR_MSG = ($<)
+
+echo "VENDOR_MSG $VENDOR_MSG" >> $OUTFILE
+if ("$VENDOR_MSG" != "") then
+	rm -f $TEMP2
+	sed "/(\*ls_vendor_msg)/s/=.*;/= $VENDOR_MSG;/" < $TEMPLATE > $TEMP2
+	cp $TEMP2 $TEMPLATE
+	rm -f $TEMP $TEMP2
+	echo "" > $TEMP
+	echo "extern char *$VENDOR_MSG();" >> $TEMP
+	sed "/^\/\* Checkout filter/r $TEMP" < $TEMPLATE > $TEMP2
+	cp $TEMP2 $TEMPLATE
+endif
+
+#
+#	User lockfile
+#
+echo ""
+echo ""
+echo "The vendor daemons use a lock file to prevent multiple copies"
+echo "from running on a single node.  This lock file defaults to"
+echo "/usr/tmp/lock$DAEMON.  If you wish to override this default,"
+echo "specify the new lock file pathname here.  If you do specify a"
+echo "lock file, then be sure to specify a full pathname (a path that"
+echo "starts with /), since a relative pathname will bypass the"
+echo "effectiveness of the lock file.  To use the standard lock"
+echo "file, simply enter <CR> at the next prompt."
+echo ""
+
+user_lockfile:
+echo ""
+echo -n "Lock file path [default: /usr/tmp/lock$DAEMON]: "
+set USER_LOCKFILE = ($<)
+if ("$USER_LOCKFILE" != "") then
+	echo -n You want \"$USER_LOCKFILE\" for the lock "file? [y/n, default: n]: "
+	set resp = ($<)
+	echo $resp | grep -i '^y' >& /dev/null
+	if ($status != 0) goto user_lockfile
+endif
+rm -f $TEMP2
+if ("$USER_LOCKFILE" == "") then
+	set _USER_LOCKFILE = "(char *)NULL"
+else
+	set _USER_LOCKFILE = `echo $USER_LOCKFILE:q | sed 's/\//\\\//g'`
+	set _USER_LOCKFILE = \"$_USER_LOCKFILE:q\"
+endif
+sed "/user_lockfile/s/=.*;/= $_USER_LOCKFILE:q;/" < $TEMPLATE > $TEMP2
+cp $TEMP2 $TEMPLATE
+echo "USER_LOCKFILE $USER_LOCKFILE:q" >> $OUTFILE
+
+#
+#	Normal or extended HOSTID checking (prompt removed - v2.72)
+#
+###echo ""
+###echo "The vendor daemons use the standard license manager hostid"
+###echo "checking routine which can provide some extra measure"
+###echo "of security in addition to the normal gethostid() call on Sun"
+###echo "and Apollo systems.  On Sun systems, these extra checks are"
+###echo "somewhat SUNOS release and system-dependent.  In addition,"
+###echo "Sun systems that run the daemons that incorporate extended"
+###echo "hostid checking MUST have readable /dev/kmem and /vmunix files."
+###echo "(Note: SunOS4.x releases have /dev/kmem as unreadable by"
+###echo "other" by default")".
+###echo ""
+###
+###normal_hostid:
+###echo ""
+###echo -n "Do you want your daemon to use extended hostid checking? [y/n, default: n]: "
+###set resp = ($<)
+###if ("$resp" == "y" || "$resp" == "Y") then
+###	set NORMAL_HOSTID = 0
+###else
+	set NORMAL_HOSTID = 1
+###endif
+rm -f $TEMP2
+sed "/normal_hostid/s/=.*;/= $NORMAL_HOSTID;/" < $TEMPLATE > $TEMP2
+cp $TEMP2 $TEMPLATE
+echo "NORMAL_HOSTID $NORMAL_HOSTID" >> $OUTFILE
+
+rm -f $TEMP $TEMP2
+
+#
+#	Enforce start date
+#
+echo ""
+echo ""
+echo "License files contain feature start dates.  You have the"
+echo "option of enforcing the start date in your vendor daemon,"
+echo "or ignoring it."
+echo ""
+
+echo ""
+echo -n "Do you want your daemon to enforce start dates? [y/n, default: y]: "
+set ENFORCE_START = ($<)
+if ("$ENFORCE_START" == "" || "$ENFORCE_START" == "Y" || "$ENFORCE_START" == "y") then 
+	set ENFORCE_START = 1
+else
+	set ENFORCE_START = 0
+endif
+echo "ENFORCE_START $ENFORCE_START" >> $OUTFILE
+rm -f $TEMP2
+sed "/ls_enforce_startdate/s/=.*;/= $ENFORCE_START;/" < $TEMPLATE > $TEMP2
+cp $TEMP2 $TEMPLATE
+
+if ($ENFORCE_START == 1) then
+#
+#	Tell start date
+#
+	echo ""
+	echo ""
+	echo "If a feature's start date is in the future, you have the"
+	echo "option of telling the user that it is not enabled yet, or"
+	echo "silently not enabling the feature."
+	echo ""
+
+	echo ""
+	echo "Should your daemon inform users that the feature is not enabled yet?" 
+	echo -n "                                                  [y/n, default: y]: "
+	set TELL_START = ($<)
+	if ("$TELL_START" == "" || "$TELL_START" == "Y" || "$TELL_START" == "y") then 
+		set TELL_START = 1
+	else
+		set TELL_START = 0
+	endif
+	echo "TELL_START $TELL_START" >> $OUTFILE
+	rm -f $TEMP2
+	sed "/ls_tell_startdate/s/=.*;/= $TELL_START;/" < $TEMPLATE > $TEMP2
+	cp $TEMP2 $TEMPLATE
+endif
+
+#
+#	Minimum user inactivity timeout
+#
+echo ""
+echo ""
+echo "End-users can specify an inactivity timeout which will"
+echo "cause a feature to be automatically checked back in if"
+echo "another user requests it.  You can specify the minimum"
+echo "value that the end-user can use for this inactivity timeout."
+echo ""
+echo "Be careful not to set this value too low (< 300 seconds), since"
+echo "a low value could cause all clients to appear to time out when"
+echo "they are actually active, resulting in extra licenses being"
+echo "granted."
+
+echo ""
+echo -n "Minimum user inactivity timeout? [(seconds), default: 900 seconds]: "
+set MIN_INACTIVITY = ($<)
+if ("$MIN_INACTIVITY" == "") then 
+	set MIN_INACTIVITY = 900
+endif
+echo "MINIMUM_INACTIVITY $MIN_INACTIVITY" >> $OUTFILE
+rm -f $TEMP2
+sed "/ls_minimum_user_timeout/s/=.*;/= $MIN_INACTIVITY;/" < $TEMPLATE > $TEMP2
+cp $TEMP2 $TEMPLATE
+
+
+#
+#	Minimum lmremove active time
+#
+echo ""
+echo ""
+echo "End-users can remove a license from a user with the"
+echo "lmremove utility.  There is a minimum amount of time"
+echo "that a client must be connected to the daemon before"
+echo "the lmremove command will be effective.  The default"
+echo "is 120 seconds.  If this is set too low, then an"
+echo "end-user can bypass the license limit by simply doing"
+echo "an lmremove on each user as soon as the license is"
+echo "checked out."
+echo ""
+
+echo ""
+echo -n "Minimum time before lmremove is effective? [(seconds), default: 120 seconds]: "
+set MIN_LMREMOVE = ($<)
+if ("$MIN_LMREMOVE" == "") then 
+	set MIN_LMREMOVE = 120 
+endif
+echo "MINIMUM_LMREMOVE $MIN_LMREMOVE" >> $OUTFILE
+rm -f $TEMP2
+sed "/ls_min_lmremove/s/=.*;/= $MIN_LMREMOVE;/" < $TEMPLATE > $TEMP2
+cp $TEMP2 $TEMPLATE
+
+#
+#	Use FEATURESET line
+#
+echo ""
+echo ""
+echo "The license file FEATURESET line combines the encryption"
+echo "codes from all features associated with a particular daemon."
+echo "The use of the FEATURESET line ensures that the end-user"
+echo "does not substitute other FEATURE lines into the license"
+echo "file.  This could be useful if you want to force old licenses"
+echo "to be invalid after a new license update."
+echo ""
+echo "If you enable the FEATURESET line, you MUST have a valid"
+echo "FEATURESET line in a license file for the daemon to operate."
+echo "The FEATURESET line is generated with the program lmfeatset"
+echo ""
+echo ""
+echo -n "Do you want to require the FEATURESET line? [y/n, default: n]: "
+set USE_FEATSET = ($<)
+if ("$USE_FEATSET" == "" || "$USE_FEATSET" == "n" || "$USE_FEATSET" == "N") then
+	set USE_FEATSET = 0
+else
+	set USE_FEATSET = 1
+endif
+echo "USE_FEATSET $USE_FEATSET" >> $OUTFILE
+rm -f $TEMP2
+sed "/ls_use_featset/s/=.*;/= $USE_FEATSET;/" < $TEMPLATE > $TEMP2
+cp $TEMP2 $TEMPLATE
+
+#
+#	Use ALL FEATURE lines
+#
+echo ""
+echo ""
+echo "Prior to FLEXlm v2.4, vendor daemons would only maintain a single"
+echo "count for any one feature name.  FLEXlm v2.4 and later daemons have"
+echo "removed this restriction, and can now use the counts on ALL the"
+echo "feature lines for a given name (as long as the encryption codes"
+echo "on the various lines are different - i.e., as long as some data"
+echo "on the feature lines differs).  If you enable this feature, then"
+echo "multiple feature lines will have the effect of ADDING licenses"
+echo "as compared to pre-v2.4, where multiple feature lines had the"
+echo "effect of a MAX function (max(#licenses1, #licenses2))."
+echo ""
+echo "NOTE: The INCREMENT and UPGRADE lines in FLEXlm v2.61 and later"
+echo "      provide all the functionality of the use_all_feature_lines"
+echo "      feature without any of the undesirable side-effects.  For"
+echo "      this reason Globetrotter Software STRONGLY DISCOURAGES your"
+echo "      use of this feature."
+echo ""
+echo -n "Do you want your daemon to use ALL FEATURE LINES? [y/n, default: n]: "
+set USE_ALL_LINES = ($<)
+if ("$USE_ALL_LINES" == "" || "$USE_ALL_LINES" == "n" || "$USE_ALL_LINES" == "N") then
+	set USE_ALL_LINES = 0
+else
+	set USE_ALL_LINES = 1
+endif
+echo "USE_ALL_LINES $USE_ALL_LINES" >> $OUTFILE
+rm -f $TEMP2
+sed "/ls_use_all_feature_lines/s/=.*;/= $USE_ALL_LINES;/" < $TEMPLATE > $TEMP2
+cp $TEMP2 $TEMPLATE
+
+
+#
+#	Do ls_checkroot()
+#
+echo ""
+echo ""
+echo "The ls_checkroot() function verifies that the vendor daemon is"
+echo running in an environment where the directory \"/\" is the real
+echo "root of the filesystem.  This prevents a malicious user from"
+echo "cloning the appropriate parts of the filesystem to another"
+echo "directory, then re-running lmgrd in order to bypass the daemon"
+echo "lock files.  By default, this check is not run.  If you"
+echo "want to allow your end-users to run your vendor daemon on a"
+echo "diskless node (NOTE: Globetrotter software does NOT recommend this"
+echo "practice.), you MUST NOT USE ls_checkroot()."
+echo ""
+echo ""
+echo -n "Do you want to use ls_checkroot()? [y/n, default: n]: "
+set DO_CHECKROOT = ($<)
+if ("$DO_CHECKROOT" == "y" || "$DO_CHECKROOT" == "Y") then
+	set DO_CHECKROOT = 1
+else
+	set DO_CHECKROOT = 0
+endif
+echo "DO_CHECKROOT $DO_CHECKROOT" >> $OUTFILE
+rm -f $TEMP2
+sed "/ls_do_checkroot/s/=.*;/= $DO_CHECKROOT;/" < $TEMPLATE > $TEMP2
+cp $TEMP2 $TEMPLATE
+
+#
+#	ls_dup_sel
+#
+echo ""
+echo ""
+echo "Vendor daemons prior to FLEXlm V2 used a variable called"
+echo \"count_duplicates\", which was replaced in V2 by the
+echo \"Duplicate grouping criteria\".  Setting the daemon variable 
+echo "count_duplicates to 1 was equivalent to a client's checkout"
+echo "request with dup_group set to LM_DUP_NONE, whereas a daemon"
+echo "with count_duplicates set to 0 was equivalent to the client's"
+echo "request with dup_group set to LM_DUP_USER | LM_DUP_HOST".
+echo ""
+echo "Since V1 clients do not transmit the dup_group parameter to"
+echo "the daemon, the vendor daemons have a default setting to"
+echo "support old clients.  You can make your daemon default to" 
+echo "count_duplicates (= LM_DUP_NONE), or not count_duplicates"
+echo "(= LM_DUP_USER|LM_DUP_HOST)"
+echo ""
+echo "NOTE: If you do not need to support V1 clients, choose the"
+echo "default answer to this question"
+echo ""
+echo ""
+echo -n "Do you want V1 clients to default to count_duplicates? [y/n, default: n]: "
+set  V1_COMPAT = ($<)
+if ("$V1_COMPAT" == "" || "$V1_COMPAT" == "n" || "$V1_COMPAT" == "N") then
+	set V1_COMPAT = LM_NO_COUNT_DUP_STRING
+else
+	set V1_COMPAT = LM_COUNT_DUP_STRING
+endif
+echo "V1_COMPAT $V1_COMPAT" >> $OUTFILE
+rm -f $TEMP2
+sed "/ls_dup_sel/s/=.*;/= $V1_COMPAT;/" < $TEMPLATE > $TEMP2
+cp $TEMP2 $TEMPLATE
+
+#echo ""
+#echo ""
+#echo Vendor daemons support the ability for one daemon to \"borrow\"
+#echo "licenses from another for a fixed period of time.  You must"
+#echo "enable license borrowing for your customers to be able to"
+#echo use it.  The customer would then use the \"lmborrow\" utility
+#echo "to borrow licenses from one daemon and give them to another."
+#echo ""
+#echo ""
+#echo -n "Do you want your server to support license borrowing? [y/n, default: n]: "
+#set  ALLOW_BORROW = ($<)
+#if ("$ALLOW_BORROW" == "" || "$ALLOW_BORROW" == "n" || "$ALLOW_BORROW" == "N") then
+#	set ALLOW_BORROW = 0
+#else
+#	set ALLOW_BORROW = 1
+#endif
+#echo "ALLOW_BORROW $ALLOW_BORROW" >> $OUTFILE
+#rm -f $TEMP2
+#sed "/ls_allow_borrow/s/=.*;/= $ALLOW_BORROW;/" < $TEMPLATE > $TEMP2
+#cp $TEMP2 $TEMPLATE
+
+#echo ""
+#echo ""
+#echo "Vendor daemons support the ability for a well-known organization"
+#echo "to redirect the hostid in the license file.  This allows the"
+#echo "end-user to change his license server host (for all vendors,"
+#echo "if they support this option) from one host to another, without"
+#echo "having to get new license codes from all his software vendors."
+#echo ""
+#echo "The hostid redirection is based on a digital signature algorithm."
+#echo "The signature is generated by the well-known organization, and your"
+#echo "vendor daemon verifies that the correct organization generated the"
+#echo "signature."
+#echo ""
+#echo "If you want your daemon to support redirection, enter the name of"
+#echo "the redirection verification routine at the next prompt.  If you enter"
+#echo "a <CR>, then no hostid redirection will be supported by your daemon."
+#echo ""
+#echo ""
+#echo -n "Hostid redirection verification routine? [<CR> for none (no support)]: "
+#set  REDIRECT_VERIFY = ($<)
+#if ("$REDIRECT_VERIFY" == "") then
+#	set REDIRECT_VERIFY = 0
+#else
+#endif
+#echo "REDIRECT_VERIFY $REDIRECT_VERIFY" >> $OUTFILE
+#rm -f $TEMP2
+#sed "/ls_hostid_redirect_verify/s/=.*;/= $REDIRECT_VERIFY;/" < $TEMPLATE >$TEMP2
+#if ("$REDIRECT_VERIFY" != "0") then
+#	cp $TEMP2 $TEMPLATE
+#	rm -f $TEMP $TEMP2
+#	echo "" > $TEMP
+#	echo "extern int $REDIRECT_VERIFY();" >> $TEMP
+#	sed "/^\/\* Hostid redirection/r $TEMP" < $TEMPLATE > $TEMP2
+#endif
+#cp $TEMP2 $TEMPLATE
+
+echo ""
+echo ""
+echo "You can add your own routine to the vendor daemon which is"
+echo "called periodically during the main processing loop of the"
+echo "daemon.  This routine will be called approximately once"
+echo "per minute."
+echo ""
+echo "If you would like to have a periodically-called routine in"
+echo "your daemon, enter the name of the routine at the next prompt."
+echo "If you enter a <CR>, then no periodically-called routine will"
+echo "be used by your daemon.  Do not forget to add the .o file for"
+echo "this routine to the makefile before building your daemon."
+echo ""
+echo ""
+echo -n "Periodic routine for vendor daemon? [<CR> for none]: "
+set  PERIODIC_ROUTINE = ($<)
+if ("$PERIODIC_ROUTINE" == "") then
+	set PERIODIC_ROUTINE = 0
+else
+endif
+echo "PERIODIC_ROUTINE $PERIODIC_ROUTINE" >> $OUTFILE
+rm -f $TEMP2
+sed "/ls_daemon_periodic/s/=.*;/= $PERIODIC_ROUTINE;/" < $TEMPLATE >$TEMP2
+if ("$PERIODIC_ROUTINE" != "0") then
+	cp $TEMP2 $TEMPLATE
+	rm -f $TEMP $TEMP2
+	echo "" > $TEMP
+	echo "extern void $PERIODIC_ROUTINE();" >> $TEMP
+	sed "/^\/\* Vendor-defined periodic call/r $TEMP" < $TEMPLATE > $TEMP2
+endif
+cp $TEMP2 $TEMPLATE
+
+#
+#	Show vendor-defined checkout data
+#
+echo ""
+echo ""
+echo "In FLEXlm v3.0, you can specify vendor-specific data which"
+echo "is used in addition to the user/host/display for the purposes"
+echo "of grouping duplicates."
+echo ""
+echo "You have the option of making this data visible or invisible"
+echo "to users via the lmstat command and lm_userlist() function."
+echo ""
+
+echo ""
+echo "Should your daemon make vendor-specific checkout data visible?" 
+echo -n "                                                  [y/n, default: y]: "
+set SHOW_VENDOR_DEF = ($<)
+if ("$SHOW_VENDOR_DEF" == "" || "$SHOW_VENDOR_DEF" == "Y" || "$SHOW_VENDOR_DEF" == "y") then 
+	set SHOW_VENDOR_DEF = 1
+else
+	set SHOW_VENDOR_DEF = 0
+endif
+echo "SHOW_VENDOR_DEF $SHOW_VENDOR_DEF" >> $OUTFILE
+rm -f $TEMP2
+sed "/ls_show_vendor_def/s/=.*;/= $SHOW_VENDOR_DEF;/" < $TEMPLATE > $TEMP2
+cp $TEMP2 $TEMPLATE
+
+#
+#	Compare vendor strings on INCREMENT lines
+#
+echo ""
+echo ""
+echo "INCREMENT lines are combined with prior FEATURE/INCREMENT lines if:"
+echo "	1. the feature name compares," 
+echo "	2. the node-locked hostid compares,"
+echo "	3. the version is the same, and"
+echo "	4. the vendor string compares."
+echo ""
+echo "You have the option of NOT requiring the vendor string to compare"
+echo "on INCREMENT lines.  If you wish to require the vendor string to"
+echo "compare, answer YES to the following question."
+echo ""
+
+echo ""
+echo "Should the vendor string match to combine INCREMENT lines?"
+echo -n "                                                  [y/n, default: n]: "
+set COMP_INCR = ($<)
+if ("$COMP_INCR" == "" || "$COMP_INCR" == "N" || "$COMP_INCR" == "n") then 
+	set COMP_INCR = 0
+else
+	set COMP_INCR = 1
+endif
+echo "COMP_INCR $COMP_INCR" >> $OUTFILE
+rm -f $TEMP2
+sed "/ls_compare_vendor_on_increment/s/=.*;/= $COMP_INCR;/" < $TEMPLATE > $TEMP2
+cp $TEMP2 $TEMPLATE
+
+#
+#	Compare vendor strings on UPGRADE lines
+#
+echo ""
+echo ""
+echo "UPGRADE lines are combined with prior FEATURE/INCREMENT lines if:"
+echo "	1. the feature name compares," 
+echo "	2. the node-locked hostid compares,"
+echo "	3. the FEATURE/INCREMENT version is >= the FROMVERSION and "
+echo "		<= the TOVERSION, and"
+echo "	4. the vendor string compares."
+echo ""
+echo "You have the option of NOT requiring the vendor string to compare"
+echo "on UPGRADE lines.  If you wish to require the vendor string to"
+echo "compare, answer YES to the following question."
+echo ""
+
+echo ""
+echo "Should the vendor string match to combine UPGRADE lines?"
+echo -n "                                                  [y/n, default: n]: "
+set COMP_UPGR = ($<)
+if ("$COMP_UPGR" == "" || "$COMP_UPGR" == "N" || "$COMP_UPGR" == "n") then 
+	set COMP_UPGR = 0
+else
+	set COMP_UPGR = 1
+endif
+echo "COMP_UPGR $COMP_UPGR" >> $OUTFILE
+rm -f $TEMP2
+sed "/ls_compare_vendor_on_upgrade/s/=.*;/= $COMP_UPGR;/" < $TEMPLATE > $TEMP2
+cp $TEMP2 $TEMPLATE
+
+buildit:
+#
+#
+#
+echo ""
+echo ""
+echo "The configuration information for your daemon is in $OUTFILE"
+echo "The data file used to build the daemon is lsvendor.c"
+
+buildit2:
+#
+#
+#
+echo ""
+echo -n "Do you want to continue and build the daemon now? [y/n, default: n]: "
+set resp = ($<)
+echo $resp | grep -i '^y' >& /dev/null
+if ($status == 0) then
+	echo ""
+	while (1)
+		if (-e /bin/sun3) then
+			sun3 >& /dev/null
+			if ($status == 0) then
+				echo "You are running on a sun3."
+				break
+			endif
+		endif
+		if (-e /bin/sun4) then
+			sun4 >& /dev/null
+			if ($status == 0) then
+				echo "You are running on a sun4/sparc."
+				break
+			endif
+		endif
+		if (-e /bin/sun4c) then
+			sun4c >& /dev/null
+			if ($status == 0) then
+				echo "You are running on a sun4/sparc."
+				break
+			endif
+		endif
+		if (-e /vmb.exe) then
+			echo "You are running on a vax or a decstation."
+			break
+		endif
+		if (-e /sys/node_data) then
+			echo "You are running on an apollo."
+			break
+		endif
+		if (-e /hp-ux) then
+			echo "You are running on an HP system"
+			break
+		endif
+		if (-e /osf_boot) then
+			echo "You are running on an alpha-osf1 system"
+			break
+		endif
+		break
+	end
+	set kit = xx
+	while ($kit != "")
+		echo ""
+		echo "FLEXlm binary directories are:"
+		set onekitonly = INIT
+		foreach i ($KITDIRS)
+			if ("$i" != "../scoinfo.o" && -e $i) then
+				if (-e $i/makefile && $i != "machind") then
+					if ($onekitonly == "INIT") then
+						set onekitonly = true
+						set kitname = $i
+					else
+						set onekitonly = false
+					endif
+					echo $i
+				endif
+			endif
+		end
+		echo ""
+		echo -n "Which daemon would you like to build? "
+		if ($onekitonly == "true") then
+			echo -n "[default: $kitname, "e" to exit]: "
+			set kit = ($<)
+			if ($kit == "") then
+				set kit = $kitname
+			else if ($kit == "e" || $kit == "E") then
+				set kit = ""
+			endif
+		else
+			echo -n "[<cr> to quit]: "
+			set kit = ($<)
+		endif
+		if ($kit != "") then
+			if (-e $kit) then
+				echo ""
+				echo "Building kit in directory $kit"
+				pushd $kit >& /dev/null
+				make
+				echo "Done building kit $kit"
+				pushd >& /dev/null 
+			else
+				echo "$kit not found"
+			endif
+		endif
+		if ($onekitonly == "true") then
+			break
+		endif
+	end
+	if ($onekitonly != "true") then
+		echo "To build your other daemons, log in to the appropriate"
+		echo machine and do a \"make\" in the proper kit directory.
+	endif
+else
+	echo To build your daemon, go to the appropriate kit directory and type \"make\"
+endif
+rm -f $TEMP $TEMP2 $TEMP3

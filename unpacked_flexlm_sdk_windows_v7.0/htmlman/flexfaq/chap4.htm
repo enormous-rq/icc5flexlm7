@@ -1,0 +1,101 @@
+<HTML>
+<HEAD>
+<TITLE>FLEXlm Frequently Asked Questions: Q2.     License File Locations</TITLE>
+</HEAD>
+<BODY>
+<P><A HREF="TOC.htm">Table of Contents</A>
+ * <A HREF="chap3.htm">Previous Chapter</A>
+ * <A HREF="chap5.htm">Next Chapter</A>
+</P>
+<P>&nbsp;
+</P>
+<H1>Q4.     License File Locations</H1>
+<HR>
+<A NAME="Q4.1"></A>
+<H2>Q4.1  My application can't seem to find the license file. What do I do? </H2>
+<P>
+Applications find the license file in one of 3 places:
+</P>
+<OL>
+<LI>A location specified in the application by the vendor. See the application manual for this 
+location. 
+</LI>
+<LI>$LM_LICENSE_FILE (including VMS and Windows/NT). In UNIX, this can also be a colon-separated list (like $PATH) of license files, so that this environment variable can be set 
+once for all applications. In Windows, you use a semicolon-seperated list.</LI>
+</OL>
+<A NAME="Q4.2"></A>
+<H2>Q4.2  lmstat doesn't report all the features in my license file. Why? </H2>
+<P>
+Here's the possibilities:</P>
+<OL>
+<LI>$LM_LICENSE_FILE is set to the wrong file.</LI>
+<LI>lmstat doesn't report on<A NAME="IX23"> 'uncounted' features</A>. These are features with a 'number of 
+licenses' field set to '0' or uncounted (v6+). 'Number of licenses' is the 6th item on a FEATURE line (after 
+the expiration date). There's nothing to report on uncounted features. NOTE: v5.+ of 
+FLEXlm provides the option of having servers service 'uncounted' features, in 
+which case lmstat will report these also.</LI>
+</OL>
+<A NAME="Q4.3"></A>
+<H2>Q4.3  I've received FLEXlm license files from 2 different companies. Do I have to combine them? </H2>
+<P>
+You don't have to combine license files. Each license file that has any 'counted' lines (the 
+ 'number of licenses' field is &gt;0) requires a server. It's perfectly OK to have any number of 
+separate license files, with different lmgrd server processes supporting each file. Moreover, 
+since lmgrd is a lightweight process, for sites without system administrators, this is often the 
+simplest (and therefore recommended) way to proceed. 
+<A NAME="Q4.4"></A></P>
+<H2>Q4.4  I want to combine license files. How do I do it?</H2>
+<P>
+Pre v6:<BR>
+Only license files with identical hostids on the SERVER line can be <A NAME="IX22">combined</A>. Note that license 
+files may refer to the same host using different hostids, particularly on hp700, where one file 
+may use ethernet hostid, and another uname -i. In this case these license files CANNOT be 
+combined because the hostids are not identical. 
+</P>
+<P>
+If the hostids are identical, concatenate the 2 files, and then remove identical SERVER lines, so 
+there's only one (or three for redundant servers) SERVER line(s). It's then strongly 
+recommended that symbolic links be made from the new, merged file to the old file locations. 
+That way, the applications will be able to find the newly merged file without having to change 
+anything. 
+</P>
+<P>
+Finally, make sure you use the latest version of lmgrd on the merged file. The FLEXlm version 
+of lmgrd MUST be &gt;= the FLEXlm version of the vendor daemon (noted on the DAEMON 
+line). Use lmver to determine the FLEXlm version of the vendor daemon or lmgrd. (The patch 
+letters at the end of the version are not significant when comparing versions for this purpose.) 
+</P>
+<P>
+
+v6+:<BR>
+If all FLEXlm computers are v6+, you can set the $LM_LICENSE_FILE to a directory (or the application may have already specified this). Then all files named <I>*.lic</I> in that directory are automatically read as if they were combined.
+<A NAME="Q4.5"></A></P>
+<H2>Q4.5  When is it recommended to combine license files?</H2>
+<P>
+ Many system administrators, especially for larger sites, prefer to combine license files to ease 
+administration of FLEXlm licenses. It's purely a matter of preference.
+<A NAME="Q4.6"></A></P>
+<H2>Q4.6  How do I set the location of the license file with an Environment Variable?</H2>
+<P>
+You can set either <A NAME="IX21">LM_LICENSE_FILE</A> or <I>VENDOR</I>_LICENSE_FILE(v6+). <BR>
+Where <I>VENDOR</I> is the vendor daemon name in all uppercase(e.g., GSI_LICENSE_FILE).
+</P>
+<DL>
+<DT>In UNIX:</DT>
+<DD> % setenv LM_LICENSE_FILE <I>license_file_path</I></DD>
+<DT>In Windows 3.1 and 95/98:</DT>
+<DD><I>edit</I> autoexec.bat</DD>
+<DD><I>type</I> SET LM_LICENSE_FILE=<I>license_file_path</I></DD>
+<DT>In Windows NT:</DT>
+<DD>In the Control Panel &quot;System icon&quot; change global environment by adding LM_LICENSE_FILE with <I>license_file_path</I></DD>
+</DL>
+  
+<HR>
+<A HREF="TOC.htm">Table of Contents</A>
+ * <A HREF="chap3.htm">Previous Chapter</A>
+ * <A HREF="chap5.htm">Next Chapter</A>
+
+<P>&nbsp;
+</P>
+</BODY>
+</HTML>

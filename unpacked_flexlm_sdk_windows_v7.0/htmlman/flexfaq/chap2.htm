@@ -1,0 +1,132 @@
+<HTML>
+<HEAD>
+<TITLE>FLEXlm Frequently Asked Questions: Q1.     Hostids</TITLE>
+</HEAD>
+<BODY>
+<P><A HREF="TOC.htm">Table of Contents</A>
+ * <A HREF="chap1.htm">Previous Chapter</A>
+ * <A HREF="chap3.htm">Next Chapter</A>
+</P>
+<P>&nbsp;
+</P>
+<H1>Q2.     Hostids</H1>
+<HR>
+<A NAME="Q2.1"></A>
+<H2>Q2.1  How do I get the system hostid?</H2>
+<P>
+This differs by hardware platform and operating system. You can always get the <A NAME="IX12">hostid</A> using 
+the <A NAME="IX11">lmhostid</A> command. However, customers that don't have access to lmhostid often need to 
+get the hostid. The following is a list of the most popular operating systems: 
+
+</P>
+<UL>
+<LI>HP700 (32-bit)uname -i, and prefix with a '#'<BR>
+ e.g.  778DA450 or #200577134</LI>
+<LI>RS-6000/AIX (32-bit)uname -m, remove last 2 digits, then use last 8 
+digits<BR>
+ e.g. 000276513100 --&gt; 02765131</LI>
+<LI>SCO/Unix (String)uname -x, then prepend with ID_STRING=<BR>
+e.g.  ID_STRING=SCO00354</LI>
+<LI>SGI/Irix echo `/etc/sysinfo -s` and convert to hex from decimal.<BR>
+e.g. 69064C3C or #1762020412</LI>
+<LI>SUN hostid <BR>
+e.g. 170a3472</LI>
+<LI>VMS ncp<BR>
+e.g. 0800200055327
+</LI>
+<LI>Windows/NT (Ethernet)lmutil lmhostid
+(Windows: Supports ODI, NDIS and Packet Driver 
+Ethernet interfaces. NT: Supports `NWLink 
+IPX/SPX' and 'NetBEUI' available from NT system CD)<BR>
+e.g. 0800200055327 
+</LI>
+<LI>Windows/NT (32-bit volume serial number)
+DIR C:\ and look for `Volume Serial Number is', and 
+remove '-'.<BR>
+e.g. <A NAME="IX13">DISK_SERIAL_NUM</A>=1CA25283
+</LI>
+<LI>Windows/NT (<A NAME="IX14">dongle</A>)
+lmhostid -flexid<BR>
+e.g. FLEXID=7-2850003
+</LI>
+<LI> Windows/NT (without using lmutil)<BR>
+e.g. winipcfg /all (Windows)<BR>
+e.g. ipconfig /all (NT)</LI>
+</UL>
+
+<A NAME="Q2.2"></A>
+<H2>Q2.2  On HP700 the hostid seems to be blank. Why?</H2>
+<P>
+Because obtaining the ethernet address (which is sometimes used as the hostid on hp700 
+systems) requires read and sometimes write permissions on `/dev/lan0'. To fix this, 
+</P>
+<PRE>1) log in as root </PRE>
+<PRE>2) type `chmod 777 /dev/lan0'</PRE>
+<P>
+No, this is not a security hole. It is trivial to read TCP packets by simply connecting a notebook 
+computer to the net. System administrators should assume these packets are readable. 
+Therefore, changing permissions on /dev/lan0 is not a security problem. 
+</P>
+<P>
+
+We've seen postings suggesting using setuid to get around this problem. Using setuid is a 
+serious, real security hole; setting permissions on /dev/lan0 is not. 
+</P>
+<P>
+
+Better yet, use the uname -i hostid. This is the default 
+hostid produced by lmhostid. 
+<A NAME="Q2.3"></A></P>
+<H2>Q2.3  At some HP sites lmhostid gives an ethernet hostid, and at others a uname -i hostid. Why? </H2>
+<P>
+Until v3.0 of FLEXlm (1994), FLEXlm only supported ethernet hostid on hp700. Since v3.0 
+FLEXlm supports 
+<I>both</I> ethernet and uname -i hostids. FLEXlm can automatically determine 
+what kind of hostid is provided and validate accordingly.</P>
+<P>
+
+The <I>uname -i</I> hostid is preferred, where possible.
+<A NAME="Q2.4"></A></P>
+<H2>Q2.4  On NT, I'm getting a 0 hostid (or FFFFFFFF)--how do I fix this?</H2>
+<P>
+Using this type of hostid requires either the SNMP service, the NETBEUI Transport Protocol, or the NW Link (IPX/SPX) Transport Protocol to be loaded
+</P>
+<P>To install the NETBEUI or NW Link Transport Protocol: 
+</P>
+<P>
+Put the NT system disk in the CDROM drive.</P>
+
+<PRE>Select `Main'</PRE>
+
+<PRE>Select `Control Panel'</PRE>
+
+<PRE>Select `Network'</PRE>
+
+<PRE>Select `Add'</PRE>
+<P>
+And add the NWLink IPX SPX or NetBEUI driver.
+
+<A NAME="Q2.5"></A></P>
+<H2>Q2.5  What are special Hostids? </H2>
+<P> Flexlm contains a numer of &quot;special&quot; hostid types which apply to all platforms.
+These hostid types can be used on either a SERVER line or a FEATURE line, wherever a hostid is required.
+
+</P>
+<UL>
+<LI> DEMO - Like ANY, but indicates a demo license.</LI>
+<LI> DISPLAY=<I>disp</I> - Locks the software dispaly to &quot;<I>disp</I>&quot;.</LI>
+<LI>HOSTNAME=<I>node</I> - Locks the software to computer hostname &quot;<I>node</I>&quot;.</LI>
+<LI><A NAME="IX15">INTERNET</A>=<I>nnn.nnn.nnn.nnn</I> - Locks the software to an Internet IP address.wildcards are allowed:<BR>
+123.123.123.*</LI>
+<LI>ANY - Locks software to any node.
+ </LI>
+</UL>
+
+<HR>
+<P><A HREF="TOC.htm">Table of Contents</A>
+ * <A HREF="chap1.htm">Previous Chapter</A>
+ * <A HREF="chap3.htm">Next Chapter</A></P>
+<P>&nbsp;
+</P>
+</BODY>
+</HTML>

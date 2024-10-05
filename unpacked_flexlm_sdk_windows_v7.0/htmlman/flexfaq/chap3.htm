@@ -1,0 +1,275 @@
+<HTML>
+<HEAD>
+<TITLE>FLEXlm Frequently Asked Questions: Q3.     FLEXlm Versions</TITLE>
+</HEAD>
+<BODY>
+<P><A HREF="TOC.htm">Table of Contents</A>
+ * <A HREF="chap2.htm">Previous Chapter</A>
+ * <A HREF="chap4.htm">Next Chapter</A>
+</P>
+<P>&nbsp;
+</P>
+<H1>Q3.     FLEXlm Versions</H1>
+<HR>
+
+<A NAME="Q3.1"></A>
+<H2>Q3.1  How do I tell what version I'm using? </H2>
+<P>
+Use lmutil <A NAME="IX16">'lmver'</A> command. Also you can use '-v', after a utility command to print the version. <BR>
+For example, lmutil lmdiag -v.
+</P>
+<P>In Windows, you can click on FLEXlm License Manager icon in the Control Panel. Then look under the &quot;Diagnostics&quot; tab and click on the &quot;Version&quot; button.
+<A NAME="Q3.2"></A></P>
+<H2>Q3.2  I have products from several companies at various FLEXlm version levels. Do I have to worry about how these versions work together? </H2>
+<P>
+If you're not combining license files from different vendors, the simplest thing to do is to run them separately making 
+sure you use the tools (especially lmgrd and the vendor daemon) that are shipped by each vendor. 
+</P>
+<P>
+Lmgrd will always correctly support older versions of vendor daemons and applications, so it's 
+ALWAYS safe to use the latest version of lmgrd. If you've combined license files rom 2 
+vendors, you MUST use the latest version of lmgrd. 
+</P>
+<P>
+
+If you've received 2 versions of a product from the same vendor, you MUST use the latest 
+vendor daemon they send you. An older vendor daemon with a newer client may cause 
+communication errors.</P>
+<P>
+
+Please ignore letters appended to FLEXlm versions, i.e., v2.4d. The appended letter indicates a 
+patch, and does NOT indicate any compatibility differences. In particular, some elements of 
+FLEXlm didn't require certain patches, so a 2.4 lmgrd can work successfully with a 2.4b vendor 
+daemon. 
+<A NAME="Q3.3"></A></P>
+<H2>Q3.3  I've received a new copy of a product from a vendor, and it uses a new version of FLEXlm. Is my old license file still valid?</H2>
+<P>
+Yes. Older FLEXlm license files are always valid with newer versions of FLEXlm. 
+<A NAME="Q3.4"></A></P>
+<H2>Q3.4  I've received a new license file, and the format is different from the old one I had from the same vendor? Why? Are they compatible?</H2>
+<P>
+As of v3.0, FLEXlm has an optional new format for license files. FLEXlm products always understand older versions; therefore, the pre-v3.0 files are 
+understood by every FLEXlm version. However, your old applications (pre-FLEXlm v3.0) will 
+not be able to use the new license file.  Read Chapter 5, for more about License File Contents. 
+<A NAME="Q3.5"></A></P>
+<H2>Q3.5  Does FLEXlm handle dates in the year 2000 and beyond?</H2>
+<P>
+Yes, every version of FLEXlm handles<A NAME="IX17"> year 2000</A>. The FLEXlm date format uses a 4-digit year. Dates in the 20th century (19xx) can be 
+abbreviated to the last 2 digits of the year (xx), and use of this feature is quite widespread. Dates 
+in the year 2000 and beyond must specify all 4 year digits. Note that the year `0' or `00' is a 
+special case, and does not mean 1900. Rather it means that the license never expires.</P>
+<A NAME="Q3.6"></A>
+<H2>Q3.6 What are the different lmgrx.dll versions ? 
+</H2>
+<P>
+
+PC Note: The version is the name (and date) of the 
+<A NAME="IX18">lmgrx.dll</A>. 
+</P>
+<P>
+
+Versions:</P>
+<DL>
+<DT>lmgr.dll</DT>
+<DD>16-bit v4.1</DD>
+<DT>lmgr32.dll</DT>
+<DD>32-bit v4.1</DD>
+<DT>lmgr164a.dll</DT>
+<DD>16-bit v4.1 patch release 6 (dated: October 1995) and v4.1b (dated: 
+December 1995).</DD>
+<DT>lmgr324a.dll</DT>
+<DD>32-bit v4.1 patch release 6 (dated: October 1995) and v4.1b (dated: 
+
+December 1995).</DD>
+<DT>lmgr165.dll</DT>
+<DD>16-bit v5.0 (Q1, 1996).</DD>
+<DT>lmgr325.dll</DT>
+<DD>32-bit v5.0 (Q1, 1996).
+</DD>
+<DT>lmgr165b.dll</DT>
+<DD>16-bit v5.1+ (dated:February 1997).
+</DD>
+<DT>lmgr325b.dll</DT>
+<DD>32-bit v5.1+ (dated:February 1997).
+</DD>
+<DT>lmgr166a.dll</DT>
+<DD>16-bit v6.0 (dated:September 1997).
+</DD>
+<DT>lmgr326a.dll</DT>
+<DD>32-bit v6.0 (dated:September 1997).
+</DD>
+<DT>lmgr166b.dll</DT>
+<DD>16-bit v6.1 (dated:June 1998).
+</DD>
+<DT>lmgr326b.dll</DT>
+<DD>32-bit v6.1 (dated:June 1998).</DD>
+</DL>
+<A NAME="Q3.7"></A>
+<H2>Q3.7  How do versions of FLEXlm differ?</H2>
+<P>
+This is a short, incomplete summary of the features introduced with each <A NAME="IX19">FLEXlm version</A>. Each 
+version had minor security, convenience and reliability enhancements, which are not listed. 
+</P>
+<P>
+v1.0 1988, First FLEXlm Release
+</P>
+<P>
+v1.5 February, 1990, First widely-used version, containing all the basic FLEXlm features, 
+including:
+</P>
+<UL>
+<LI>Basic license file format</LI>
+<LI>Floating and node-locked licenses</LI>
+<LI>lmgrd and vendor daemons</LI>
+<LI>TCP/IP communications</LI>
+<LI>DEMO, expiring licenses</LI>
+<LI>Basic end-user utility set, including lmdown, lmhostid, lmremove, lmstat, lmver</LI>
+<LI>lmgrd log file</LI>
+<LI>LM_LICENSE_FILE to locate license file</LI>
+<LI>End-User Options file to control daemon behavior, including RESERVE and 
+TIMEOUT, etc.</LI>
+<LI>License Queueing.</LI>
+<LI>Redundant Servers</LI>
+</UL>
+<P>
+v2.1 March, 1991
+</P>
+<UL>
+<LI>Improved TIMEOUT support</LI>
+<LI>Improved ethernet hostid support</LI>
+<LI>More customizable by vendor 
+</LI>
+</UL>
+<P>
+v2.21 November 1991
+</P>
+<UL>
+<LI>Added support for many platforms, and some platform- specific improvements, such 
+as hostid.</LI>
+<LI>Hostid ANY added</LI>
+</UL>
+<P>
+v2.26 March 1992 - Released only to Sun
+</P>
+<UL>
+<LI>Added license lingering</LI>
+<LI>Other bug fixes and minor enhancements</LI>
+</UL>
+<P>
+v2.4 December 1992 - Currently (Summer 1995) the most commonly used version.
+</P>
+<UL>
+<LI>Added `use-all-feature-lines' capability for incremental license distribution.</LI>
+<LI>Enhanced vendor customization routines.</LI>
+<LI>Enhanced End-User Options file.</LI>
+<LI>Added new hostid types: USER, HOSTNAME and DISPLAY</LI>
+<LI>Added `port@host' to LM_LICENSE_FILE capability - down-loads license file from 
+server. 
+</LI>
+</UL>
+<P>
+v2.61 March 1993 - Released only to Sun
+</P>
+<UL>
+<LI>Added INCREMENT and UPGRADE lines to license file</LI>
+</UL>
+<P>
+v3.0 May 1994 
+</P>
+<UL>
+<LI>INCREMENT and UPGRADE behavior changed and improved</LI>
+<LI>Added UDP protocol support.</LI>
+<LI>Added 'uname -i' hostid for hp.</LI>
+<LI>Added 'multiple jobs,' for enhanced support of LM_LICENSE_FILE as a colon-separated list.</LI>
+<LI>New, optional license file format, with `name=value' syntax for optional new features, 
+including: asset_info, ISSUER, and NOTICE, '\' license file continuation character, 
+2048 character limit per feature</LI>
+</UL>
+<P>
+v4.0 December 1994
+</P>
+<UL>
+<LI>Removed use of floating point, for enhanced reliability</LI>
+<LI>FEATURE line additions: ck (for use with lmcksum), OVERDRAFT, DUP_GROUP, 
+INTERNET hostid</LI>
+<LI>PACKAGE line</LI>
+<LI>License Finder</LI>
+<LI>lmdiag for end-user diagnostics</LI>
+</UL>
+<P>
+v4.1May 1995
+</P>
+<UL>
+<LI>Same features as v4.0, with bug fixes and new platform support</LI>
+</UL>
+<P>
+v4.1 Patch Release 6, October 1995
+</P>
+<UL>
+<LI>PC patch release for Windows 95 and various bug fixes.</LI>
+</UL>
+<P>
+v5.0 March 1996
+</P>
+<UL>
+<LI>Improved port@host behavior - client application doesn't read license file.</LI>
+<LI>Automatic port@host via USE_SERVER line in license file.</LI>
+<LI>Hostid lists - lock a feature to several hostids.</LI>
+<LI>Improved firewall support. (Available upon request now)</LI>
+<LI>New FEATURE attributes: SN (serial number), USER_BASED, HOST_BASED, 
+MINIMUM, SUPERSEDE, ISSUED (issued date), CAPACITY (charging based on 
+system capacity).</LI>
+<LI>Optional avoidance of NIS and DNS via IP address instead of hostname.</LI>
+<LI>Improved REPORTLOG format</LI>
+<LI>Server, upon startup, notifies of licenses that will expire within 2 weeks.</LI>
+<LI>Improved end-user options file functionality.</LI>
+<LI>New FEATURE attributes: SUPERSEDE, ISSUED, USER_BASED, 
+HOST_BASED, SN.</LI>
+</UL>
+<P>
+v5.11 February 1997</P>
+<UL>
+<LI>SUPERSEDE lists, PLATFORMS=license attribute,</LI>
+<LI>new end-user options: MAX, TIMEOUTALL, CPU_USAGE_INTERVAL, CPU_USAGE_DELTA</LI>
+<LI>Windows control panel added.</LI>
+</UL>
+<P>v5.12 April 1997
+</P>
+<UL>
+<LI>Performance improvements and new platform support.</LI>
+</UL>
+<P>v6.0 September 1997
+</P>
+<UL>
+<LI>lmgrd can read multiple license files</LI>
+<LI>FLEXlm license  directory support: *.lic automatically used.</LI>
+<LI> License files require no editing for use at the end-user site.</LI>
+<LI>Optional path on DAEMON/VENDOR line; $PATH used.</LI>
+<LI>Decimal license format, with lminstall utility for typing licenses.</LI>
+<LI>Feature lines are shorter, easier to understand and type in.</LI>
+<LI>PACKAGE lines can be shipped in separate files that never require user editing.</LI>
+<LI>Default port numbers make SERVER line port number optional.</LI>
+<LI>Default end-user options file path</LI>
+<LI>&quot;this_host&quot; hostname supported on the SERVER line.</LI>
+<LI>VENDOR_LICENSE_FILE supported(e.g., &quot;<A NAME="IX20">GSI_LICENSE_FILE</A>&quot;).</LI>
+<LI>Improved error message handling.</LI>
+<LI>Alternative error message available: paragraph format.</LI>
+<LI>@host supported where default port numbers are used.</LI>
+<LI>Windows only; user prompted for license file or license server name.</LI>
+<LI>License files are optionally case-insensitive.</LI>
+<LI>lmdown and lmreread accept - vendor <I>name</I> argument.</LI>
+<LI>lminstall utility.</LI>
+</UL>
+<P>v6.1 June 1998
+</P>
+<UL>
+<LI>Improved security.</LI>
+</UL>
+<HR>
+<P><A HREF="TOC.htm">Table of Contents</A>
+ * <A HREF="chap2.htm">Previous Chapter</A>
+ * <A HREF="chap4.htm">Next Chapter</A></P>
+<P>&nbsp;
+</P>
+</BODY>
+</HTML>

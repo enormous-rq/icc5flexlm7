@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<TITLE>FLEXlm Frequently Asked Questions: Q12.     End-User Options File </TITLE>
+</HEAD>
+<BODY>
+<P><A HREF="TOC.htm">Table of Contents</A>
+ * <A HREF="chap11.htm">Previous Chapter</A>
+ 
+</P>
+<P>&nbsp;
+</P>
+<H1>Q12.     End-User Options File </H1>
+<HR>
+<P>
+Please refer to the End-User manual for a general discussion of the End-User Options file. Only 
+exceptional  are answered here. 
+<A NAME="Q12.1"></A></P>
+<H2>Q12.1  How do I enable the <A NAME="IX64">Options file</A>? </H2>
+<P>
+Add a path to your Options file to the DAEMON line in the license file: 
+
+</P>
+<P>
+Before: 
+</P>
+<PRE>DAEMON xyzd ../daemon_path
+</PRE>
+<P>
+After: </P>
+<PRE>DAEMON xyzd ../daemon_path ../options_file_path</PRE>
+Refer to END USER MANUAL.
+<A NAME="Q12.2"></A>
+<H2>Q12.2  Why doesn't <A NAME="IX65">TIMEOUT</A> work? </H2>
+<P>
+TIMEOUT only works if the application developer specifically supports it. By default, it 
+doesn't work. Often, it's a difficult feature to support, since the application has to determine 
+when it's `idle', and this is sometimes non-trivial to determine. 
+<A NAME="Q12.3"></A></P>
+<H2>Q12.3  Is the Options GROUP the same as a Unix group (/etc/groups)?</H2>
+<P>
+No. GROUPs are defined in the Options file, and are unrelated to Unix groups. 
+<A NAME="Q12.4"></A></P>
+<H2>Q12.4  I need to have more users in a GROUP - how can I get around the 240 character limitation?</H2>
+<P>
+Upgrade to v4+ vendor daemons. They support '\' line continuation character, and a GROUP line of up to 2K.  Also use multiple GROUP lines with the same groupname concatenated.
+<A NAME="Q12.5"></A></P>
+<H2>Q12.5  I need a <A NAME="IX66">GROUP</A> of hosts, not users.</H2>
+<P>
+Upgrade to v4+ vendor daemons, where HOST_GROUP is supported.
+<A NAME="Q12.6"></A></P>
+<H2>Q12.6  What is <A NAME="IX67">REPORTLOG </A>for?</H2>
+<P>
+It's used by FLEXadmin to give an accurate report of historical usage. It's not intended for any 
+other use.  This can be enable in the Options File: REPORTLOG <I>filename</I>.
+<HR>
+<A HREF="TOC.htm">Table of Contents</A>
+ * <A HREF="chap11.htm">Previous Chapter</A>
+</P>
+<P>&nbsp;
+</P>
+</BODY>
+</HTML>

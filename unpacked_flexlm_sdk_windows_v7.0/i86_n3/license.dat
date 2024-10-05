@@ -1,0 +1,6 @@
+SERVER this_host ANY 27000
+VENDOR demo
+# First a counted license
+FEATURE f1 demo 1.0 permanent 4 1F0E784111C6
+# Next, an uncounted license
+FEATURE f2 demo 1.000 permanent uncounted C79E9EBF34BA HOSTID=ANY

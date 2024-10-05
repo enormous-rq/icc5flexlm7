@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<TITLE>FLEXlm Frequently Asked Questions: Q10.     Common Application Startup Problems</TITLE>
+</HEAD>
+<BODY>
+<P><A HREF="TOC.htm">Table of Contents</A>
+ * <A HREF="chap9.htm">Previous Chapter</A>
+ * <A HREF="chap11.htm">Next Chapter</A>
+</P>
+<P>&nbsp;
+</P>
+<H1>Q10.     Common Application Startup Problems</H1>
+<HR>
+<A NAME="Q10.1"></A>
+<H2>Q10.1  Cannot find <A NAME="IX56">license</A> file</H2>
+<P>
+Most applications have a default location in their application directory hierarchy. You can 
+override this with the LM_LICENSE_FILE environment variable. This problem can occur 
+when this variable is set wrong, or the default location for the license is missing.
+</P>
+<P>The default FLEXlm license file location:
+</P>
+<P> /usr/local/flexlm/<I>v</I>6.1/<I>platform</I>/license.dat   (UNIX) <BR>
+c:\flexlm\license.dat (Windows, NT, OS/2)<BR>
+SYS:\SYSTEM\flexlm\license.dat (Netware) <BR>
+SYS$COMMON:[SYSMGR] flexlm.dat (VMS)
+<A NAME="Q10.2"></A></P>
+<H2>Q10.2  No such feature exists</H2>
+<P>
+The most common reason for this is that you're using the wrong license file, or an outdated copy 
+of the file.
+<A NAME="Q10.3"></A></P>
+<H2>Q10.3  Cannot connect to license server</H2>
+<P>
+Usually this means the server isn't running. It can also mean the server is using a different copy 
+of the license file, which has a different port number than the license file you're currently using 
+indicates. You can use the lmdiag utility to more fully analyze this error.
+<A NAME="Q10.4"></A></P>
+<H2>Q10.4  License server does not support this feature</H2>
+<P>
+This means the server is using a different copy of the license file than the application. They 
+should be synchronized. This error will also report `UNSUPPORTED' in the debug log file. If you're using v5+ applications, add a USE_SERVER line after the SERVER line to fix this.</P>
+<A NAME="Q10.5"></A>
+<H2>Q10.5  What is <A NAME="IX57">WINSOCKX.DLL</A>?
+</H2>
+<P>
+Winsockx.dll is a dll provided by Globetrotter that is used by 16 bit applications to interface 
+between Flexlm and other networking software provided by networking ISV's. It allows 
+nodelocked applications to not require networking software. It also interfaces between 
+winsock.dll for TCP/IP, and the Novell dll's that provide IPX/SPX on 16 bit operating systems.</P>
+<P>&nbsp;
+</P>
+<P>
+<HR>
+<A HREF="TOC.htm">Table of Contents</A>
+ * <A HREF="chap9.htm">Previous Chapter</A>
+ * <A HREF="chap11.htm">Next Chapter</A>
+</P>
+<P>&nbsp;
+</P>
+</BODY>
+</HTML>

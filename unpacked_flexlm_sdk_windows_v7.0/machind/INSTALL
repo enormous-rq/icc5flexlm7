@@ -1,0 +1,132 @@
+#!/bin/csh -f
+#******************************************************************************
+#
+#	    COPYRIGHT (c) 1988-1998 by Globetrotter Software Inc.
+#	This software has been provided pursuant to a License Agreement
+#	containing restrictions on its use.  This software contains
+#	valuable trade secrets and proprietary information of 
+#	Globetrotter Software Inc and is protected by law.  It may 
+#	not be copied or distributed in any form or medium, disclosed 
+#	to third parties, reverse engineered or used in any manner not 
+#	provided for in said License Agreement except with the prior 
+#	written authorization from Globetrotter Software Inc.
+#
+#******************************************************************************
+#
+#	INSTALL - Install the Flexible License Manager software
+#
+#	M. Christiano
+#	9/2/88
+#
+#	Module:	INSTALL v3.29.0.0
+#	Last changed:  1/12/98
+#
+echo "Flexible License Manager binary kit installation"
+echo "Copyright (C) 1988 - 1999 Globetrotter Software, Inc."
+echo "U.S. Patents 5,390,297 and 5,671,412."
+echo "All rights reserved."
+echo ""
+if (-e machind) then
+	set SDIR = machind
+else
+	if (! -e lm_code.h) then
+		echo "DEMO_INSTALL must be from the FLEXlm install directory"
+		echo "	exiting..."
+		exit
+	endif
+	set SDIR = ../machind
+endif
+
+set here = `pwd`
+
+
+set onsco = FALSE
+if (-e /dos || -e /usr/odt) then
+	set onsco = TRUE
+endif
+
+again:
+set num = 0
+echo "Your FLEXlm kits are in:"
+foreach i (../*_?? ../*_???)
+	if (-e $i/liblmgr.a) then
+		echo $i
+		set kit = $i
+@			num++
+	endif
+end
+echo ""
+
+if ($num == "1") then
+	echo "Only 1 kit found, installing it ($kit)"
+	echo ""
+else
+	echo -n "Which kit would you like to install? "
+	if ($onsco == "TRUE") then
+		set kit = `head -1 < /dev/tty`
+	else
+		set kit = ($<)
+	endif
+endif
+if (-e $kit/liblmgr.a) then
+	echo "Installing FLEXlm kit $kit"
+else
+	echo "$kit is not a FLEXlm kit directory, please try again"
+	echo ""
+	goto again
+endif
+
+pushd $kit >& /dev/null
+
+set doranlib = FALSE
+foreach i ($path)
+	if (-e $i/ranlib) then
+		set doranlib = TRUE
+	endif
+end
+if ($doranlib == "TRUE" && -e /bin/sun) then
+	echo ranlib-ing libraries -- please ignore any \"no symbol table\" warning messages
+	ranlib *.a
+endif
+
+echo "Creating ANY license file for test purposes in $kit"
+rm -f license.dat
+echo "SERVER `hostname` ANY" > license.dat
+echo "VENDOR demo `pwd`/demo" >> license.dat
+echo FEATURE f1 demo 1.0 permanent 4 E4123D3F54B8 >> license.dat
+
+
+popd >& /dev/null
+
+#
+#	See if they want to configure the daemon
+#
+echo ""
+echo -n "Do you want to continue and configure your daemon now [y/n]? "
+if ($onsco == "TRUE") then
+	set resp = `head -1 < /dev/tty`
+else
+	set resp = ($<)
+endif
+#
+#	This tests for the first char in resp to be [Yy]
+#
+echo $resp | grep -i '^y' >& /dev/null
+if ($status == 0) then
+	./CONFIG_DAEMON
+else
+	echo "Building FLEXlm executables..."
+	pushd $kit >& /dev/null
+	make
+	popd >& /dev/null
+	echo To configure your daemon, run the script \"CONFIG_DAEMON\"
+endif
+pushd $kit >& /dev/null
+#
+# re-encrypt license.dat
+#
+if ( -e license.dat ) then
+	./lmcrypt license.dat
+endif
+popd >& /dev/null
+

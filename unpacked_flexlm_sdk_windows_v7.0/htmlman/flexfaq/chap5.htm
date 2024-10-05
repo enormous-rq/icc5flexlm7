@@ -1,0 +1,351 @@
+<HTML>
+<HEAD>
+<TITLE>FLEXlm Frequently Asked Questions: Q5.     License File Contents</TITLE>
+</HEAD>
+<BODY>
+<P><A HREF="TOC.htm">Table of Contents</A>
+ * <A HREF="chap4.htm">Previous Chapter</A>
+ * <A HREF="chap6.htm">Next Chapter</A>
+</P>
+<P>&nbsp;
+</P>
+<H1>Q5.     License File Contents</H1>
+<HR>
+<A NAME="Q5.1"></A>
+<H2>Q5.1  What are the components of a license file?</H2>
+<P>
+The<A NAME="IX24"> license file</A> keywords are:
+</P>
+<P>
+SERVER
+</P>
+<P>
+DAEMON or VENDOR
+</P>
+<P>
+USE_SERVER (v5+ only)
+</P>
+<P>
+FEATURE
+</P>
+<P> 
+INCREMENT
+</P>
+<P>
+UPGRADE
+</P>
+<P>
+PACKAGE
+</P>
+<P>
+Any line not beginning with a keyword is a comment. Although it is recommended to use a '#' sign at the beginning of each commented line.
+</P>
+<P>
+Following is a summary of these lines and their meaning. For a more complete description, 
+please refer to the End-Users or Programmers Manual.
+</P>
+<DL>
+<DT><A NAME="IX25">SERVER</A></DT>
+<DD>This line is required if any FEATURE lines are `counted' (number 
+of licenses &gt; 0). This indicates 1) NODENAME - the hostname of the server (so the 
+client applications will know which host to talk to), 2) ID - the host's 
+unique hostid, and 3) PORT-NUMBER - This 
+`port' number is a unique address on that host. The combination of 
+port number and hostname is a unique address, like a unique 
+telephone number, so any process on that network can talk to the 
+lmgrd server.
+The hostname and port number can be changed. The hostid 
+CANNOT be changed, or the license is invalidated. If there are no 
+`counted' FEATURE lines, this line is not needed, and is ignored if 
+it's included.</DD>
+<DD>
+<P>SERVER <I>nodename id  [port-number]</I></P>
+Note v6+: The port number is optional for independent servers, but is still required for 3-server redundancy. 
+</DD>
+</DL>
+
+<DL>
+<DT><A NAME="IX26">DAEMON/VENDOR</A></DT>
+<DD>
+This line is also required only if there are `counted' FEATUREs. This specifies the daemon's unique name, and the path to the vendor daemon binary. This path can be changed and often needs to be modified upon installation. * Note: In FLEXlm v6.+, the DAEMON line can be called VENDOR.  VENDOR can be used if the lmgrd and vendor-daemon are both at least FLEXlm v6.0.
+  []=optional
+
+
+<P>DAEMON <I>daemon_name daemon_path</I> [[<I>options=</I>]<I>options_path</I>] [[<I>port=</I>]<I>portnum</I>]
+</P>
+<P>(v6+) VENDOR <I>daemon_name</I> [<I>daemon_path</I>] [[<I>options=</I>]<I>options_path</I>] [[<I>port=</I>]<I>portnum</I>] </P>
+<P>&nbsp;</P>
+</DD>
+</DL>
+
+<DL>
+<DT><A NAME="IX27">USE_SERVER</A> (v5+)</DT>
+<DD>USE_SERVER takes no arguments, and has no impact on the server. When the 
+application sees USE_SERVER, it ignores everything in the license file except 
+preceding SERVER lines, and the checkout validation occurs at the vendor daemon. 
+USE_SERVER is recommended since it improves performance when a license server 
+is used. For uncounted features, USE_SERVER can be used to force logging of usage 
+by the daemons.</DD>
+</DL>
+
+<DL>
+<DT><A NAME="IX28">FEATURE/INCREMENT/UPGRADE</A></DT>
+<DD>This is the heart of the license file, and lists what the user is licensed 
+to use. These three keywords have nearly identical layouts and 
+similar meaning. FEATUREThere's 2 formats for a FEATURE line, v2.0 and v3.0+. Both 
+formats have the same first 7 fields. ALL versions of FLEXlm 
+understand the pre-v3.0 format.</DD>
+</DL>
+
+<P>Here are the first 7 fields:</P>
+<P>
+
+FEATURE <I>name daemon version exp_date #lic key</I></P>
+
+
+<DL>
+<DT><I>name</I></DT>
+<DD>feature name</DD>
+<DT><I>daemon</I></DT>
+<DD>The vendor's unique daemon name. Ties this feature to the 
+appropriate DAEMON line. 
+</DD>
+<DT><I>version</I></DT>
+<DD>Software version licensed. Any version of the software up to this 
+version number is licensed. Later version numbers will be denied. 
+Format is floating-point, e.g., nnn.nnn.</DD>
+<DT><I>exp-date</I></DT>
+<DD>License expires on this date. Format: ddd-mm-yy[yy], `1-mar-2002'. If the year is '0' the software never expires, e.g., 1-jan-0. 
+</DD>
+<DT><I>#lic</I></DT>
+<DD>Number of licenses. Usually this refers to the number of concurrent 
+users of the feature. 
+</DD>
+<DT><I>key</I></DT>
+<DD>A 12- or 20-character hex key. The heart of the license file security, it's like a 
+checksum of the FEATURE line, and the hostid, and the vendor's 
+encryption seeds. Guarantees the user cannot change most of the 
+license file (hostname, port number, and daemon path can be 
+changed without changing this key).</DD>
+</DL>
+<P>
+In pre-v3.0 format, there's one more required field, and an optional field:
+</P>
+<DL>
+<DT><I>vendor-defined string</I></DT>
+<DD>This is often blank, and is then specified with a blank string: ``. This 
+field is required in pre-v3.0 format. If non-blank, it's meaning is 
+determined by the application vendor.</DD>
+<DT><I>hostid</I></DT>
+<DD>This field is optional in pre-v3.0 format. For node-locked licenses. 
+This differs from the hostid on the SERVER line: on the SERVER 
+line, the FLEXlm server must be run on the specified hostid; on the 
+FEATURE line, the USER must be on the specified hostid to use the 
+licensed feature.
+<P>&nbsp;</P>
+</DD>
+<DT>v3.0+ FORMAT </DT>
+<DD>After the first 7 fields, the remaining fields are always of the format 
+`name=value', and are called `name-value pairs,' for example, 
+`HOSTID=12345678'. Name-value pairs where the name is 
+uppercase are part of the license key, and cannot be altered. If the 
+name is lowercase, it's not part of the key, and users are welcome to 
+change it.</DD>
+<DT></DT>
+<DD>Here's the v3.0+ name keywords for name-value pairs:</DD>
+<DT>HOSTID</DT>
+<DD>See description above.</DD>
+<DT>ck</DT>
+<DD>Used in conjunction with lmcksum to determine that the license file 
+has been typed incorrectly.</DD>
+<DT>OVERDRAFT</DT>
+<DD>Allows a number of uses beyond the #lic field, for a more lenient 
+licensing policy.</DD>
+<DT><A NAME="IX29">DUP_GROUP</A></DT>
+<DD>With this field, the application can allow, for example, a user on the 
+same node and display to have any number of uses counted as one 
+use. Please see the manuals for further information on this. 
+</DD>
+</DL>
+<P>
+The following FEATURE keywords have no predefined meaning by FLEXlm - their use is 
+defined by the application vendor. 
+</P>
+<DL>
+<DT><A NAME="IX30">VENDOR_STRING</A></DT>
+<DD>vendor_info, dist_info, user_info, asset_info
+ISSUER Issuer of the license. 
+NOTICE A field for intellectual property notices.</DD>
+</DL>
+<DL>
+<DT><A NAME="IX31">INCREMENT</A></DT>
+<DD> The fields are identical to a FEATURE line, but `increments' the 
+#lic field. This way a distributor can issue an INCREMENT line for 
+1 use, and then, later, another INCREMENT line for 2 uses, totaling 
+3 uses. 
+<P>
+Note that if the INCREMENT's differ by version, hostid (node-locked), they will `pool' 
+separately in the server - that is, they'll be counted separately. Also, if vendor-defined strings 
+are different they may or may not pool separately, depending on the vendor. 
+</P>
+<P> INCREMENT <I>name daemon version exp_date #lic key</I></P>
+</DD>
+</DL>
+<DL>
+<DT><A NAME="IX32">UPGRADE</A></DT>
+<DD> Identical format to FEATURE, except there's 2 version numbers, a 
+`from' version and a `to' version. Useful with INCREMENT lines, 
+to upgrade a number of the existing licenses from one version to 
+another.
+<P> UPGRADE <I>name daemon from_version version exp_date #lic key</I></P>
+</DD>
+</DL>
+<DL>
+<DT><A NAME="IX33">PACKAGE</A></DT>
+<DD>Package has 2 different purposes:
+<DL>
+</DL>
+<OL>
+<LI>to license a product SUITE, or</LI>
+<LI>to provide a more efficient way of distributing a license file that has a large number of 
+features. 
+</LI>
+</OL>
+<P>
+Since PACKAGE lines contain no customer-specific information, they can be optionally 
+included with the application software to further ease license distribution. 
+</P>
+<P>
+PACKAGE 
+<I>pkg-name vendor version key</I> COMPONENTS=<I>list</I> [OPTIONS=SUITE]</P>
+</DD>
+</DL>
+<DL>
+<DT><I>pkg-name</I></DT>
+ 
+<DD>If a corresponding FEATURE line has the same name, this package 
+will be `enabled' - each feature name in `list' will become an 
+independent FEATURE.</DD>
+<DT><I>vendor</I></DT>
+<DD>Ties in to DAEMON name</DD>
+<DT><I>version</I></DT>
+<DD>The corresponding FEATURE line must have the same version.</DD>
+<DT><I>key</I></DT>
+<DD>20-  character license key - secures the PACKAGE line.</DD>
+<DT><I>list</I></DT>
+<DD>feature names which will be some features if the packaged is 
+`enabled'.</DD>
+<DT><A NAME="ix34">SUITE</A></DT>
+<DD>If this is set, the PACKAGE behaves as a suite. The package name 
+itself becomes a feature, which is checked out in parallel with each 
+component feature. </DD>
+</DL>
+
+
+
+
+
+
+
+
+
+
+
+
+<A NAME="Q5.2"></A>
+<H2>Q5.2  What does a demo license look like?</H2>
+<P>
+Companies can implement demo licenses in unlimited ways, but there is one most common 
+method, which will be explained. </P>
+<P>Example: 
+</P>
+<P>
+v2 format:
+</P>
+<PRE>FEATURE f1 <A NAME="ix35">demo</A> 1.0 1-jan-1999 0 87CED98CE12a12900878 &quot; &quot; DEMO </PRE>
+<P>
+v3+ format:
+</P>
+<PRE>FEATURE f1 demo 1.0 1-jan-2001 0 87CED98CE12A12900878 HOSTID=DEMO</PRE>
+<P>
+This is a complete demo license for feature `f1'. The attributes of a standard demo license, like 
+this one, are:
+</P>
+<UL>
+<LI>It's uncounted (Note the `Number of licenses' field is '0') and therefore requires no 
+server. 
+</LI>
+<LI>Since it is uncounted, there's no SERVER or DAEMON lines.</LI>
+<LI>The word `DEMO' at the end is a pseudo-hostid, which indicates it will run on any 
+system.</LI>
+</UL>
+<P>
+
+
+Normally, the software vendor will preprint these demo licenses, one set for each time period, 
+and hand out the licenses based on the appropriate expiration date.
+<A NAME="Q5.3"></A></P>
+<H2>Q5.3  Is there any way to steal licenses by duplicating lines, etc.?</H2>
+<P>
+Following is a list of attempts to alter a license file, and the result:
+</P>
+<UL>
+<LI>Duplicating FEATURE lines:</LI>
+</UL>
+<P>
+The server only recognizes the first FEATURE line with a given feature name for a 
+particular vendor-daemon, so copying the FEATURE line has no affect--the second line 
+is ignored by the server. NOTE: some companies, for historical reasons, issue 
+FEATURE lines which actually behave as INCREMENT lines; see the next example for 
+these.)
+</P>
+<UL>
+<LI>Duplicating INCREMENT lines:</LI>
+</UL>
+<P>
+INCREMENT lines with identical 20-character license keys are considered duplicates, 
+and the server ignores the duplicates. If the customer changes the 20-character license 
+key, the line becomes invalid. If the customer has 2 INCREMENT lines with different 
+license keys, then these were issued by the vendor, and the intent is that they both are 
+valid.
+</P>
+<UL>
+<LI>Customer has a FEATURE line for `foobar', and is issued another license for `foobar.' 
+Suppose the customer puts BOTH lines in the license file?</LI>
+</UL>
+<P>
+The server only recognizes the first FEATURE line for a given FEATURE name. If the 
+first line in the file is the old one, the customer won't get the benefit of the new line. 
+Conversely, if the first FEATURE is the new line, the old line is simply ignored by the 
+server.The client applications will, however, attempt a checkout from the second line, if the first 
+line fails. The client will get an error from the server for the attempt on the second line 
+of NOSERVSUPP, `License server does not support this feature.' In addition, the ascii 
+debug log produced by the server will note the duplicated FEATURE name.
+</P>
+<UL>
+<LI>Customer has an INCREMENT line, and receives another INCREMENT line for the 
+same feature name, and keeps both lines in the license file.</LI>
+</UL>
+<P>
+Both lines will work. In fact, that's the intent behind INCREMENT, that the user keeps 
+both lines, and the second increments the first.
+</P>
+<UL>
+<LI>Copying the license file to another name, and putting both in the 
+$LM_LICENSE_FILE path?</LI>
+</UL>
+<P>
+This has the same effect as duplicating each line.
+</P>
+<P>
+
+<HR>
+<A HREF="TOC.htm">Table of Contents</A>
+ * <A HREF="chap4.htm">Previous Chapter</A>
+ * <A HREF="chap6.htm">Next Chapter</A>
+</P>
+<P>&nbsp;
+</P>
+
+</BODY>
+</HTML>

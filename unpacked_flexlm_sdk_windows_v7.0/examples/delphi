@@ -1,0 +1,128 @@
+
+unit FLEXlm;
+
+interface
+
+uses
+  SysUtils;
+
+{ FLEXlm Constants }
+
+const
+  LM_RETRY_RESTRICTIVE = 512;
+  LM_MANUAL_HEARTBEAT = 256;
+
+  LM_RESTRICTIVE = 1;
+  LM_QUEUE = 2;
+  LM_FAILSAFE = 3;
+  LM_LENIENT = 4;
+
+  ENCRYPTION_SEED1 = $87654321;
+  ENCRYPTION_SEED2 = $12345678;
+  VENDOR_KEY5 = $00000000;
+
+  VENDOR_NAME = 'demo';
+
+  DLL_NAME = 'LMGR326A.DLL';
+
+var
+  VENDOR_KEY1: LongInt = $00000000;
+  VENDOR_KEY2: LongInt = $00000000;
+  VENDOR_KEY3: LongInt = $00000000;
+  VENDOR_KEY4: LongInt = $00000000;
+
+  XOR_VALUE1: LongInt = ENCRYPTION_SEED1 xor VENDOR_KEY5;
+  XOR_VALUE2: LongInt = ENCRYPTION_SEED2 xor VENDOR_KEY5;
+
+{ FLEXlm API's }
+
+function LP_SETUP(Name: PChar; var VendorCode1, VendorCode2, VendorCode3,
+  VendorCode4, XorValue1, XorValue2: LongInt): Integer;
+  stdcall; external DLL_NAME;
+function LP_CHECKOUT(Policy: LongInt; Feature, Version: PChar; nlic: LongInt;
+  LicensePath: PChar; var lpH: LongInt): Integer;
+  stdcall; external DLL_NAME;
+function LP_CHECKIN(var lpH: LongInt): Integer;
+  stdcall; external DLL_NAME;
+function LP_HEARTBEAT(var lpH, reconn, minutes: LongInt): Integer;
+  stdcall; external DLL_NAME;
+
+{}
+
+function FLEXlm_Init: Boolean;
+function FLEXlm_Checkout(const Feature, Version: String;
+  var License_Handle: LongInt): Integer;
+procedure FLEXlm_Checkin(var License_Handle: LongInt);
+function FLEXlm_HeartBeat: Boolean;
+
+var
+  gLH_Main: LongInt;
+
+implementation
+
+// FLEXlm_Init: Initialize FLEXlm.  Returns True or False as to success.
+
+function FLEXlm_Init: Boolean;
+begin
+  if not FileExists(ExtractFilePath(ParamStr(0)) + DLL_NAME) then
+    Result := False
+  else
+  begin
+    try
+      Result := LP_SETUP(PChar(VENDOR_NAME), VENDOR_KEY1, VENDOR_KEY2,
+      VENDOR_KEY3, VENDOR_KEY4, XOR_VALUE1, XOR_VALUE2) = 0;
+    except
+      Result := False;
+    end;
+  end;
+end;
+
+// FLEXlm_Checkout(Feature, Version, License_Handle)
+//
+// Try to checkout the given Feature/Version from FLEXlm.
+// Returns True or False as to success.  The handle of the
+// license is returned in License_Handle.
+
+function FLEXlm_Checkout(const Feature, Version: String;
+  var License_Handle: LongInt): Integer;
+var
+  License_File: String;
+begin
+  try
+    License_File := ExtractFilePath(ParamStr(0)) + 'LICENSE.DAT';
+    Result := LP_CHECKOUT(LM_RESTRICTIVE or LM_MANUAL_HEARTBEAT,
+    PChar(Feature), PChar(Version), 1, pChar(License_File), License_Handle);
+  except
+    Result := -1;
+  end;
+end;
+
+// FLEXlm_Checkin(License_Handle)
+//
+// Check back in the license given by License_Handle.
+
+procedure FLEXlm_Checkin(var License_Handle: LongInt);
+begin
+  LP_CHECKIN(License_Handle);
+end;
+
+// FLEXlm_HeartBeat: Make sure the license server is still up.
+
+function FLEXlm_HeartBeat: Boolean;
+var
+  status: Integer;
+  num_reconnects, num_minutes: LongInt;
+begin
+  try
+    num_minutes := 10;
+    status := LP_HEARTBEAT(gLH_Main, num_reconnects, num_minutes);
+    Result := (status < 3) and (num_reconnects < 4);
+  except
+    Result := False;
+  end;
+end;
+
+end.
+
+
+

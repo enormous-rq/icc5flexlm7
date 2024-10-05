@@ -1,0 +1,745 @@
+                       Flexible License Manager
+
+                             Version 7.0d
+
+                            RELEASE NOTES
+
+                           November 22, 1999
+
+
+        These release notes describe the changes from FLEXlm v6.1
+
+
+Summary of v7 Enhancements
+__________________________
+
+
+    License Certificate Manager:
+        o Automatically download and install licenses across the internet.
+          (Windows only)
+
+    FLEXlock:
+        o Try Before You Buy Licensing (Windows only).  Like expiring
+          demo, but no license file required.
+
+    License file enhancements:
+
+        o license file handles inserted newlines from emailers correctly
+        o License lines sorted automatically sorted.
+
+    Windows Enhancements:
+
+        o lmtools rewritten -- easier to use, with a more native
+          Windows Interface, with cut and paste.
+        o lmgrd now starts in "background" by default
+        o lmstrip now supported on Windows
+        o set FLEXLM_BATCH=1 turns off all message box prompts.
+        o Intel Pentium III CPUID (v7.0d+)
+
+    Other Enhancements:
+
+        o 3-Server Redundant server reliability improved.
+        o lmcrypt takes -e to redirect error messages.
+        o Documentation: available in PDF format.  HTML versions are
+          in single file for improved searching.
+        o Improved the way RESERVE records are reported in lmgrd debug log
+          and lmstat
+        o lmreread and lmdown now take -all argument to apply to
+          multiple lmgrd processes.
+        o LM_A_JAVA_LIC_FMT and -java args to lmcrypt and makekey (v7.0d+ only)
+
+    Important 16-bit Windows Note:
+    ______________________________
+
+        16-bit windows will continue to be supported for bug fixes
+        for v6.1, but will not be supported for v7.
+
+
+Compatibility Issues For Existing FLEXlm Companies
+__________________________________________________
+
+        There is one minor compatibility issue, which may affect
+        ISV internal testsuites.  Upon successful checkout, the
+        license file location used for the checkout is stored and
+        remembered for all future checkouts for products using the same
+        vendor daemon.
+
+        Therefore, for existing FLEXlm ISVs, a checkout may be attempted
+        with an unexpected license or license server.  See
+        "REGISTRY and $HOME/.flexlmrc" below.
+
+        This can be disabled in 3 ways:
+
+                1) Set the environment variable FLEXLM_NO_CKOUT_INSTALL_LIC
+                   to 1.  This can be set in the environment, or on windows
+                   in the FLEXlm registry, or on unix in $HOME.flexlmrc.
+
+                2) In lm_code.h, change
+                        #define LM_VER_BEHAVIOR LM_BEHAVIOR_V7
+                   to
+                        #define LM_VER_BEHAVIOR LM_BEHAVIOR_V6
+
+                3) or call
+
+                        lc_set_attr(job, LM_A_CKOUT_INSTALL_LIC,
+                                                        (LM_A_VAL_TYPE)0);
+
+        We recommend that this not be disabled, but testsuites may
+        behave unexpectedly with this enhancement.
+
+FLEXlm V7.0 Enhancements
+_________________________
+
+
+        Licenses improved for E-Mailing
+        _______________________________
+
+        Many e-mailers insert newlines in licenses.  v7 now
+        handles this correctly.  You can still use licenses
+        directly from e-mail, without removing the email headers.
+
+        Licenses are more strict about requiring '#' at the beginning
+        of a line in certain cases:  If a comment appears immediately after
+        a valid FLEXlm line, it should begin with a '#'.  Otherwise,
+        FLEXlm may interpret the comment as being part of the preceding
+        line.
+
+        Examples:
+
+        GOOD LICENSE:
+                From lpichotta@earthlink.net Fri Aug  7 17:06:47 1998
+                Received: from mail1.globes.com
+                Received: (from uucp@localhost)
+                          by mail1.globes.com (8.8.4/8.8.4)
+
+                SERVER license_server 12345678
+                VENDOR xyzd
+                # Here is a comment
+                FEATURE f1 xyzd 1.0 permanent 4 1F0E784111C6
+                # Here is another comment
+
+        PROBLEM LICENSE:
+                SERVER license_server 12345678
+                VENDOR xyzd
+                Here is a comment
+                FEATURE f1 xyzd 1.0 permanent 4 1F0E784111C6
+                Here is another comment
+
+            There are 2 minor problems with this.
+            FLEXlm understands this file as follows:
+
+                SERVER license_server 12345678
+                VENDOR xyzd Here is a comment
+                FEATURE f1 xyzd 1.0 permanent 4 1F0E784111C6 Here is \
+                        another comment
+
+            It therefore interprets the VENDOR line as:
+
+                Here: path to vendor daemon
+                is:   path to options file
+                a:    port number for vendor daemon to run on
+
+            The log file will complain about these, but, as long as
+            xyzd is in the $PATH, the vendor daemon will run fine.
+
+            With the FEATURE line, the additional words are
+            ignored if the checkout succeeds.  If not, the
+            error printed refers to the additional text as being
+            possibly from a future version of FLEXlm that it doesn't
+            understand:
+
+                Future license file format or misspelling in license file
+
+            These problems are prevented by beginning comments
+            with a '#'.
+
+        Other licenses E-Mailing improvements
+        _____________________________________
+
+        On Windows, it's easy to rename a file called license.dat to
+        license.dat.txt without realizing it.  v7 now automatically
+        finds such files when this occurs.
+
+
+        lmstrip now supported on windows
+        ________________________________
+
+        Companies that ship libraries (*.lib) that make FLEXlm function
+        calls need lmstrip, for 2 reasons:
+
+                1) For security, so that customers can't replace
+                   lmgr.lib with a dummy library that will resolve
+                   necessary links, but disable licensing, and
+                2) So that a customer can do their own FLEXlm licensing
+                   in a binary that links your FLEXlm library.  Otherwise,
+                   a conflict can occur.
+
+        Usage:
+                C:> copy lmgr.lib mylmgr.lib
+                C:> lmstrip -r -m mylmgr.lib
+                C:> lib mylmgr.lib
+                C:> lmstrip -r -m myfuncs.lib
+                C:> lib myfuncs.lib
+
+        With -m, lmstrip creates a "mapfile" which contains a
+        lookup table of randomized symbol names which is reused
+        later for other object or library files, ensuring the
+        names are mapped identically.  For example, "lc_checkout"
+        may be renamed to "xLfH3C".  If this happens in 2 separate
+        object files, the renaming must be identical.
+
+        You can now safely ship mylmgr.lib and myfuncs.lib to
+        your customers.  When your customer links their object
+        with myfuncs.lib and mylmgr.lib, everything is resolved
+        and functions correctly.  And the temptation to alter
+        the libraries and/or functions is reduced since the
+        function names are not meaningful.
+
+        The default mapfile name is "lmstrip.map".  "-mapfile filename"
+        can be used to override this, where 'filename' is the new
+        mapfile name.
+
+
+        REGISTRY and $HOME/.flexlmrc
+        ____________________________
+
+        On Windows all FLEXlm environment variables can be specified
+        in the Registry in
+        HKEY_LOCAL_MACHINE\SOFTWARE\FLEXlm License Manager\LM_LICENSE_FILE
+
+        and
+
+        HKEY_LOCAL_MACHINE\SOFTWARE\FLEXlm License Manager\VENDOR_LICENSE_FILE
+
+        where "VENDOR" is your vendor daemon name.
+
+        On Unix, you can specify these variables in $HOME/.flexlm.
+        For example, $LM_LICENSE_FILE can be set thus:
+
+        __________________________________________________________
+        % cat ~/.flexlmrc
+        LM_LICENSE_FILE = /u/product/licenses
+        __________________________________________________________
+
+        In addition, upon successful checkout, FLEXlm automatically sets
+        $VENDOR_LICENSE_FILE in the registry (Windows) or .flexlmrc
+        (Unix).
+
+        License sorting
+        _______________
+
+        Licenses lines are sorted automatically, to avoid problems that
+        can occur through FEATURE ordering.  This feature can be overridden
+        by using the "sort=nnn" attribute, as noted below.
+
+        The automatic ordering accomplishes the following enhancements:
+
+                1) Uncounted licenses are tried before counted licenses.
+                   Users will obtain uncounted licenses wherever possible
+                   before using a counted license.
+                2) More recent feature/increment lines are used
+                   before older lines.  This avoids the problem with
+                   FEATURE lines where the user adds a new FEATURE line
+                   at the end of the file, but this remains ununused by
+                   the license server, which ignores all but the first
+                   FEATURE line for a given feature name.
+                3) FEATURE lines are seen by the server before INCREMENT lines
+                   for the same feature.  Otherwise, the FEATURE line is
+                   ignored.
+                4) Files are not broken up.  This way, the order of
+                   license files as indicated in LM_A_LICENSE_DEFAULT,
+                   $LM_LICENSE_FILE and $VENDOR_LICENSE_FILE are still
+                   honored.
+
+        To override this order, the end-user (or ISV) can add "sort=100"
+        to all FEATURE/ INCREMENT lines.  Valid sort values are from 1
+        to 200.  Lower appear earlier than higher numbers.  All lines
+        with the same sort value retain the order they have in the
+        license file.  sort=nnn is not computed into the license key,
+        so it can be changed by anyone without reissuing the license.
+
+
+        USING FLEXlock Functionality
+        ____________________________
+
+        FLEXlock is a new feature in FLEXlm designed to make it extremely easy
+        to add "try before you buy" licensing to a product that uses FLEXlm.
+        After enabling FLEXlock in a FLEXlm licensed product,  FLEXlock
+        automatically allows a trial period after the initial installation
+        along with explanatory warnings and dialogs explaining the evaluation
+        system to the user.  At the completion of the trial period, the user
+        has the option to either stop using or purchase the product. Upon
+        purchasing, the user is given a license file that will enable your
+        product to run in a normal FLEXlm manner.  During the evaluation period
+        it is possible to detect if the user has made unlicensed copies.
+
+        To use the FLEXlock functionality you need to:
+
+                1.  Enable the functionality in your program.
+
+                2.  Determine the operation and parameters of the "try before
+                        you buy" functionality.
+
+                3.  Run "flsetup.exe" to define these FLEXlock parameters
+                        and create the FLEXlock distribution file "fldata.ini".
+
+
+        Enabling the FLEXlock Features
+       ______________________________
+
+        To enable the functionality of the FLEXlock you will need to specify
+        to FLEXlm that you will be permitting this functionality.
+
+        If you are using the TRIVIAL or SIMPLE API's of FLEXLM, you will simply
+        specify an additional License Policy of LM_FLEXLOCK to your checkout
+        call.
+
+        i.e.
+        CHECKOUT(LM_RESTRICTIVE | LM_FLEXLOCK, "myfeature", "1.0",
+                         "license.dat"  )
+
+        If you are using the FLEXible API, you will need to add a lc_set_attr
+        call,
+
+                lc_set_attr ( lm_job, LM_A_FLEXLOCK , 1 );
+
+        NOTE:  We've made every effort to make the FLEXlock feature secure.
+        However, due to the type of security technology used for FLEXlock,
+        it is less secure than the rest of FLEXlm.  This is why it is disabled
+        by default.  You should only enable FLEXLOCK if the convenience of
+        FLEXlock licensing is more important than the reduced security it
+        exposes your product to.
+
+        For additional security, each time that your application is installed,
+        and the user activates the FLEXlock operation, a random id number is
+        generated.  This number can be used to identify work done with your
+        application in this mode.  If this number is saved in the work, and
+        compared when accessing it, you may be able to  determine if your
+        application has been re-installed.
+
+        You can obtain this number by calling
+
+        short code_id;
+                lc_get_attr(job, LM_A_FLEXLOCK_INSTALL_ID, ( short * )
+                                         &code_id );
+
+        After the FLEXlock operation is activated, an entry is generated in the
+        registry.  It is located at:
+
+          HKEY_LOCAL_MACHINE->SOFTWARE->GLOBEtrotter Software Inc.->FLEXlock
+
+        A subkey for each feature is located inside the FLEXlock subkey and
+        is a combination of the vendor name and the feature name.  If this
+        subkey is deleted, the program will act as if you had never activated
+        the FLEXlock functionality.  (Familiarity with the registry editor is
+        necessary for testing FLEXlock enabled features.)
+
+
+        The FLEXlock Configuration Editor
+       _________________________________
+
+        To define the operation of FLEXlock features, you must run the
+        flsetup.exe program and generate the "fldata.ini" file.
+
+        Flsetup.exe allows developers to quickly define:
+
+        The type of product trial including:
+                - fixed number of days
+                - fixed numbers of executions
+                - expiration on a fixed date
+
+        How to behave when the trial expires:
+                - don't run
+                - run with a warning
+
+        The greeting given when the product is first executed
+        The greeting given during the trial phase
+        The message given when the trial phase expires including
+                instructions on how to purchase the product
+
+        Product's Attributes:
+                - product name
+                - company name
+                - copyright notice
+
+        After configuring these parameters and saving the file, run the
+        "File->Create Distribution Files".  This generates the fldata.ini file
+        that will need to be shipped with the product.  Also the flcflxA.dll
+        file will need to be shipped with the product as well.  These files
+        should be placed in the same directory as your program executable.
+
+
+        LCM - License Certificate Manager
+       _________________________________
+
+        FLEXlock has been designed to work with GLOBEtrotter's LCM, so software
+        vendors may have a fully automated try-before-you-buy program,
+        coupled to a web-based unlocking and payment system.
+        With the use of Globetrack Licensing, it is possible to obtain a
+        license file over the internet, and have it automatically installed
+        without user intervention of copying and pasting.
+
+
+       Enabling and using LCM
+       ______________________
+
+        To enable the LCM automated license installer:
+
+                lc_set_attr(job, LM_A_LCM, (LM_A_VAL_TYPE)1);
+
+        Note:   This enabled by default.
+
+        To change the default URL for the LCM.
+
+                lc_set_attr(job, LM_A_LCM_URL,
+                    (LM_A_VAL_TYPE)"www.mycompany.com/licenses");
+
+        Note: By default this value is is "www.globetrotter.com/vendorname"
+        where vendorname is your vendor daemon name.
+
+
+        Intel Pentium III CPUID (v7.0d+)
+        ________________________________
+        
+        The Intel Pentium hostid is supported, but only on systems using
+        Pentium III.  We believe this hostid is more secure than any
+        other FLEXlm hostids, especially on windows, so where available
+        it's the preferred hostid for Windows/NT.
+
+        We support it in 3 formats: 96, 64 and 32-bit.
+
+        The hostid itself is 96 bit, and looks like:
+
+                XXXX-XXXX-XXXX-XXXX-XXXX-XXXX
+
+        Intel claims that the 96-bit id will be unique, with some
+        possible rare exceptions due to chips flaws.  However, the
+        64-bit and 32-bit versions should also be very nearly unique,
+        although according to Intel, duplicates will likely occur with
+        these versions.  Duplicates are not likely in any given chip
+        batch, so we would expect that systems built from chips from
+        a given factory over a short period of time would have a high
+        probability of being unique.
+
+        The 32-bit version is the last 9 characters from the 96-bit
+        hostid, and the 64-bit version is the last 19 characters.
+
+        For example:
+
+        % lmhostid -cpu96 -n
+        1111-2222-3333-4444-5555-6666
+        % lmhostid -cpu64 -n
+        3333-4444-5555-6666
+        % lmhostid -cpu32 -n
+        5555-6666
+        % lmhostid -cpu -n
+        5555-6666
+
+        We recommend using the 32-bit format, but if you require 
+        strict uniqueness for the hostids then you should use the
+        96-bit.  The 64-bit version should be more unique than the
+        32-bit version.
+
+        How to enable the Intel Pentium III CPUID
+        _________________________________________
+
+        This feature is shipped turned off from the factory.  This is
+        turned on using the BIOS Setup, which is usually entered by 
+        hitting the DEL key during bootup.
+
+        How to read the CPUID
+        _________________________________________
+
+        lmhostid -cpu:                  32-bit CPUID
+        lmhostid -cpu32:                32-bit CPUID
+        lmhostid -cpu64:                64-bit CPUID
+        lmhostid -cpu96:                96-bit CPUID
+
+        lmtools.exe shows the 96-bit version.  
+
+
+Other v7.0 Changes
+__________________
+
+        Enhanced 3-server Redundant Server Reliability
+        ______________________________________________
+
+        The reliability of 3-server configuration is improved, particularly
+        when the master node becomes disconnected.
+
+
+        Windows: "set FLEXLM_BATCH=1" turns off prompts
+        _______________________________________________
+
+        When set, error messages are directed to stderr, so they
+        are not lost when programs are run in batch.   The programmer
+        has always had the ability to turn these off, but now
+        the end-user can do it if the programmer didn't think of it.
+        It is still strongly recommended that the programmer turn
+        off prompts so that the end-user doesn't have to set an
+        environment variable to correctly use the product.
+
+        In addition, this can be set programmatically using:
+
+                lc_set_attr(job, LM_A_PERROR_MSGBOX, (LM_A_VAL_TYPE)0);
+                lc_set_attr(job, LM_A_PROMPT_FOR_FILE, (LM_A_VAL_TYPE)0);
+
+
+        Windows: Process ID now full ID and in hex
+        __________________________________________
+
+        FLEXlm refers to process ids in various places.  In the
+        past these were sometimes incorrect, and sometimes truncated.
+        They're now full process ids in hex, as Windows displays them.
+
+
+        RESERVE PROJECT
+        _______________
+
+        You can now reserve for a project.  The project is specified
+        by the client's $LM_PROJECT environment variable.
+
+
+        Improved RESERVE reporting
+        __________________________
+
+        Previously, if 'n' licenses were RESERVEd in the options file,
+        'n' messages were produced in both the lmgrd debug log and lmstat -a
+        output.  In the worst case, if for example 100 licenses were reserved,
+        100 messages would be printed.  Now a single message is printed.
+
+
+        lmreread, lmdown now take -all
+        ______________________________
+
+        lmdown -all will automatically shutdown all lmgrd servers
+        it finds.  Otherwise, if there are more than one lmgrd running,
+        it requires the user to specify which one to shutdown.
+
+        Similarly lmreread -all will tell all lmgrd processes to
+        reread their license files.
+
+        lmdown -all implies lmdown -q.
+
+
+        lmutil now takes "-e file"
+        __________________________
+
+        lmutil and all lm* utilities can now redirect stderr to a
+        file using "-e file."
+
+
+        Improved DLL support -- LM_A_WINDOWS_MODULE_HANDLE
+        __________________________________________________
+
+        If your application links the FLEXlm static library into
+        your DLL, then you need to set this new attribute:
+        LM_A_WINDOWS_MODULE_HANDLE.  After lc_new_job() and
+        before lc_checkout(), you should call:
+
+                lc_set_attr(job, LM_A_WINDOWS_MODULE_HANDLE, (LM_A_VAL_TYPE)
+                        GetModuleHandle(dllname));
+
+        where dllname is the name of your DLL.  Otherwise, the
+        FLEXlm installation dialog won't work, and the lc_checkout
+        call will fail with the new error code LM_NORESLINK.
+
+
+v7.0 Changes from Previous versions
+___________________________________
+
+        VENDOR_LICENSE_FILE automatically set
+        _____________________________________
+
+        Upon successful checkout, $VENDOR_LICENSE_FILE is automatically
+        set for the user.  This is done via the registry on Windows
+        and ~/.flexlmrc on Unix.  This can be disabled via
+
+                lc_set_attr(job, LM_A_CKOUT_INSTALL_LIC, (LM_A_VAL_TYPE)0);
+
+        or by setting the behavior in lm_code.h to V6.
+
+        This can also be disabled with the environment variable
+        FLEXLM_NO_CKOUT_INSTALL_LIC.
+
+
+        makekey.exe no longer prompts for SPX port number
+        _________________________________________________
+
+        Instead use -spx_port on the command line.  This is now supported
+        on Unix also.  makekey behaves the same on Unix as on windows now.
+
+
+Platform Specific Notes:
+________________________
+
+        UNIX
+        ____
+
+        hp700_u9 -- HPUX 9.x through 11.x
+        ________
+
+            uname -a:   HP-UX hpfcvab1 A.09.05 A 9000/720 2010177394
+                                two-user license
+            CC:         /bin/cc -Aa -D_HIUX_SOURCE -D_HPUX_SOURCE +DA1.0 +DS1.0
+            Hostid note:  we no longer recommend using ethernet address
+                        as a hostid.  It may fail on some HPUX 11.x systems.
+
+        hp64_u11 -- 64-bit HP
+        ________
+
+            uname -a:   HP-UX hp782 B.11.00 A 9000/782 2002591447
+            CC:         /bin/cc -DHP -DHP700  -DHP64 -Aa -D_HIUX_SOURCE \
+                                        -D_HPUX_SOURCE +DA2.0W +DS2.0W
+            link:       +DA2.0W +DS2.0W
+
+        i86_n3 (32-bit Windows)
+        ______
+
+            CC:         Microsoft Visual C++ Version 4 or higher
+
+        i86_x5
+        ______
+
+            uname -a:   SunOS sunpc 5.4 generic i86pc i386
+            CC:         /bin/cc
+            link:       /bin/cc -lsocket -lnsl -lintl
+
+        i86_l1, i86_g2, i86_r6  Linux
+        ______________________
+
+            i86_l1:     Caldera linux, Redhat 4
+            i86_g2:     Linux with GLibc, Redhat 5
+            i86_r6:     Redhat 6
+
+                    i86_g2 binaries will run fine on Redhat 6, but
+                    objects and libraries, when linked and run, won't.
+
+                    i86_l1 binaries will *appear* to run on Redhat 5, but
+                    will fail with wierd errors.
+
+        i86_u7 -- Unixware 7
+        ______
+
+            uname -a:
+
+        rs6000_u3  AIX 3.x through 4.x,  Power PC and RS6000, 32-bit
+        _________
+
+            uname -a:   AIX rs6000 1 3 000276513100
+            CC:         /bin/cc -D_BSD -D_BSD_INCLUDES
+            link flags: -lbsd
+
+        rs64_u4    64-bit AIX
+        _______
+
+            uname -a:   AIX rs64 3 4 000687724C00
+            CC:         /usr/ibmcxx/bin/cc -DRS64 -DRS6000 -D_BSD \
+                                -D_BSD_INCLUDES -q64
+
+            link flags: -lbsd -q64
+
+            You have to use "ar -X64" and "strip -X64" on this platform also.
+            Older 32-bit binaries run fine on this OS.
+
+        sgi32_u6
+        ________
+
+            uname -a:   IRIX64 challenger 6.1 07121831 IP26 mips
+            CC:         /bin/cc -n32 -mips3
+            link:       /bin/cc -n32 -mips3
+
+        sgi64_u6
+        ________
+
+            uname -a:   IRIX64 challenger 6.1 07121831 IP26 mips
+            CC:         /bin/cc -n64 -mips3
+            link:       /bin/cc -n64 -mips3
+
+
+        sun4_u5
+        _______
+
+            uname -a:   SunOS backstage 5.1 Generic sun4m sparc
+            CC:         /opt/SUNWspro/bin/cc
+            link:       /bin/cc -lsocket -lnsl -lintl
+
+        sun64_u5
+        _______
+
+            uname -a:   SunOS ultra5 5.7 Generic_106541-02 sun4u sparc
+                                        SUNW,Ultra-5_10
+            CC:         /bin/cc -xarch=v9
+            link:       /bin/cc -lsocket -lnsl -lintl -xarch=v9 -xildoff
+
+            Older, 32-bit binaries run fine on this OS.
+
+
+Bugs fixed in v7.0d
+___________________
+
+`       Bug   Platform  Description
+        ___________________________
+        P4449 all       start dates don't work with decimal format
+        P4579 all       possible core dump in lc_next_conf (rare) [application]
+        P4606 unix      vendor daemon doesn't start when it's not in the
+                        $PATH but is in the same directory as lmgrd [lmgrd]
+        P4622 all       lc_errtext() fails if LM_A_LONG_ERRMSG is true
+                        [application]
+        P4626 all       memory can be incorrectly freed twice in application
+                        (rare)
+        P4628 all       LM_MAXED_OUT can be incorrectly returned [vendor daemon]
+        P4613 all       "Phase 2" security not supported in vendor daemon
+
+
+Bugs fixed in v7.0c
+___________________
+
+        Bug  Platform   Description
+        ___________________________
+        P4446 windows   lmgr.rc overrode the version tab in properties.
+
+Bugs fixed in v7.0b
+___________________
+
+        Bug  Platform   Description
+        ___________________________
+        P1247 sun4_u5   vendor daemon was limited to 1024 clients.  Now the
+                        limitation is purely the OS and network speed.
+        P4211 all       security issue.
+        P4224 all       lmswitchr may core dump
+        P4225 all       client may core dump when component is removed via
+                        SUPERSEDE
+        P4232 windows   linker error about lm_debug_printf when linked to
+                        wrong C runtime library.
+        P4247 all       memory corruption in vd with PLATFORMS= and rereread.
+        P4255 all       lmreread with PLATFORMS in license can cause
+                        vendor daemon core dump.
+
+Bugs fixed in v7.0a
+___________________
+
+        Bug  Platform   Description
+        ___________________________
+        P2765 all       LM_CI_ALL_FEATURES can fail
+        P3128 all       options file specified on VENDOR line only read from
+                        1st file in list
+        P3609 all       lminstall silently truncates after converting 400 lines.
+        P3617 all       core dump when > 127 .lic files in directory
+        P3618 all       lmcrypt can skip a line (rare)
+        P3636 all       licenses must have CR at end
+        P3874 all       FLEXLM_DIAGNOSTICS output goes to stdout sometimes,
+                        instead of stderr
+        P4007 all       Queued PACKAGE SUITE may be erronesouly DENIED or
+                        GRANTED
+        P4100 windows   lmgrd -v doesn't work
+        P4101 windows   debug log file lines can be out of order
+        P4102 windows   lminstall and lmswitchr didn't work on command line
+        P4114 sun4_u5   lmgrd and clients die when ulimit -n (soft limit) >
+                        1024
+        P4130 all       ls_outfilter doesn't allow filtering different pools
+        P4154 all       CANTCONNECT or VENDORDOWN can occur with fully-qualified
+                        hostnames
+
+
+

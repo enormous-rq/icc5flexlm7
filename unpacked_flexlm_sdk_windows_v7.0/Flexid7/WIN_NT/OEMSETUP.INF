@@ -1,0 +1,29 @@
+[Source Media Descriptions]
+    1  = "Sentinel Driver Disk" , TAGFILE = disk1
+[Installable.Drivers]
+driver1 = 1:snti386.dll,  "SENTINEL", "Sentinel for i386 Systems" , , ,
+driver2 = 1:sntmips.dll,  "SENTINEL", "Sentinel for MIPS Systems" , , ,
+driver3 = 1:sntalpha.dll, "SENTINEL", "Sentinel for Alpha Systems" , , ,
+driver4 = 1:sntppc.dll,   "SENTINEL", "Sentinel for PowerPC Systems" , , ,
+
+[driver1]
+1:i386\senttemp.sys
+1:i386\sentinel.hlp
+1:i386\rnbovtmp.dll
+
+[driver2]
+1:mips\senttemp.sys
+1:mips\sentinel.hlp
+1:mips\rnbovtmp.dll
+
+[driver3]
+1:alpha\senttemp.sys
+1:alpha\sentinel.hlp
+1:alpha\rnbovtmp.dll
+
+[driver4]
+1:ppc\senttemp.sys
+1:ppc\sentinel.hlp
+1:ppc\rnbovtmp.dll
+
+

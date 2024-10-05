@@ -1,0 +1,3633 @@
+<html><head>
+<title>FLEXlm Programmers Guide</title>
+</head><body>
+<title>FLEXlm Programmers Guide</title>
+<h1>FLEXlm Programmers Guide</h1>
+<a href="#_IX">Index</a>
+<ul>
+<li><a href="#Chapter 1">Chapter 1 
+Introduction</a>
+<ul>
+<li><a href="#1.1">1.1  About this Manual</a>
+<li><a href="#1.2">1.2  How to use this Manual</a>
+<li><a href="#1.3">1.3  Introduction to FLEXlm<I></I></a>
+<li><a href="#1.4">1.4  FLEXlm<I></I> Terms and Definitions</a>
+<li><a href="#1.5">1.5  How FLEXlm<I></I> Works</a>
+<li><a href="#1.6">1.6  FLEXlm<I></I> APIs</a>
+</ul>
+<li><a href="#Chapter 2">Chapter 2 
+<a name="13483: chap head: Installing the Distribution Kit"></a>Installing the Distribution Kit</a>
+<ul>
+<li><a href="#2.1">2.1  Installation from FTP site on Unix</a>
+<li><a href="#2.2">2.2  Installation for Windows, NT, and Netware Systems</a>
+</ul>
+<li><a href="#Chapter 3">Chapter 3 <a name="19073: ChapTitle: Chapter 3 Your First FLEXlm Application"></a>
+Evaluating FLEXlm<I></I> and Your First FLEX<I>lm</I> Application</a>
+<ul>
+<li><a href="#3.1">3.1  Evaluating FLEXlm<I></I> on Unix</a>
+<li><a href="#3.2">3.2  Windows demo kits - Pre-configured Demo</a>
+<li><a href="#3.3">3.3  Unix Demo kits - Incorporating FLEXlm<I></I> into your Application</a>
+<li><a href="#3.4">3.4  Windows - Incorporating FLEXlm<I></I> into your Application</a>
+<li><a href="#3.5">3.5  Shared Library/DLL on Windows/NT</a>
+<li><a href="#3.6">3.6  Windows demo kits - Additional Information</a>
+<li><a href="#3.7">3.7  Hostids for FLEXlm<I></I></a>
+</ul>
+<li><a href="#Chapter 4">Chapter 4 
+<a name="39267: chap head: Chapter 3 Incorporating FLEXlm Into Your Application"></a>Incorporating FLEXlm<I></I> Into Your Application</a>
+<ul>
+<li><a href="#4.1">4.1  FLEXlm<I></I> Naming Conventions</a>
+<li><a href="#4.2">4.2  Installation and Directory Naming for Java</a>
+<li><a href="#4.3">4.3  Building your Vendor Daemon</a>
+<li><a href="#4.4">4.4  FLEXlm<I></I> Example Applications</a>
+<li><a href="#4.5">4.5  Client Heartbeats and License Server Failures</a>
+<li><a href="#4.6">4.6  License Policies</a>
+<li><a href="#4.7">4.7  Policy Modifiers</a>
+</ul>
+<li><a href="#Chapter 5">Chapter 5 <a name="17661: ChapTitle: Chapter 5 Trivial API"></a>
+Trivial API</a>
+<ul>
+<li><a href="#5.1">5.1  Overview of Trivial API Calls</a>
+<li><a href="#5.2">5.2  Trivial API Example Program</a>
+<li><a href="#5.3">5.3  CHECKOUT</a>
+<li><a href="#5.4">5.4  CHECKIN</a>
+<li><a href="#5.5">5.5  ERRSTRING</a>
+<li><a href="#5.6">5.6  HEARTBEAT</a>
+<li><a href="#5.7">5.7  PERROR</a>
+<li><a href="#5.8">5.8  PWARN</a>
+<li><a href="#5.9">5.9  WARNING</a>
+</ul>
+<li><a href="#Chapter 6">Chapter 6 
+<a name="_IX_59"></a>Simple API</a>
+<ul>
+<li><a href="#6.1">6.1  Simple API Library Routines</a>
+<li><a href="#6.2">6.2  Simple API Example Program</a>
+<li><a href="#6.3">6.3  lp_checkout</a>
+<li><a href="#6.4">6.4  lp_checkin</a>
+<li><a href="#6.5">6.5  lp_errstring</a>
+<li><a href="#6.6">6.6  lp_heartbeat</a>
+<li><a href="#6.7">6.7  lp_perror</a>
+<li><a href="#6.8">6.8  lp_pwarn</a>
+<li><a href="#6.9">6.9  lp_warning</a>
+</ul>
+<li><a href="#Chapter 7">Chapter 7 <a name="_IX_69"></a>
+Java API</a>
+<ul>
+<li><a href="#7.1">7.1  Methods</a>
+<li><a href="#7.2">7.2  Public Constants</a>
+<li><a href="#7.3">7.3  Java and Security</a>
+</ul>
+<li><a href="#Chapter 8">Chapter 8 <a name="40917: ChapTitle: Chapter 7 Configuring License Daemons"></a>
+License Daemons</a>
+<ul>
+<li><a href="#8.1">8.1  lmgrd</a>
+<li><a href="#8.2">8.2  Configuring Your Vendor Daemon</a>
+<li><a href="#8.3">8.3  Redundant License Servers</a>
+</ul>
+<li><a href="#Chapter 9">Chapter 9 <a name="13237: ChapTitle: Chapter 8 Software Vendor Utility Programs"></a>
+Software Vendor Utility Programs</a>
+<ul>
+<li><a href="#9.1">9.1  makekey</a>
+<li><a href="#9.2">9.2  lmcrypt</a>
+<li><a href="#9.3">9.3  makepkg</a>
+<li><a href="#9.4">9.4  genlic32.exe (Windows only)</a>
+<li><a href="#9.5">9.5  Integrating the License Certificate Manager</a>
+</ul>
+<li><a href="#Chapter 10">Chapter 10 <a name="45129: ChapTitle: Chapter 9 The License File"></a>
+The License File</a>
+<ul>
+<li><a href="#10.1">10.1  Format of the License File</a>
+<li><a href="#10.2">10.2  Locating the License File</a>
+<li><a href="#10.3">10.3  Hostids for FLEXlm<I></I> Supported Machines</a>
+<li><a href="#10.4">10.4  <TT></TT>Types of License Files</a>
+<li><a href="#10.5">10.5  License in a buffer</a>
+<li><a href="#10.6">10.6  Decimal Format Licenses</a>
+</ul>
+<li><a href="#Chapter 11">Chapter 11 
+FLEXlock and License Certificate Manager (Windows only)</a>
+<ul>
+<li><a href="#11.1">11.1  FLEXlock</a>
+<li><a href="#11.2">11.2  License Certificate Manager (LCM)</a>
+</ul>
+<li><a href="#Chapter 12">Chapter 12 
+Integration Guidelines</a>
+<ul>
+<li><a href="#12.1">12.1  Where to Install Your Licensing Software</a>
+<li><a href="#12.2">12.2  Redundant vs. Single-server licensing</a>
+<li><a href="#12.3">12.3  Keeping Your Software Secure</a>
+</ul>
+<li><a href="#Chapter 13">Chapter 13 
+<a name="19683: chap head: End-User License Administration"></a>End-User License Administration</a>
+<ul>
+<li><a href="#13.1">13.1  End-User Options File</a>
+<li><a href="#13.2">13.2  License Administration Tools - lmutil (UNIX)</a>
+<li><a href="#13.3">13.3  License Administration Tools  -  LMUTIL (Windows, NT)</a>
+<li><a href="#13.4">13.4  Switching the Debug Log File Under Unix<I></I></a>
+</ul>
+<li><a href="#Chapter 14">Chapter 14 
+<a name="35653: chap head: End-User Installation"></a>End-User Installation Instruction Template</a>
+<ul>
+<li><a href="#14.1">14.1  Binaries Your Customers Will Require</a>
+<li><a href="#14.2">14.2  Information Every Customer Needs to Know</a>
+</ul>
+<a href="#_IX">Index</a>
+</ul>
+	<I></I>	<I>	</I>		<p>
+
+<p>
+		
+		<B> 	</B> 		<B></B><B>	</B>	 		<B></B><B>	</B> 		<B></B><B></B>		<B>	</B><I></I> 								 				 				<a name="Chapter 1"></a><hr><h1>Chapter 1 
+Introduction</h1>
+<a name="1.1"></a><h2>1.1  About this Manual</h2>
+<p>
+This manual, the 
+FLEXlm<I></I>` Programmers Guide, is an introduction to 
+FLEXlm<I></I> and 
+includes a complete description of the simplest Application Programming Interfaces 
+(APIs) that can be used to incorporate license management into your application. This 
+manual describes the license administration tools that are bundled with 
+FLEXlm<I></I>, and 
+provides guidelines for integration of 
+FLEXlm<I></I> into your application.With this manual, 
+you should be able to have an example license-managed application up and running 
+within a few hours.<p>
+<p>
+The 
+FLEXlm Reference Manual<I></I> provides a comprehensive description of all other 
+aspects of 
+FLEXlm<I></I> from the software developer's perspective, including a complete 
+description of the FLEX<I>ible</I> API, the most complete API available for license 
+management. Companies upgrading from a version older than version 6 should refer 
+to Appendix F in the Reference Manual, `Upgrading FLEXlm to Version 6 - Compatibility Issues'.<p>
+<p>
+The 
+FLEXlm End-User Manual<I></I> contains information for products that utilize 
+FLEXlm<I></I> 
+as their licensing system. This manual describes the setup and administration of a 
+FLEXlm<I></I> licensing system.<p>
+<a name="1.2"></a><h2>1.2  How to use this Manual</h2>
+<p>
+If you are getting started with 
+FLEXlm<I></I>, we suggest that you read chapters 1-3 of this 
+manual. By the end of chapter 3, you will have installed 
+FLEXlm<I></I> and run a sample 
+application with license management in a number of different situations.<p>
+<p>
+Once you are familiar with how 
+FLEXlm<I></I> operates, the remainder of this manual 
+provides reference material for integrating 
+FLEXlm<I></I> into your application and includes 
+instruction in the use of the administration tools provided with 
+FLEXlm<I></I>, and general 
+guidelines on configuring your application and its licensing software.<p>
+<a name="1.3"></a><h2>1.3  Introduction to FLEXlm<I></I></h2>
+<p>
+FLEXlm<I></I> is a software licensing package that allows licensing a software application 
+on a concurrent-usage as well as on a per-computer basis. 
+FLEXlm<I></I> allows the 
+implementation of a wide variety of<I> license policies</I> by the developer of an application.<p>
+<p>
+With 
+FLEXlm<I></I>, you, the application developer, can restrict the use of your software 
+packages to:<p>
+<ul><li>A single specified computer<li>A specified number of users on a network of one or more computer systems</ul><p>
+FLEXlm<I></I> is available on 
+Unix<I></I>, 
+Windows, 
+Windows NT, 
+VMS, and Netware systems. 
+FLEXlm<I></I> features include:<p>
+<ul><li>Operation in a heterogeneous network of supported computer systems<li>Transparent reconnection of applications when their license server process 
+becomes unavailable, including conditions of license server node failure<li>Simple configuration by using a single license file per network<li>Configuration controls for System Administrators<li>Administration tools for System Administrators<li>Independent features from one or multiple vendors with independent vendor 
+security codes<li>A wide variety of 
+<I>license policies</I> and 
+<I>license styles</I>, including:</ul><ul><li>Floating licenses<li>Node locked licenses<li>Personal use licenses<li>Demo licenses<li>Counted and uncounted licenses<li>Optional license expiration dates<li>Several vendor-definable fields for each application feature</ul><ul><li>License management on redundant server hosts for improved license availability 
+due to hardware failure</ul><a name="1.4"></a><h2>1.4  FLEXlm<I></I> Terms and Definitions</h2>
+<p>
+The following terms are used to describe 
+FLEXlm<I></I> concepts and software components:<p>
+<dl><a name="_IX_1"></a><dt>feature<dd>Any functionality requiring licensing. The meaning of a 
+feature will depend entirely on how it is used by an 
+application developer. For example, a feature could 
+represent any of the following:</dl><ul><li>An application software system consisting of hundreds 
+of programs<li>A single program (regardless of version)<li>A specific version of a program<li>A part of a program<li>A piece of data (restricted via the access routines)</ul><dl><a name="_IX_2"></a><dt>license<dd>The legal right to use a feature. 
+FLEXlm<I></I> can control 
+licenses for features by counting the number of licenses 
+currently in use for a feature when new requests are made 
+by the application software (client). 
+FLEXlm<I></I> can also 
+restrict software usage to particular nodes or user names.<a name="_IX_3"></a><dt>client<dd>An application program requesting or receiving a license.<a name="_IX_4"></a><dt>daemon<dd>A process that `serves' clients. Sometimes referred to as a 
+<I>server</I>.<a name="_IX_5"></a><dt>vendor daemon<dd>The 
+<a name="_IX_6"></a>daemon that dispenses licenses for the requested 
+features. This daemon is built by an application's vendor 
+(from libraries supplied by 
+GLOBEtrotter Software<I></I>) and 
+contains the vendor's unique encryption seeds.<a name="_IX_7"></a><dt>lmgrd<dd>The 
+<a name="_IX_8"></a>daemon process, or license daemon, that sends client 
+processes to the correct vendor daemon on the correct 
+machine. The same license daemon process can be used by 
+all applications from all vendors, as this daemon neither 
+authenticates nor dispenses licenses. lmgrd processes no 
+user requests on its own, but forwards these requests to 
+other daemons (the vendor daemons).<a name="_IX_9"></a><dt>server node 
+<dd>A computer system running the license server software. 
+The server node will contain all site-specific information 
+regarding all feature usage. Multiple server nodes used for 
+redundancy can logically be considered the<I> server node</I>.<a name="_IX_10"></a><dt>license file<dd>A<a name="_IX_11"></a> site-specific file that contains descriptions of server 
+node(s) that can run the license daemons, various vendor 
+daemons, and licenses (features) for all supported products.<a name="_IX_12"></a><dt>license file list<dd>A list of license files separated with a colon ':' on Unix, a 
+semi-colon ';' on Windows and a space on VMS. A 
+<I>license 
+file list</I> can be accepted in most places where a license file 
+is appropriate. When a directory is specified, all files 
+matching 
+<I>*.lic</I> in that directory are automatically used, as if 
+specified as a list.<a name="_IX_13"></a><dt>license key<dd> A 12- to 20-character hexadecimal number which 
+`authenticates' the readable license file text, ensuring that 
+the license text has not been modified. 
+<a name="_IX_14"></a><dt>license server<dd>The lmgrd and vendor daemon processes. License server 
+refers to the processes, not the computer.</dl><a name="1.5"></a><h2>1.5  How FLEXlm<I></I> Works</h2>
+<p>
+FLEXlm<I></I> is a client-server application toolkit. The client (your application) requests a 
+license from the license server and is either granted or denied the license.<p>
+<p>
+The five main components in 
+FLEXlm<I></I> are:<p>
+<ul><li>C<a name="_IX_15"></a>lient library (embedded in the license-managed application)<li><TT><a name="_IX_16"></a>lmgrd</TT>, the license daemon<li>V<a name="_IX_17"></a>endor daemon(s)<li>Vendor and end-user 
+<a name="_IX_18"></a>license administration tools<li>L<a name="_IX_19"></a>icense file(s)</ul><p>
+The end-user installs 
+<TT>lmgrd</TT> and the vendor daemon on the license server node. Once 
+the license file(s) and the daemons are in place, the only requirement is to start lmgrd. 
+The daemon is typically started when the machine boots (in the machine startup file, 
+or on Windows as a system service), but can also be started later by any user.<p>
+<p>
+With the license file installed in an expected location and the 
+FLEXlm<I></I> daemons 
+running, 
+FLEXlm<I></I> use is transparent to the end-user.<p>
+<h4>See Also</h4>
+<ul><li><a href="#45129: ChapTitle: Chapter 9 The License File">Chapter 10, `The License File' on page 60</a><li><a href="#19683: chap head: End-User License Administration">Chapter 13, `End-User License Administration' on page 76</a></ul><a name="1.6"></a><h2>1.6  FLEXlm<I></I> APIs</h2>
+<p>
+The application program interfaces to 
+FLEXlm<I></I> via a set of routines that request 
+(checkout) and release (checkin) licenses of selected feature(s). 
+<p>
+<p>
+There are 
+4 
+APIs available to the developer: 
+<p>
+<ul><li><a name="_IX_20"></a>Trivial API<li><a name="_IX_21"></a>Simple API<li><a name="_IX_22"></a>FLEX<I>ible</I> API<li><a name="_IX_23"></a>Java API (for programs written in the Java language)</ul><p>
+Globetrotter recommends using the Trivial API; if the application requires 
+functionality not provided in this API, use the Simple API functions; for complete 
+flexibility use the FLEX<I>ible</I> API. The FLEX<I>ible</I> API is described in the 
+FLEXlm Reference Manual<I></I>.<p>
+<p>
+In the Trivial and Simple APIs, a licensing `policy' is selected as an argument to the 
+license request call. In these APIs, a `heartbeat' function is usually called explicitly by 
+the application and policy upon server failure must be programmed into the 
+application.<p>
+<p>
+Most of the important functionality and flexibility in 
+FLEXlm<I></I> is contained in the 
+license file; all license file attributes are available to 
+all APIs.<p>
+<a name="Chapter 2"></a><hr><h1>Chapter 2 
+<a name="13483: chap head: Installing the Distribution Kit"></a>Installing the Distribution Kit</h1>
+<p>
+FLEXlm<I></I> kits are obtained from the Globetrotter web site:<p>
+<pre>	http://www.globetrotter.com/lmpostreg.htm</pre>
+</ol></ul><p>
+Vendor Keys are required from Globetrotter to successfully download and install 
+FLEXlm<I></I>.<p>
+<p>
+Once installed, the manuals are available on-line.<p>
+<p>
+If you are installing on Windows, NT, or Netware, skip to 
+<a href="#32193: 1Head: 2.3 Installation for Windows, NT, and Netware Systems">Section 2.2, `Installation for 
+Windows, NT, and Netware Systems,' on page 13</a>. 
+<p>
+<a name="38649: 1Head: 2.2 Installation for Unix Systems"></a><a name="2.1"></a><h2>2.1  Installation from FTP site on Unix</h2>
+<ol><li>Get the 5 Vendor Keys from Globetrotter Software. 
+(Note that FLEXlm v7 Vendor 
+Keys are different from FLEXlm previous versions).<li>Connect to Globetrotter's web site:<pre>		http://www.globetrotter.com/lmpostreg.htm</pre>
+<li>Download the following files into your local directory (use BINARY mode):<pre>	install_flexlm.ftp
+	machine_ind.tar
+	PLATFORM_1.tar
+	PLATFORM_2.tar
+	...
+	PLATFORM_n.tar</pre>
+</ol></ul><p>
+        where `PLATFORM' is the type of machine you are running on, e.g.:<p>
+<pre>                sun/solaris - sun4_u5</pre>
+<pre>                hp9000/700  - hp700_u9</pre>
+</ol></ul><p>
+You must download the tar file for the machine on which you will run the 
+install_flexlm.ftp, so that it can install the files properly and run the complete 
+installation.<p>
+<li>Run the install_flexlm.ftp script in your local directory (note that this directory is 
+referred to as the `GSI home directory' in the demo guide):<pre>	% sh install_flexlm.ftp</pre>
+</ol></ul><p>
+This will create the flexlm directories. It will also start the FLEXlm INSTALL 
+script to install FLEXlm. This INSTALL script, in turn, requires FLEXlm Vendor 
+Keys, which you must obtain from Globetrotter.<p>
+<p>
+The install_flexlm.ftp script does the complete install from the ftp site tarring the files 
+as necessary. Should any errors occur during the install, or it ever needs to be re-run, 
+you can always re-use install_flexlm.ftp, and it will start from where it last left off.<p>
+<p>
+install_flexlm.ftp calls flexlm/v6.1/INSTALL, which automatically edits 
+<I>lm_code.h</I> 
+<I>and changes the DAEMON name in the makefile to your vendor-daemon name (which 
+is listed along with the vendorkeys from Globetrotter, and is always `demo' with an 
+evaluation kit</I>. You can also manually edit 
+<I>lsvendor.c, lm_code.h</I> and the 
+<I>makefile</I> 
+should the need arise.<p>
+<h3>2.1.1	 <a name="20374: 2Head: 2.2.1 Example Unix INSTALL Session"></a>Example Unix install_flexlm.ftp Session (highlights)</h3>
+<p>
+This example illustrates the use of 
+<TT>install_flexlm.ftp 
+</TT>to complete binary kit 
+installation for a sun4, sunOS4 kit. Data you enter is typed in 
+<B>bold</B>. The example is 
+edited, but includes all prompts that you must enter. Skipped output is indicated with 
+`[...]'<p>
+<pre>% ls</pre>
+<pre>install_flexlm.ftp machine_ind.tar sun4_u4.tar</pre>
+<pre>% sh install_flexlm.ftp
+Installation for FTP FLEXlm
+[...]
+Extracting from machine_ind.tar
+[...]
+Is this is a Evaluation installation? (Y/n) <B>y
+</B>[...]
+Your demo kit is for the ../sun4_u4 platform
+[...]
+Do you want to configure your daemon now [y/n]? <B>y
+</B>[...]
+FLEXlm vendor key #1 for demo [hexadecimal]:<B> 12345678</B></pre>
+<pre>FLEXlm vendor key #2 for demo [hexadecimal]: <B>12345678</B></pre>
+<pre><B>FLEXlm vendor key #3 for demo [hexadecimal]:</B><B> 12345678</B></pre>
+<pre><B>FLEXlm vendor key #4 for demo [hexadecimal]:</B><B> 12345678</B></pre>
+<pre><B>FLEXlm vendor key #5 for demo [hexadecimal]: </B><B>12345678</B></pre>
+<pre><B>Do you want to continue and build the daemon now? [y/n, default: n]:</B><B> y</B></pre>
+<pre><B>[...]
+Building kit in directory ../sun4_u4</B></pre>
+<pre><B>cc -c -g -I../machind -DSUNOS4 ../machind/makekey.c</B></pre>
+<pre><B>[...]</B></pre>
+<a name="32193: 1Head: 2.3 Installation for Windows, NT, and Netware Systems"></a><a name="_IX_24"></a><a name="2.2"></a><h2>2.2  Installation for Windows, NT, and Netware Systems</h2>
+<ol><li>Connect to Globetrotter's download site:<pre>		http://www.globetrotter.com/lmpostreg.htm</pre>
+<li>Download the following files into your local directory (use BINARY mode):<pre>	flexlm.exe(32-bit)</pre>
+</ol></ul><p>
+flexlm.exe also contains all the platform independent files.<p>
+<p>
+To install, run the 
+<TT>flexlm.exe 
+</TT>program; it will expand into all files needed to install 
+FLEXlm<I></I>. If you are evaluating flexlm, answer YES when asked if this is a demo 
+installation.<p>
+<p>
+The installation locations closely parallel the Unix structure. 
+A single 
+<TT>machind</TT> 
+directory will be created with all of the machine independent files and documentation. 
+A machine dependent directory will be created for each platform during installation. 
+<TT><a name="_IX_25"></a>i86_n3</TT> stands for Intel 32-bit (NT, 
+<a name="_IX_26"></a>Windows 95/98 32-bit)<p>
+<p>
+For your convenience, we have pre-built all applications and utilities to assist in 
+evaluating the product.<p>
+<p>
+During the installation, a 
+<TT>BUILD.BAT</TT> file will be created in each machine dependent 
+directory, which is designed to run correctly with MS VC++. Running 
+VCVARS32.BAT for VCC 2.0 will normally set up the necessary environment for 
+BUILD.BAT. If you have environment variables set up correctly for MS Visual C++, 
+then the 
+<TT>BUILD</TT>.<TT>BAT</TT> file will be able to compile all necessary programs.<p>
+<p>
+Although the 
+FLEXlm<I></I> license server relies on Microsoft Visual C++, any application 
+can be a 
+FLEXlm<I></I> client if it is written in a language that can interact with the 
+FLEXlm<I></I> 
+client DLL LMGR327x.DLL (which is a standard 
+<a name="_IX_27"></a><a name="_IX_28"></a>Windows WIN32 DLL).<p>
+<p>
+All Documentation is provided on-line in the HTMLMAN directory and can be 
+accessed by running any HTML browser.<p>
+<h3>2.2.1	 What's installed</h3>
+<p>
+The following directories are available<p>
+<dl><dt>i86_n3<dd>Windows executables and files necessary for evaluation<dt>htmlman<dd>Browser documentation<dt>machind<dd>Machine independent files, include lm_code.h, manuals in 
+PDF format, and sample programs. These files are identical 
+on Unix<dt>examples<dd>More example programs</dl><p>
+The following files will be loaded into the C:\Program Files\FLEXlm\v7.0\i86_n3:<p>
+<dl><dt>demo.exe<dd>Evaluation vendor daemon 
+<dt>flsetup.exe<dd>FLEXlock setup program<dt>genlic32.exe<dd>Evaluation program for making license files<dt>installs.exe<dd>NT service installer for lmgrd.exe<dt>license.dat<dd>Sample license, including licenses for f1 and f2<dt>lmclient.exe<dd>Sample 
+FLEXlm<I></I> client program, using Trivial API<dt>lmcrypt.exe<dd>FLEXlm<I></I> license generation program<dt>lmgrd.exe<dd>FLEXlm<I></I> license manger<dt>lmtools.exe<dd>GUI tool for testing the 
+FLEXlm<I></I> license manager<dt>lmwin.exe<dd>Sample FLEXlm Windows GUI application<dt>lmutil.exe<dd>Command line (DOS prompt) tool for testing the 
+FLEXlm<I></I> 
+license manager<dt>makekey.exe<dd>Sample program for making license files</dl><a name="Chapter 3"></a><hr><h1>Chapter 3 <a name="19073: ChapTitle: Chapter 3 Your First FLEXlm Application"></a>
+Evaluating FLEXlm<I></I> and Your First FLEX<I>lm</I> Application</h1>
+<p>
+This chapter will walk you through the process of integrating 
+FLEXlm<I></I> into a small 
+application. Before you start this chapter, please install the 
+FLEXlm<I></I> software as 
+described in 
+<a href="#13483: chap head: Installing the Distribution Kit">Chapter 2, `Installing the Distribution Kit' on page 12</a>.<p>
+<p>
+The 
+FLEXlm<I></I> kit has pre-configured source files to build a vendor daemon (demo), 
+sample client program (lmclient), and license generation utility (lmcrypt). If your 
+demo kit has expired, you will have to enter the new 
+FLEXlm<I></I> vendor keys provided by 
+Globetrotter Software before you re-build these components. 
+<p>
+<p>
+If you're familiar with 
+FLEXlm<I></I> on Unix or are comfortable with commands in a DOS 
+window, the commands available on Unix are available on Windows and behave the 
+same, so you can try 
+<a href="#30797: 1Head: 3.1 Using FLEXlm on Unix">, `Evaluating FLEXlm on Unix' on page 16</a>. Otherwise, Windows 
+users should following the evaluation instructions in 
+<a href="#41622: 1Head: 3.4 Windows demo kits\xd1 pre-configured demo">, `Windows 
+demo kits - Pre-configured Demo' on page 19</a>.<p>
+<p>
+Note that 
+FLEXlm<I></I> demo kits expire (the expiration date is a function of the 
+FLEXlm<I></I> 
+vendor keys that were issued). 
+<p>
+<a name="30797: 1Head: 3.1 Using FLEXlm on Unix"></a><a name="3.1"></a><h2>3.1  Evaluating FLEXlm<I></I> on Unix</h2>
+<p>
+Change directories (cd) to flexlm/v7.0/<I>platform</I>, where 
+<I>platform</I> is the technical name 
+for your system, e.g., sun4_u5 is solaris, hp700_u9 is HP, and so on. Make sure 
+..\machind\lm_code.h has the correct VENDORKEYs. Run<p>
+<pre>make</pre>
+</ol></ul><p>
+To ensure that all the binaries are up to date in the 
+<I>platform</I> kit directory.<p>
+<h4>Command Summary</h4>
+<p>
+You'll be running the following commands to evaluate 
+FLEXlm<I></I>:<p>
+<pre>lmcrypt license.dat <I>				#	generate license file)</I></pre>
+<pre>lmgrd -c license.dat -l lmgrd.dl	<I># Start license server</I></pre>
+<pre>lmclient<I> 				# run sample application</I></pre>
+<pre>lmstat -a -c license.dat				<I># Check server status</I></pre>
+<pre>lmdown -c license.dat <I>				# Stop license server</I></pre>
+<h4>Using lmcrypt on license.dat</h4>
+<p>
+A sample license file is pre-shipped in the kit directory (e.g., sun4_u5/license.dat):<p>
+<pre>SERVER myhost ANY
+VENDOR demo /t/tmp/flexlm/v7.0/sun4_u5/demo
+FEATURE f1 demo 1.0 permanent 4 E4123D3F54B8
+</pre>
+</ol></ul><p>
+However, the license-key in this file may not be up-to-date. Run<p>
+<pre>% lmcrypt license.dat</pre>
+</ol></ul><p>
+to ensure the license-key is up-to-date.<p>
+<h4>Start the license server</h4>
+<p>
+Run<p>
+<pre>% lmgrd -c license.dat -l lmgrd.dl</pre>
+</ol></ul><p>
+to start the license server. This is required because the license is 
+<I>counted</I>. For 
+<I>uncounted</I> licenses the license server is not needed. The lmgrd debug log file will be 
+located in lmgrd.dl. At this point it will look something like:<p>
+<pre>11:11:49 (lmgrd) FLEXlm (v7.0c) started on myhost (Sun) (9/3/1999)
+11:11:49 (lmgrd) FLEXlm Copyright 1988-1999, Globetrotter Software, Inc.
+11:11:49 (lmgrd) US Patents 5,390,297 and 5,671,412.
+11:11:49 (lmgrd) World Wide Web:  http://www.globetrotter.com
+11:11:49 (lmgrd) License file(s): license.dat
+11:11:49 (lmgrd) lmgrd tcp-port 27000
+11:11:49 (lmgrd) Starting vendor daemons ... 
+11:11:49 (lmgrd) Started demo (internet tcp_port 34641 pid 9159)
+11:11:49 (demo) FLEXlm version 7.0c
+11:11:49 (demo) Server started on myhost for:    f1
+</pre>
+<h4>Run sample application, lmclient:</h4>
+<pre>lmclient</pre>
+<pre>Enter feature to checkout [default:"f1"]: <I>&lt;=Enter
+</I>f1 checked out...press return to exit...<I>&lt;=Enter
+</I></pre>
+</ol></ul><p>
+lmgrd.dl will now have at the bottom<p>
+<pre>11:22:35 (demo) OUT:"f1" daniel@myhost 
+11:22:40 (demo) IN:"f1" daniel@myhost 
+</pre>
+<h4>Run lmstat for license server status</h4>
+<p>
+Run<p>
+<pre>lmstat -a -c license.dat</pre>
+</ol></ul><p>
+and you should see output like:<p>
+<pre>License server status: 27000@myhost
+	License file(s) on myhost: /flexlm/v7.0/sun4_u5/license.dat:
+	myhost: license server UP (MASTER) v7.0
+Vendor daemon status (on myhost):
+
+	demo: UP v7.0
+Feature usage info:
+Users of f1:  (Total of 4 licenses available)
+</pre>
+</ol></ul><p>
+If you run 
+<TT>`lmstat 
+</TT>-a -c license.dat' 
+<I>while</I> 
+<TT>lmclient</TT> has a license checked out, you'll 
+see something like:<p>
+<pre>Users of f1:  (Total of 4 licenses available)
+ "f1" v1.0, vendor: demo
+  floating license
+    tom myhost 19.16.18.26 (v1.0) (myhost/27000 102), start Fri 9/3 7:29
+</pre>
+<h4>FLEXlm<I></I> errors</h4>
+<p>
+Try checking out an unlicensed feature:<p>
+<pre>Enter feature to checkout [default:"f1"]: <I>&lt;myfeat=
+</I>Checkout failed: License server does not support this feature
+Feature:       myfeat
+License path:  @localhost:license.dat:./*.lic
+FLEXlm error:  -18,147
+For further information, refer to the FLEXlm End User Manual,
+available at"www.globetrotter.com".
+</pre>
+</ol></ul><p>
+On windows, the error message appears by default in a popup window.<p>
+<h4>Stop license server</h4>
+<p>
+Run<p>
+<pre>lmdown -c license.dat
+    Port@Host 			Vendors
+1) 27000@myhost			demo 
+Are you sure (y/n)?  <I>y&lt;=E
+</I>Shut down FLEXlm server on node myhost
+1 FLEXlm License Server shut down
+</pre>
+</ol></ul><p>
+The lmgrd.dl log file will have text at the end like<p>
+<pre>11:35:46 (lmgrd) SHUTDOWN request from daniel at node myhost
+11:35:46 (lmgrd) lmgrd will now shut down all the vendor daemons
+11:35:46 (lmgrd) Shutting down demo
+11:35:46 (demo) daemon shutdown requested - shutting down
+</pre>
+<h4>Changing the license</h4>
+<p>
+Edit the license file, copy the FEATURE line for f1, so that it's now duplicated. On the 
+2nd FEATURE line, change f1 to my feat. Then run 
+<p>
+<pre>lmcrypt license.dat</pre>
+</ol></ul><p>
+The license should now look like:<p>
+<p>
+SERVER myhost ANY
+VENDOR demo /flexlm/v7.0/sun4_u5/demo
+FEATURE f1 demo 1.0 permanent 4 1F0E784111C6
+FEATURE myfeat demo 1.0 permanent 4 E92DCA5E9ADD
+<p>
+<p>
+If you restart the server (<TT>lmgrd</TT> command above) and run 
+<TT>lmclient</TT>, asking for 
+<I>myfeat</I>, 
+it should succeed now. 
+<p>
+<p>
+Note that if you don't run 
+<TT>lmcrypt</TT> on the edited license, you'll get:<p>
+<pre>`Invalid (inconsistent) license key'</pre>
+</ol></ul><p>
+which is the error end-users get if they attempt to alter a license file, or if they type it 
+in incorrectly.<p>
+<p>
+Don't forget to shutdown the demo server when you're done evaluating.<p>
+<a name="41622: 1Head: 3.4 Windows demo kits\xd1 pre-configured demo"></a><a name="3.2"></a><h2>3.2  Windows demo kits - Pre-configured Demo</h2>
+<p>
+A pre-configured set of executables is automatically installed by 
+<TT>flexlm.exe</TT>. 
+Follow these steps to evaluate 
+FLEXlm<I></I>.<p>
+<h3>3.2.1	 Start the license server with lmtools.exe</h3>
+<p>
+The evaluation kit automatically installs a sample license file and configures the 
+registry to know about this file.<p>
+<ol><li>Launch lmtools.exe. You can do this from the Start Menu with
+
+Start-&gt;Programs-&gt;FLEXlm v7.0-&gt;FLEXlm Utilities
+
+or by simply executing lmtools.exe.<li>Click on `'Configuration using Services' and make sure `Demo License 
+Manager' is highlighted. (This should have been installed during your installation. 
+If not, you can create an entry here with `Configure Services' in this utility.)<li>Click the `Start/Stop/Reread' tab<li>Click `Start Server'.</ol>
+<h3>3.2.2	 Check Server Status</h3>
+<p>
+To make sure the server is running, click:<p>
+<p>
+Server Status-&gt;Perform Status Enquiry<p>
+<p>
+At the bottom of the output window, it should say:<p>
+<pre>	demo: UP v7.0</pre>
+<pre>Feature usage info:</pre>
+<pre>Users of f1:  (Total of 4 licenses available)</pre>
+<pre>Users of f2:  (Uncounted, node-locked)</pre>
+<h3>3.2.3	 Run sample application - lmwin.exe</h3>
+<ol><li>Launch lmwin.exe. You can do this from the Start Menu with
+Start-&gt;Programs-&gt;FLEXlm v7.0-&gt;FLEXlm Test Program
+or simply executing lmwin.exe. By default, the feature that appears in the box is 
+`f1'. This is a `floating' license. 
+<li>Click on Checkout.</ol>
+<p>
+If successful, you rerun Server Status in lmtools, you will see at bottom of the 
+output like this:<p>
+<pre>	Users of f1:  (Total of 4 licenses available)</pre>
+<pre>	 "f1" v1.0, vendor: demo</pre>
+<pre>	  floating license</pre>
+<pre>	      daniel myhost myhost(v1.0) (myhost/27000 101), start ...</pre>
+</ol></ul><p>
+If you examine lmgrd's debug log file, Program 
+files\FLEXlm\v7.0\i86_n3\lmgrd.dl, you'll see at the end of it something like:<p>
+<pre>	19:03:54 (demo) OUT:"f1" daniel@myhost</pre>
+<li>Click on Checkin, to free the license. The status and log will be updated 
+automatically.<li>Edit the `f1' in lmwin and change it to `f2'. This is an `uncounted, nodelocked' 
+license and does not require the license server. Checkout will always work, even 
+if the server is not running.</ol>
+<h3>3.2.4	 Stop license server with lmtools</h3>
+<p>
+In lmtools, select Start/Stop/Reread, then Stop Server. After completion you can check 
+server status, and it should report something like:<p>
+<pre>lmgrd is not running: Cannot connect to license server
+  The server (lmgrd) has not been started yet, or
+  the wrong port@host or license file is being used, or the
+  port or hostname in the license file has been changed.
+Server name:   myhost
+License path:  @myhost
+FLEXlm error:  -15,10.  System Error: 10061"WinSock: Connection refused"
+For further information, refer to the FLEXlm End User Manual,
+available at"www.globetrotter.com".</pre>
+<h3>3.2.5	 lm_code.h</h3>
+<p>
+Edit lm_code.h in the C:\Program Files\FLEXlm\v7.0\machind directory and insert 
+your demo vendor codes. (If you do not have demo vendor codes, contact Globetrotter 
+Software to receive your demo vendor codes.) You can perform this step later if 
+desired, however, if you get an expiration date error when running the sample 
+application, be sure to edit lm_code.h with your demo keys and run build.bat to rebuild 
+the applications.<p>
+<h3>3.2.6	 Generating and testing your own licenses</h3>
+<p>
+These examples require using genlic32.exe, which in turn requires a correct lm_code.h 
+file. If lm_code.h is not correct, you can still generate licenses with makekey.exe or 
+lmcrypt.exe, though the descriptions below or only for genlic32.exe.<p>
+<h4>Test an `ANYWHERE' License</h4>
+<p>
+genlic32.exe is a visual license generation program provided with the evaluation kit. 
+Eventually, you'll want to learn to use lmcrypt.exe, but genlic32 is easier to get started 
+with. The `Run Anywhere' license is a license that will run on any computer. Choices 
+of expiration date allow the license to be used for a limited or unlimited amount of 
+time. 
+<p>
+<p>
+First, make a `Run Anywhere' license using genlic32.exe. Select<p>
+<p>
+Start-&gt;Programs-&gt;FLEXlm v7.0-&gt;Evaluation License Generator<p>
+<p>
+or simply start genlic32.exe.<p>
+<p>
+Choose the 
+<I>Run Anywhere</I> radio button to set the license type. Enter the feature name, 
+`f1,' in the Feature Name edit field. Click the 
+<I>Permanent 
+</I>check box to make a non-expiring license.<p>
+<p>
+Click the 
+<I>Make License</I> button. The text of the license file will appear in the window. 
+(To create multiple features, edit the form and click 
+<I>Make License</I> again. Each feature 
+will be appended to the window 
+ -  but don't do this now.) Type `gen.lic' in the 
+`License File' edit field and click 
+<I>Save</I> to create a license file called gen.lic. For more 
+information, see 
+<a href="#14846: 1Head: 9.4 Genlic.exe">`genlic32.exe (Windows only)' on page 56</a>.<p>
+<p>
+Next, run the program lmwin.exe, if it isn't already running, located in the 
+FLEXlm<I></I> 
+program group. Click the 
+<I>Checkout</I> button. Note that the display window states that the 
+checkout has succeeded. To release the license, press the 
+<I>Checkin</I> button.<p>
+<h4>Test a Node Locked License</h4>
+<p>
+A Node Locked license is a license that only runs on a specific machine. Launch 
+genlic32 if it is not already running, or click the 
+<I>CLEAR</I> button at the bottom if it is still 
+running from the prior test. Choose the 
+<I>Node Locked</I> radio button to set the License 
+Type. Enter the feature name `f1' in the Feature Name edit field. Click the 
+<I>Permanent 
+</I>check box to make a non-expiring license.<p>
+<p>
+Click the drop-down button in the 
+<I>Node Lock Host ID</I> edit box. Choose the 
+DISK_SERIAL_NUM entry. This is the disk volume serial number for Drive C.<p>
+<p>
+Click the 
+<I>Make License</I> button. The license line will appear in the box. Make sure that 
+gen.lic is in the License File edit field. Click 
+<I>Save</I> to create a license file called 
+gen.lic\license.dat. When the dialog warns you that you are overwriting the file, click 
+<I>YES</I> to create a new file.<p>
+<p>
+Next, run the program 
+<I>Test Application</I> located in the 
+FLEXlm<I></I> program group (if it's 
+not already running). Choose the 32 bit version for running on Windows 95 or NT.<p>
+<p>
+Use Checkout and Checkin in the lmwin window to try the license. This license will 
+only work on this computer because you have specified the host ID of 
+DISK_SERIAL_NUM with a value specific to this computer. If you were to run the 
+test application with this license file on another computer, it would not run because that 
+computer would not have this same host ID. 
+<p>
+<h4>Test a Floating License.</h4>
+<p>
+A floating license is a type of license sometimes called, `Concurrent Licensing' or 
+`Server Based Licensing.' A floating license can be used by different people on a 
+network.<p>
+<p>
+Launch GENLIC32 if it is not already running, or click the 
+<I>CLEAR</I> button at the 
+bottom if it is still running from the prior test. Choose the 
+<I>Floating</I> radio button to set 
+the License Type. Enter the feature name `f1' in the 
+<I>Feature Name</I> edit field. Click the 
+<I>Permanent 
+</I>check box to make a non-expiring license. In the 
+<I>Number of Licenses</I> edit 
+field, enter `1'. In the 
+<I>Server Name</I> edit field enter the name of your computer (this 
+will be filled in if TCP/IP is properly installed on your computer). In the 
+<I>Server Host 
+ID 
+</I>edit field, pull down the menu and select 
+<I>Any</I>.<p>
+<p>
+Click the 
+<I>Make License</I> button. The license line will appear in the box. Make sure that 
+gen.lic is in the License File edit field and then click the 
+<I>Save</I> button to create a license 
+file called gen.lic. When the dialog warns you that you are overwriting the file, click 
+<I>YES</I> to create a new file.<p>
+<p>
+Next, run the license server using lmtools. Select Configure Services, and enter<p>
+<dl><dt>Service Name<dd>mytest<dt>Path to the lmgrd.exe file<dd>C:\Program Files\flexlm\v7.0\i86_n3\lmgrd.exe<dt>Path to the license file<dd>C:\Program Files\flexlm\v7.0\i86_n3\gen.lic<dt>Path to the debug log file<dd>C:\Program Files\flexlm\v7.0\i86_n3\lmgrd.dl</dl><p>
+Click `Save Service. Then, in Start/Stop/Reread, click `Start Server'<p>
+<p>
+run lmwin (if it's not already running). Checkout and checkin the license. To test that 
+the server is actually counting the licenses, bring up another instance of the test 
+program. Check out one feature from the first of the test applications, and then try to 
+check out one feature from the other test application. The server will reject the second 
+license check out.<p>
+<p>
+Finally, stop the server by clicking the 
+<I>Stop Server 
+</I>button in the lmtools window.<p>
+<a name="3.3"></a><h2>3.3  Unix Demo kits - Incorporating FLEXlm<I></I> into your Application</h2>
+<p>
+	After you have become familiar with lmgrd, the vendor daemon (demo), lmcrypt and 
+the sample client program, you might want to incorporate the 
+FLEXlm<I></I> client calls into 
+your own software. If you wish to do this, follow these steps:<p>
+<ol><li>Modify your application code to call the license manager client routines. Add calls 
+like the following to your application 
+	 code:<pre>	#include"lmpolicy.h"</pre>
+<pre>	 /*...*/</pre>
+<pre>	 CHECKOUT(LM_RESTRICTIVE,"myfeature","1.0", `license.dat');</pre>
+<pre>	 /*...*/</pre>
+<pre>	 CHECKIN();</pre>
+</ol></ul><p>
+	(see `lmclient.c' or 
+<a href="#17661: ChapTitle: Chapter 5 Trivial API">Chapter 5, `Trivial API'</a>, for a full description of the 
+parameters).<p>
+<li>Run `make' in the 
+FLEXlm<I></I> directory (e.g., flexlm/v6.1/sun4_u4), in order to re-build the daemon `demo' and lmcrypt. This is necessary to make 
+<I><a name="_IX_29"></a>lm_new.o</I> 
+(<I>lm_new.obj</I>) and for lmcrypt to use your new encryption seeds that you entered 
+during the installation.</ol>
+<p>
+Whenever you re-configure your daemon or update your 
+FLEXlm<I></I> encryption 
+seeds, you must make sure to re-build lm_new.o, your application, vendor 
+daemon, and lmcrypt so that they are built with the correct encryption seeds (in 
+lm_code.h).<p>
+<li>Build your application as usual, adding the following to your link (<I>ld</I> or<I> cc</I> on 
+Unix) command:</ol>
+<ul><li>Unix: 
+<I>lm_new.o</I> (created in step 2) and<I> liblmgr.a</I><li>Windows: 
+<I><a name="_IX_30"></a>lm_new.obj</I> (created in step 2) and 
+<I>lmgr.lib</I></ul><li>Run 
+<I>lmcrypt</I> to create a new license file. You'll want to start with an existing file, 
+using the files in examples/licenses.</ol>
+<p>
+If you get a link error complaining about missing `<a name="_IX_31"></a>l_n36_buf', the problem is that you 
+need to add lm_new.o (lm_new.obj on Windows) to your link list.<p>
+<a name="3.4"></a><h2>3.4  Windows - Incorporating FLEXlm<I></I> into your Application</h2>
+<p>
+This section presumes you're using Microsoft Visual C++. If you're using any other 
+compiler or a different language, see 
+<a href="#18652: 1Head: 3.4 Shared Library: For different languages or a different C compiler">, `Shared Library/DLL on Windows/NT' on page 
+28</a>.<p>
+<p>
+lmwin.exe is used as a sample application. The source is in 
+<TT>machind\lmwin.c</TT>.<p>
+<h3>3.4.1	 Step 1: Evaluate using the pre-built kit</h3>
+<p>
+On windows, integration with your C compilers can take some planning. For this 
+reason, we recommend that you first familiarize yourself with the pre-built kit, as 
+outlined above: 
+<a href="#41622: 1Head: 3.4 Windows demo kits\xd1 pre-configured demo">Section 3.2,`Windows 
+demo kits - Pre-configured Demo,' on page 
+19</a>.<p>
+<h3>3.4.2	 Step 2: Edit lm_code.h</h3>
+<p>
+Make sure that 
+<TT>machind\lm_code.h</TT> has correct vendorkeys. If this is a demo 
+version, set only the vendorkeys to your evaluation vendorkeys. If it's a non-evaluation 
+set of vendorkeys, in addition to changing the vendor keys, you must also change the 
+<TT>ENCRYPTION_SEEDS</TT> to 2 32-bit numbers that you make up, and change the 
+<TT>VENDOR_NAME</TT> to your vendor name. Keep the lm_code.h file and the 
+ENCRYPTION_SEEDS secret. This file, lm_code.h is only used to build license 
+generators (lmcrypt.exe, makekey.exe) and the lm_new.obj file. You do not need the 
+lm_code.h file to build your licensed applications once the lm_new.obj file is built. So 
+not all programmers in your company need access to lm_code.h, only the resulting 
+lm_new.obj file.<p>
+<p>
+If you have real vendor keys, we recommend that you edit i86_n3\makefile and make 
+the following change<p>
+<p>
+From:<p>
+<p>
+DAEMON = demo.exe<p>
+<p>
+to<p>
+<p>
+DAEMON = 
+<I>vendor</I>.exe<p>
+<p>
+where 
+<I>vendor</I> is the same as VENDOR_NAME in lm_code.h. Otherwise, after 
+demo.exe is built by build.bat, you'll need to rename it to 
+<I>vendor</I>.exe, where 
+<I>vendor</I> is 
+your vendor daemon name.<p>
+<h3>3.4.3	 Step 3: C Development Environment</h3>
+<p>
+First, make sure that you have your Microsoft VC++ Development environment 
+correctly configured, which is what is presumed for this manual. If you don't have this 
+compiler, you'll have to use the FLEXlm DLL; See If you're running this from a DOS 
+command window (which is usually the way this is done, but not necessarily), you may 
+need to run vcvars32.bat to setup your development environment correctly. In a DOS 
+window, you can easily see if your environment is set correctly: type `set' and make 
+sure that MSVCDIR is set, and that PATH includes the BIN directory in MSVCDIR.<p>
+<p>
+If you're running from a `My Computer' window, your C Development environment 
+(include MSVCDIR) must be part of your normal environment set in Windows 95 in 
+autoexec.bat, or via the Control Panel on NT.<p>
+<h3>3.4.4	 Step 4: Run build.bat</h3>
+<p>
+In i86_n3, run 
+<TT>build.bat</TT>. This builds lm_new.obj, which is used to build your 
+application, plus your vendor daemon as well as the sample applications lmclient.exe 
+and lmwin.exe. Build.bat itself only calls nmake. If you're familiar with nmake, you 
+can run this directly. Nmake uses the i86_n3\makefile to build all files which are out-of-date. If you've just edited lm_code.h, it will rebuild everything except your 
+application.<p>
+<p>
+If you've done this correctly, you should be able to generate a license file, and use it 
+with the sample applications, lmclient.exe or lmwin.exe.<p>
+<h3>3.4.5	 Step 5: Add FLEXlm calls to your application</h3>
+<p>
+Add calls like the following to your application code:<p>
+<pre>	#include"lmpolicy.h"</pre>
+<pre>	 /*...*/</pre>
+<pre>	 if (CHECKOUT(LM_RESTRICTIVE,"myfeature","1.0","license.dat"))</pre>
+<pre>	{</pre>
+<pre>		PERROR("Checkout failed");</pre>
+<pre>		exit(1);</pre>
+<pre>	}</pre>
+<pre>	 /*...*/</pre>
+<pre>	 CHECKIN();</pre>
+</ol></ul><p>
+	(see 
+<TT>machind\lmclient.c</TT> or 
+<a href="#17661: ChapTitle: Chapter 5 Trivial API">Chapter 5, `Trivial API'</a>, for a full description 
+of the parameters).<p>
+<p>
+For the rest of this example, we use machind\lmwin.exe as a sample application.<p>
+<h3>3.4.6	 Step 6: Compile your object file</h3>
+<h4>INCLUDE directory</h4>
+<p>
+Add C:\Program files\FLEXlm\v7.0\machind to your INCLUDE path. If you use CL 
+on the command line or in a batch file, add `/I 
+C:\Program Files\FLEXlm\v7.0\machind' to your CL command line.<p>
+<p>
+If you use the IDE (GUI development environment), add the INCLUDE directory in 
+Tools/Options/Directories. Pick `Include files' from the choicelist, and add the full 
+path to the machind directory.<p>
+<h4>/MD or MT (multi-threaded shared or static libraries)</h4>
+<p>
+FLEXlm requires multi-threaded libraries. You can use either the static (<TT>libcmt.lib</TT>) or 
+shared (<TT>msvcrt.lib</TT>) multi-threaded C runtime libraries. The cl compiler /MT switch 
+indicates static multi-threaded library (preferred) and /MD indicates shared, and one 
+or the other must be used when compiling. If you indicate /MT, then you must link with 
+<TT>libcmt.lib</TT> and 
+<TT>lmgr.lib</TT>. If you indicate /MD, then you must link with 
+<TT>msvcrt.lib</TT> and 
+<TT>lmgr_md.lib</TT>.<p>
+<p>
+If you use the command line, make sure /MT (or /MD) is included in the CL command 
+line.<p>
+<p>
+If you use the IDE, in Project/Settings pick the C/C++ tab. Then make sure that /MT 
+(or /MD) is specified in the switches listed in the bottom window. In more current 
+versions of VC++, there's a choicelist for multi-threaded.<p>
+<p>
+Or, if you're not using /MT, link with the lmgr_md.lib library.<p>
+<h4>Compiling lmwin.obj on the command line</h4>
+<pre>	c:&gt;cl /nologo /c /O1 /I../machind /MT  ../machind/lmwin.c</pre>
+<h4>Compiling lmwin.obj in the IDE</h4>
+<ol><li>Make an empty project:<p>
+File -&gt; New<p>
+<p>
+Project name: lmwin<p>
+<p>
+Pick `Win32 Application'<p>
+<p>
+Click OK<p>
+<li>Add source file</ol>
+<p>
+Project -&gt; Add to Project -&gt; Files...<p>
+<p>
+C:\Program Files\FLEXlm\v7.0\machind\lmwin.c<p>
+<li>Add Include directory</ol>
+<ul><li>Tools -&gt; Options -&gt; Directories -&gt; Include Directories<li>C:\Program Files\FLEXlm\v7.0\machind</ul><li>Specify Multi-threaded</ol>
+<p>
+(MSVC++ v6+): Specify Multi-threaded<p>
+<p>
+Otherwise: Change /ML or /MD to /MT in the options window<p>
+<li>Compile</ol>
+<p>
+File -&gt; Recent Files -&gt; lmwin.c<p>
+<p>
+Build -&gt; Compile lmwin.c<p>
+<h3>3.4.7	 Step 7: Link</h3>
+<p>
+You need to add the following files to your link line:<p>
+<dl><dt>lm_new.obj<dd>has security information from lm_code.h, made by 
+build.bat. (Or lm_new_md.obj if using /MD.)<dt>lmgr.lib<dd>FLEXlm library. (Or lmgr_md.lib if using /MD).<dt>/nodefaultlib<dd>A link switch that's needed to avoid a conflict.</dl><p>
+In addition, the following MS libraries must be on the link line:<p>
+<pre>oldnames.lib  libcmt.lib kernel32.lib user32.lib netapi32.lib advapi2.lib  gdi32.lib comdlg32.lib  comctl32.lib</pre>
+<h4>Command line example</h4>
+<p>
+On the command line, the lmwin link line looks like:<p>
+<pre>C:&gt; LINK /nologo /NODEFAULTLIB  /out:lmwin.exe lmwin.obj lm_new.obj lmwin.res lmgr.lib oldnames.lib  libcmt.lib kernel32.lib user32.lib netapi32.lib advapi32.lib  gdi32.lib comdlg32.lib  comctl32.lib</pre>
+</ol></ul><p>
+IDE Settings<p>
+<p>
+Change the following settings:<p>
+<ol><li>Library path<p>
+Tools -&gt; Options -&gt; Directories<p>
+<p>
+Pick the Library Files choicelist, and add 
+<p>
+<p>
+C:\Program Files\FLEXlm\v7.0\i86_n3<p>
+<li>Libraries and options</ol>
+<p>
+Project -&gt; Settings -&gt; Link<p>
+<p>
+Make sure the following are included in the list of object/library modules:<p>
+<pre>/NODEFAULTLIB lm_new.obj lmgr.lib oldnames.lib  libcmt.lib kernel32.lib user32.lib netapi32.lib advapi32.lib  gdi32.lib comdlg32.lib  comctl32.lib</pre>
+</ol></ul><p>
+If you're using shared C runtime library (<TT>msvcrt.lib</TT>), you'll need to make the 
+following substitutions:<p>
+<pre>	lm_new.obj		lm_new_md.obj</pre>
+<pre>	lmgr.lib		lmgr_md.lib</pre>
+<pre>	libcmt.lib		msvcrt.lib</pre>
+<li>Link</ol>
+<p>
+Build -&gt; Build lmwin.exe<p>
+<a name="18652: 1Head: 3.4 Shared Library: For different languages or a different C compiler"></a><a name="3.5"></a><h2>3.5  Shared Library/DLL on Windows/NT</h2>
+<p>
+For supporting alternate languages, like Visual Basic, or a different C 
+compiler, like Borland. Any compiler that can use Windows DLLs can 
+use the FLEXlm DLL.<p>
+<p><hr>
+Caution:	Use of the shared is a security risk. For this reason we recommend that you use the 
+static library, as outlined above. One way to accomplish this, when you're not using 
+MSVC++ is to use MSVC++ to make your own shared library, which your 
+application would then interface to. This is somewhat more secure than using our 
+standard shared library, as it is less standard, particularly if the DLL has other 
+functionality is required by the application.<hr><p>
+<p>
+Nearly all the steps are same as the previous section. Following are the few differences:<p>
+<h3>3.5.1	 FLEXLM_DLL</h3>
+<p><hr>
+Caution:	Using the FLEXlm DLL is less secure than using the static library, and should be 
+avoided if possible. If your application does not use MSVC++, the way to use the 
+static library is to use MSVC++ to make your own DLL, linking in the FLEXlm static 
+library.<hr><p>
+<p>
+If you're using the Trivial or Simple API, when compiling your source code, you must 
+make sure the FLEXLM_DLL is defined. You can do this by<p>
+<dl><dt>command line<dd>cl /DFLEXLM_DLL<dt>in the source code<dd>Add `#define FLEXLM_DLL' before any 
+FLEXlm<I></I> 
+headers are included.<dt>in the IDE<dd>Project-&gt;Settings-&gt;C/C++-&gt;Preprocessor Definitions
+Add FLEXLM_DLL</dl><h3>3.5.2	 lmgr327a.lib/dll</h3>
+<p>
+Link with lmgr327a.lib instead of lmgr.lib, as outlined in the section above. Ship 
+lmgr327a.dll with your application. This must be in the same directory as your 
+application, or in the users PATH.<p>
+<a name="3.6"></a><h2>3.6  Windows demo kits - Additional Information</h2>
+<p>
+The makefiles have been designed to work with MSVC++ Version 2.0 or greater. Other 
+compilers may work, but will take additional time and effort to get a running product.<p>
+<p>
+Each Unix platform normally supports one kind of hardware-based hostid. However, 
+on the PC platforms, 
+FLEXlm<I></I><I> 
+</I>supports the following types of hostids:<p>
+<ul><li>Intel CPU ID (Pentium III+ and FLEXlm v7.0d+ required). This hostid is 
+probably preferable where avaialable, but since this turned off by default, the user 
+must enable it using BIOS Setup.<li>Disk Volume Serial Number (<TT>DISK_SERIAL_NUM=</TT>)<li><a name="_IX_32"></a>FLEX<I>id</I> hardware key, often called a 
+<I><a name="_IX_33"></a>dongle</I> (<TT>FLEXID=</TT>)<li>Ethernet Address, default (12 hex characters, e.g., `1234567890ab')</ul><p>
+The decision to use a particular hostid is made in the license file. You do not need to 
+do anything in your application to decide which hostid-type to use. For more hostid 
+information refer to the 
+FLEXlm Reference Manual<I></I>. 
+<p>
+<a name="14445: 1Head: 3.5 Hostids for FLEXlm-DS"></a><a name="3.7"></a><h2>3.7  Hostids for FLEXlm<I></I></h2>
+<p>
+A 
+<I>hostid</I> is a means used to uniquely identify a specific machine. 
+When you create a 
+license with 
+FLEXlm<I></I>, you bind this license to a hostid. This binding allows only the 
+authorized user(s) to run your software. The binding is created when you generate the 
+<I>license file</I> for your customer. 
+<a href="#23330: 2Head: 9.4.1 Simple Uncounted License">Section 10.4.1,`Simple Uncounted License,' on page 
+63</a>, and 
+<a href="#10652: 2Head: 9.4.3 Simple floating (counted) license">Section 10.4.3,`Simple Floating (Counted) License,' on page 64</a> are two good 
+examples of license files you might create to authorize your customer to run your 
+software.<p>
+<a name="Chapter 4"></a><hr><h1>Chapter 4 
+<a name="39267: chap head: Chapter 3 Incorporating FLEXlm Into Your Application"></a>Incorporating FLEXlm<I></I> Into Your Application</h1>
+<p>
+To incorporate 
+FLEXlm<I></I> into your application, you will add function calls to your 
+application program, build your application, and build a custom vendor daemon as 
+discussed in the following sections.<p>
+<a name="38556: 1Head: 4.1 FLEXlm Naming Conventions"></a><a name="4.1"></a><h2>4.1  FLEXlm<I></I> Naming Conventions</h2>
+<p>
+All 
+FLEXlm<I></I> client routines and variables adhere to certain naming conventions. These 
+conventions are:<p>
+<ul><li>Trivial API functions are all uppercase MACROS defined in 
+lmpolicy.h.<li>Simple API function names start with `lp_'. The 'p' stands for `policy', since 
+this is policy-based licensing.<li>FLEXible API client routine names start with `lc_'.<li>All 
+FLEXlm<I></I> server function and global data names start with `ls_'. These 
+routines are contained in the library files 
+<I></I>liblmgr_s.a and 
+<a name="_IX_34"></a>liblmgr_as.a, 
+(lmgras.lib and lmgrs.lib for Windows Platforms) as well as in 
+liblmgrd.a. Note 
+that the 
+liblmgrd.a, lmgr_s.a and 
+liblmgr_as.a<I></I> (lmgras.lib, lmgrs.lib) routines 
+will not be linked into your application.</ul><p>
+All 
+FLEXlm<I></I> client routines are contained in the library file 
+<a name="_IX_35"></a>liblmgr.a (Unix), 
+lmgr.lib 
+(static) lmgr327a.dll/lmgr327a.lib, lmgr.lib (STATIC) 
+(Windows/32). In addition, 
+clients need to link 
+<I><a name="_IX_36"></a>lm_new.o</I> (<I>lm_new.obj</I>, Windows), part of 
+FLEXlm<I></I> security.<p>
+<a name="_IX_37"></a><a name="4.2"></a><h2>4.2  Installation and Directory Naming for Java</h2>
+<p>
+No special installation of the 
+FLEXlm<I></I> class files is required. The classes are in the 
+java_01/flexlm directory of the 
+FLEXlm<I></I> v6.1 main directory. Note that the 
+FLEXlm<I></I> 
+class files must reside in a directory called `flexlm', since they are in a Java package 
+named `flexlm'.<p>
+<p>
+If you are running Java applications, you must set your CLASSPATH environment 
+variable to include a component reflecting the location of the 
+FLEXlm<I></I> classes. For 
+example, if you installed the 
+FLEXlm<I></I> classes into `/a/b/c/lmgr/v5.12/java_01/flexlm' 
+you would include the following component in your CLASSPATH:<p>
+<pre>	"/a/b/c/lmgr/v5.12/java_01"</pre>
+</ol></ul><p>
+If you are setting up the 
+FLEXlm<I></I> class files for access by an http server, they must 
+reside in a directory called `flexlm', again because the 
+FLEXlm<I></I> class files are in the 
+`flexlm' package.<p>
+<a name="4.3"></a><h2>4.3  Building your Vendor Daemon</h2>
+<p>
+To build your vendor daemon, see 
+<a href="#40917: ChapTitle: Chapter 7 Configuring License Daemons">Chapter 8, `License Daemons' on page 50</a>.<p>
+<a name="_IX_38"></a><a name="4.4"></a><h2>4.4  FLEXlm<I></I> Example Applications</h2>
+<p>
+The 
+FLEXlm<I></I> distribution kit contains an example client application program in the 
+<I>machind</I> directory called 
+<TT>lmclient.c</TT>. This is a small stand-alone licensed program 
+and is a good place to start to learn how to integrate 
+FLEXlm<I></I> with your application.<p>
+<p>
+For 
+Windows and 
+Windows NT systems, the 
+<TT>machind\lmwin.c</TT> example 
+application which uses Microsoft Visual C++ to build a slightly more complicated 
+example program to demonstrate a GUI Windows application.<p>
+<p>
+The 
+<TT>lmcrypt</TT>, 
+<TT>makekey, 
+</TT>and<TT> GENLIC 
+</TT>programs can be used to generate licenses for 
+your customers, or they can be used as examples of license generation programs. 
+Source to the 
+<a name="_IX_39"></a><TT>makekey</TT> and 
+<TT>lmcrypt</TT> programs is in the machind directory.<p>
+<p>
+The 
+<TT>lmcrypt</TT> and 
+<TT>makekey</TT> programs generate the same license keys on all 
+FLEXlm<I></I> 
+supported platforms for all 
+FLEXlm<I></I> versions, allowing you to create 
+<a name="_IX_40"></a>license keys for 
+any supported platform on any other supported platform.<p>
+<p>
+FLEXlm<I></I> kits also contain an 
+<TT>examples</TT> directory at the top-level of the kit hierarchy. 
+The 
+<TT>examples</TT> directory contains 
+<I>example</I> programs, which have been put on the kit 
+to illustrate how to perform various operations with 
+FLEXlm<I></I>. These programs are 
+<B>not 
+supported</B> and 
+GLOBEtrotter Software<I></I> may not include them in future 
+FLEXlm<I></I> 
+releases.<p>
+<a name="_IX_41"></a><a name="4.5"></a><h2>4.5  Client Heartbeats and License Server Failures</h2>
+<p>
+Your client application will need to communicate regularly with the server via 
+HEARTBEAT calls to ensure the server is still running. How the heartbeats occur and 
+what action takes place when the server is not running are the most important part of 
+incorporating 
+FLEXlm<I></I> in an application. This is addressed in the following sections:<p>
+<ul><li><a href="#20690: 1Head: 3.6 HEARTBEAT">Section 5.6, `HEARTBEAT,' on page 36</a><li><a href="#30398: 1Head: 4.7 lp_heartbeat">Section 6.6, `lp_heartbeat,' on page 41</a></ul><a name="41941: 1Head: 4.7 License Policies"></a><a name="4.6"></a><h2>4.6  License Policies</h2>
+<p>
+The Trivial and Simple APIs both require that you specify a license policy. A policy 
+can be modified by ORing a list of optional modifiers. License policies and policy 
+modifiers are described in the following sections.<p>
+<h3>4.6.1	 <a name="_IX_42"></a>LM_RESTRICTIVE</h3>
+<p>
+With this policy, any failure in the license, checkout, or server will be reported to the 
+calling application as an error. The application decides what action to take with this 
+error 
+ -  it is not necessary that the application fail to run. For example, the application 
+may report the error and continue running, it may exit, or it may run in a limited mode.<p>
+<h3>4.6.2	 <a name="_IX_43"></a>LM_QUEUE</h3>
+<p>
+This policy is the same as LM_RESTRICTIVE, except that the checkout call will wait 
+for a license if the licenses are all currently in use. To the end-user, the application will 
+appear to `hang' until the license is available.<p>
+<h3>4.6.3	 <a name="_IX_44"></a>LM_FAILSAFE</h3>
+<p>
+With this policy, the application will attempt a checkout, but failures of any kind will 
+not be reported to the calling application. This policy provides `optional' licensing to 
+the user. If the user wants to use licensing, he can, in which case the checkout will 
+succeed. If the user doesn't want to use licensing, or if licensing is for some reason 
+broken, applications will always continue to run.<p>
+<p>
+In the case where all licenses are currently in use, the application will still run. The end-user could use FLEX<I>admin</I> to report on historical usage, which will show when 
+licensed use is exceeded. Application users will never be denied usage. Errors that 
+normally make a checkout fail are available as warnings.<p>
+<h3>4.6.4	 <a name="_IX_45"></a>LM_LENIENT</h3>
+<p>
+In this policy, if all licenses are in use, the checkout will return a failure status showing 
+that all licenses are in use. For any other error, no error is returned. This is another form 
+of `optional' end-user licensing, where the user is not penalized if licensing is not set 
+up, or an operational error occurs. Errors that would normally make a checkout fail are 
+available as warnings.<p>
+<a name="_IX_46"></a><a name="16288: 1Head: 4.8 Policy Modifiers"></a><a name="4.7"></a><h2>4.7  Policy Modifiers</h2>
+<p>
+These modifiers are binary ORed (`|') with the main policies, listed above. For 
+example:<p>
+<pre>	LM_RESTRICTIVE | LM_MANUAL_HEARTBEAT</pre>
+</ol></ul><p>
+indicates that the main policy is LM_RESTRICTIVE, and the application will call 
+HEARTBEAT() manually.<p>
+<h3>4.7.1	 <a name="_IX_47"></a><a name="12681: 2Head: 4.8.1 LM_MANUAL_HEARTBEAT"></a>LM_MANUAL_HEARTBEAT</h3>
+<p>
+If this policy modifier is not specified, heartbeats, via 
+<I>HEARTBEAT()</I> or 
+<I>lp_heartbeat()</I> 
+are automatically sent every 2 minutes from the application to the server. On Unix, 
+SIGALRM is used to send the heartbeats.<p>
+<p>
+If specified, LM_MANUAL_HEARTBEAT indicates that no automatic heartbeats 
+should be sent to the server and the application will call 
+<I>HEARTBEAT()</I> or 
+<I>lp_heartbeat()</I> directly.<p>
+<p>
+Most Unix applications will require LM_MANUAL_HEARBEAT, but some simple 
+applications may prefer to have the heartbeats sent automatically. 
+If your application 
+does not send heartbeats to the license server, the application will not know if the 
+license server has been shut down and restarted. If the server is restarted, the old copies 
+of the applications continue running and a (new) full compliment of licenses becomes 
+available, making license over-usage possible.<p>
+<h3>4.7.2	 <a name="_IX_48"></a>LM_RETRY_RESTRICTIVE</h3>
+<p>
+If this policy modifier is set, the application will exit with a short error message after 
+5 failed heartbeat messages. This is not normally recommended, but is useful for some 
+simple applications.<p>
+<h3>4.7.3	 LM_CHECK_BADDATE</h3>
+<p>
+If set, attempts are made o detect whether the user has set the system date back. This 
+should be used in conjunction with setting ls_a_check_baddate to 1 in the 
+machind/lsvendor.c file.<p>
+<a name="Chapter 5"></a><hr><h1>Chapter 5 <a name="17661: ChapTitle: Chapter 5 Trivial API"></a>
+Trivial API</h1>
+<a name="_IX_49"></a><a name="5.1"></a><h2>5.1  Overview of Trivial API Calls</h2>
+<p>
+The Trivial API consists of macros that call the Simple API. What makes this API 
+trivial is the simplified arguments to the macros. The only required header file is 
+lmpolicy.h, and no other macros or function calls are needed.<p>
+<dl><dt>CHECKOUT<dd>Acquires a license<dt>HEARTBEAT<dd>Sends a heartbeat to the server<dt>PERROR, PWARN<dd>Presents current error/warning message to user<dt>ERRSTRING<dd>Returns a string describing the most recent error<dt>WARNING<dd>Returns a string describing the most recent warning<dt>CHECKIN<dd>Releases a license, and frees all 
+FLEXlm<I></I> memory</dl><p>
+To use the Trivial API, simply include `lmpolicy.h' at the top of your source file. 
+Only one feature can be checked out at a time from a single process.<p>
+<p>
+Where possible, this is the preferred 
+FLEXlm<I></I> API.<p>
+<p><hr>
+Note:	You cannot mix Trivial API calls with 
+either 
+Simple 
+or FLEXible 
+API calls.<hr><p>
+<a name="5.2"></a><h2>5.2  Trivial API Example Program</h2>
+<p>
+The following is a complete example of the 
+FLEXlm<I></I> calls required in an application 
+which uses the Trivial API:<p>
+<pre>#include"lmpolicy.h"</pre>
+<pre>	/*...*/</pre>
+<pre>	if (CHECKOUT(LM_RESTRICTIVE,"myfeature","1.0","license.dat"))</pre>
+<pre>	{</pre>
+<pre>		PERROR("Checkout failed");</pre>
+<pre>		exit(-1);</pre>
+<pre>	}</pre>
+<pre>/*</pre>
+<pre> *	Checkout succeeded. Actual application code here</pre>
+<pre> */</pre>
+<pre>	/*...*/</pre>
+<pre>	CHECKIN();		/* Done with"feature", check it back in. */</pre>
+<a name="_IX_50"></a><a name="5.3"></a><h2>5.3  CHECKOUT</h2>
+<h4>Syntax</h4>
+<pre>status= CHECKOUT(policy, feature, version, <a name="_IX_51"></a>license_path)</pre>
+<h4>Description</h4>
+<p>
+Acquires a license for a feature.<p>
+<h4>Parameters</h4>
+<dl><dt>(int) 
+<I>policy</I><dd>See 
+<a href="#41941: 1Head: 4.7 License Policies">Section 4.6,`License Policies,' on page 31</a>. Example: 
+LM_RESTRICTIVE.<dt>(char *) 
+<I>feature</I> 
+<dd>The feature name to check out.<dt>(char *) 
+<I>version</I><dd>The version of the feature to check out. This is a string in 
+floating point format (e.g., `12345.123'). If the license in 
+the license file has the same version number or a higher 
+version number, the checkout will succeed.
+GLOBEtrotter recommends that this version number be a 
+license version level and 
+<I>not</I> the application's version 
+number. This version number should only be changed when 
+you want old licenses to no longer work with a new version 
+of the software.<dt>(char *) 
+<I>license_path</I><dd>The `default' location for the license file. 
+
+If 0, this argument is unused.</dl><h4>The application will look in the following places for the license file: 
+</h4>
+<ul><li>the location specified by the $<I><a name="_IX_52"></a>VENDOR</I>_LICENSE_FILE and/or 
+$LM_LICENSE_FILE environment variable or registry settings.<li>the 
+<I>license_path</I> specified here.</ul><p>
+Upon success, the path to the license file used is set in $VENDOR_LICENSE_FILE 
+in the Registry on Windows (\HKEY_LOCAL_MACHINE\SOFTWARE\FLEXlm 
+License Manager) and $HOME/.flexlmrc on Unix 
+<p>
+<h4>Return</h4>
+<dl><dt>(int) 
+<I>status</I><dd>0 if successful, otherwise the 
+FLEXlm<I></I> error number.</dl><h4>See also</h4>
+<ul><li><a href="#41941: 1Head: 4.7 License Policies">Section 4.6,`License Policies,' on page 31</a><li><a href="#16288: 1Head: 4.8 Policy Modifiers">Section 4.7,`Policy Modifiers,' on page 32</a></ul><a name="_IX_53"></a><a name="5.4"></a><h2>5.4  CHECKIN</h2>
+<h4>Syntax</h4>
+<pre>(void) CHECKIN()</pre>
+<h4>Description</h4>
+<p>
+Releases the license for the feature and frees memory associated with the checkout.<p>
+<a name="_IX_54"></a><a name="5.5"></a><h2>5.5  ERRSTRING</h2>
+<h4>Syntax</h4>
+<pre>string = ERRSTRING()</pre>
+<h4>Description</h4>
+<p>
+Returns a string describing the last 
+FLEXlm<I></I> error.<p>
+<h4>Return</h4>
+<dl><dt>(char *) 
+<I>string</I><dd>An explanatory string.</dl><a name="_IX_55"></a><a name="20690: 1Head: 3.6 HEARTBEAT"></a><a name="5.6"></a><h2>5.6  HEARTBEAT</h2>
+<h4>Syntax</h4>
+<pre>status = HEARTBEAT()</pre>
+<h4>Description</h4>
+<p>
+Exchanges heartbeat messages with the server. If the server goes down and later comes 
+back up, 
+HEARTBEAT() 
+will automatically reconnect and check the license out. On 
+failure, returns the number of failed attempts to reconnect to the server. On failure, 
+applications should at a minimum notify the user of the failure. For a restrictive policy, 
+applications may exit after a certain number of failures. In addition, applications may 
+want to exit if reconnections succeed more than 3 or 4 times in a relatively short period 
+(e.g. 10 minutes), which may indicate a user restarting the license server in an attempt 
+to acquire extra licenses. Do not call 
+CHECKOUT() on failure from 
+<I>HEARBEAT() 
+</I> -  
+this is not necessary and will cause problems if attempted.<p>
+<p>
+<I>HEARTBEAT()</I> should not be called unless LM_MANUAL_HEARTBEAT is set in the 
+<I>CHECKOUT()</I> call. If LM_MANUAL_HEARTBEAT is not set, then 
+HEARTBEAT() 
+is called automatically.<p>
+<h4>Return</h4>
+<dl><dt>(int) 
+<I>status</I><dd>0 if successful. Otherwise, it returns the number of failed 
+attempts to reconnect to the server.</dl><h4>See also</h4>
+<ul><li><a href="#12681: 2Head: 4.8.1 LM_MANUAL_HEARTBEAT">Section 4.7.1,`LM_MANUAL_HEARTBEAT,' on page 32</a></ul><a name="_IX_56"></a><a name="5.7"></a><h2>5.7  PERROR</h2>
+<h4>	Syntax</h4>
+<pre>PERROR(string)</pre>
+<h4>Description</h4>
+<p>
+Presents 
+<I>string</I> and a description of the most recent error to the user. On Windows this 
+appears in a dialog; on other systems, it prints to stderr.<p>
+<h4>Parameters</h4>
+<dl><dt>(char *) 
+<I>string<dd></I>A string describing the error context<dd>.</dl><a name="_IX_57"></a><a name="5.8"></a><h2>5.8  PWARN</h2>
+<h4>	Syntax</h4>
+<pre>PWARN(string)</pre>
+<h4>Description</h4>
+<p>
+Presents 
+<I>string</I>, plus a description of the most recent warning to the user. On Windows 
+this appears in a dialog; on other systems, it prints to stderr. This is useful with policy 
+set to LM_LENIENT or LM_FAILSAFE. Nothing is printed if there is no warning.<p>
+<h4>Parameters</h4>
+<dl><dt>(char *) 
+<I>string</I><dd>A string describing the error context.</dl><a name="_IX_58"></a><a name="5.9"></a><h2>5.9  WARNING</h2>
+<h4>Syntax</h4>
+<pre>string = WARNING()</pre>
+<h4>Description</h4>
+<p>
+Returns a string describing the last 
+FLEXlm<I></I> warning.<p>
+<h4>Return</h4>
+<dl><dt>(char *) 
+<I>string</I><dd>An explanatory string. This is useful with policy 
+
+set to LM_LENIENT or LM_FAILSAFE</dl><a name="Chapter 6"></a><hr><h1>Chapter 6 
+<a name="_IX_59"></a>Simple API</h1>
+<p>
+The Simple API can do nearly everything the FLEXible API can do. Use this API if 
+your application requires checking out more than one feature name at a time or if you 
+need to acquire more than one license for a feature.<p>
+<p>
+This API requires that you include the `lmpolicy.h' header file.<p>
+<a name="6.1"></a><h2>6.1  Simple API Library Routines</h2>
+<dl><dt>lp_checkout<dd>Acquires a license<dt>lp_heartbeat<dd>Sends a heartbeat to the server<dt>lp_perror, lp_pwarn<dd>Presents current error/warning message to user<dt>lp_errstring<dd>Returns a string describing the most recent error<dt>lp_checkin<dd>Releases a license, and frees all 
+FLEXlm<I></I> memory<dt>lp_warning<dd>Returns a string describing the most recent warning</dl><p><hr>
+Note:	You cannot mix Simple API calls with 
+either 
+Trivial 
+or FLEXible 
+API calls.<hr><p>
+<a name="6.2"></a><h2>6.2  Simple API Example Program</h2>
+<p>
+The following is a complete example of the 
+FLEXlm<I></I> calls required in an application 
+that uses the Simple API. The primary differences between this and the Trivial API 
+example are:<p>
+<ul><li>The setup is a bit more complicated.<li>The args to 
+lp_checkout() are more complicated than 
+CHECKOUT().<li>You can checkout more than one feature simultaneously, or more than one license 
+of a feature (although neither of these are illustrated in the example).</ul><pre>#include"lmpolicy.h"</pre>
+<pre>LP_HANDLE *lp_handle;</pre>
+<pre>	/*...*/</pre>
+<pre>	if (lp_checkout(LPCODE, LM_RESTRICTIVE|LM_MANUAL_HEARTBEAT,</pre>
+<pre>			"myfeature","1.0", 1,"license.dat", &amp;lp_handle))</pre>
+<pre>	{</pre>
+<pre>		fprintf(stderr,"Checkout failed: %s",</pre>
+<pre>					lp_errstring(lp_handle));</pre>
+<pre>		exit(-1);</pre>
+<pre>	}</pre>
+<pre>/*</pre>
+<pre> *	Checkout succeeded. Actual application code here</pre>
+<pre> */</pre>
+<pre>	/*...*/	</pre>
+<pre>/*	</pre>
+<pre> *	Done with"feature", check it back in.</pre>
+<pre> */</pre>
+<pre>	lp_checkin(lp_handle);</pre>
+<dl></dl><a name="_IX_60"></a><a name="6.3"></a><h2>6.3  lp_checkout</h2>
+<h4>Syntax</h4>
+<pre>#include"lmpolicy.h"</pre>
+<pre>LP_HANDLE *lp_handle;</pre>
+<pre>status= lp_checkout(LPCODE, policy, feature, version, nlic, 	</pre>
+<pre>				<a name="_IX_61"></a>license_path, &amp;lp_handle)</pre>
+<h4>Description</h4>
+<p>
+Acquires a license for a feature.<p>
+<h4>Parameters</h4>
+<dl><dt>(<TT>LPCODE_HANDLE</TT> *) 
+<TT>LPCODE<dd></TT>From the `<TT>lmpolicy.h</TT>' include file. Use the 
+literal `<TT>LPCODE</TT>'.<dt>(int) 
+<I>policy</I><dd>See 
+<a href="#41941: 1Head: 4.7 License Policies">Section 4.6,`License Policies,' on page 31</a>. 
+Example: LM_RESTRICTIVE.<dt>(char *) 
+<I>feature</I> 
+<dd>The desired feature name to check out.<dt>(char *) 
+<I>version</I><dd>The version of the feature to check out. This is a 
+string in floating point format (e.g., `12345.123'). 
+If the license in the license file has the same 
+version number or a higher version number, the 
+checkout will succeed.
+GLOBEtrotter recommends that this version 
+number be a license version level and 
+<I>not</I> the 
+application's version number. This version 
+number should only be changed when you want 
+old licenses to no longer work with a new version 
+of the software.<dt>(int) 
+<I>nlic</I><dd>The number of licenses to check out. Usually this 
+is 1.<dt>(char *) 
+<I>license_path</I><dd>The default location for the license file. The 
+application will look in the following places for 
+the license file: the location specified by the 
+$<TT><a name="_IX_62"></a>VENDOR</TT><TT>_LICENSE_FILE</TT> and/or 
+$<TT>LM_LICENSE_FILE</TT> environment and/or 
+registry variables, this default location, then the 
+FLEXlm<I></I> default 
+(/usr/local/flexlm/licenses/license.dat or 
+C:\flexlm\license.dat for PC's). It is highly 
+recommended that this be set to a place in your 
+product's installation hierarchy. The application 
+may need to do some work to determine the exact 
+path at runtime.
+If 0, this argument is unused. 
+<dt>(Pointer to LP_HANDLE *) lp_handle
+This is the return handle, and is used for 
+subsequent calls that apply to this checkout, e.g. 
+lp_checkin(), 
+lp_errstring(), etc. If 
+<I>lp_checkout</I> is 
+called more than once, separate 
+<I>lp_handle</I> 
+variables must be used, and the corresponding 
+handle must be used with the other lp_xxx calls.</dl><p>
+Upon success, the path to the license file used is set in $VENDOR_LICENSE_FILE 
+in the Registry on Windows (\HKEY_LOCAL_MACHINE\SOFTWARE\FLEXlm 
+License Manager) and $HOME/.flexlmrc on Unix (v7+).<p>
+<h4>Return</h4>
+<dl><dt>(int) 
+<I>status</I><dd>0 if successful, otherwise 
+FLEXlm<I></I> error number.</dl><a name="_IX_63"></a><a name="6.4"></a><h2>6.4  lp_checkin</h2>
+<h4>Syntax</h4>
+<pre>(void) lp_checkin(lp_handle)</pre>
+<h4>Description</h4>
+<p>
+Releases a license, and frees memory associated with the corresponding checkout. 
+<I>lp_checkin()</I> should be called even if the checkout fails, in order to free associated 
+memory and resources.<p>
+<h4>Parameter</h4>
+<dl><dt>(LP_HANDLE *) lp_handle<dd><dd>The handle from the<I> lp_checkout() 
+</I>call.</dl><a name="_IX_64"></a><a name="6.5"></a><h2>6.5  lp_errstring</h2>
+<h4>Syntax</h4>
+<pre>string = lp_errstring(lp_handle)</pre>
+<h4>Description</h4>
+<p>
+Returns a string describing the previous 
+FLEXlm<I></I> error.<p>
+<h4>Parameter</h4>
+<dl><dt>(LP_HANDLE *) lp_handle<dd><dd>The handle from the<I> lp_checkout() 
+</I>call.</dl><h4>Return</h4>
+<dl><dt>(char *) 
+<I>string</I><dd>Error description.</dl><a name="_IX_65"></a><a name="30398: 1Head: 4.7 lp_heartbeat"></a><a name="6.6"></a><h2>6.6  lp_heartbeat</h2>
+<h4>Syntax</h4>
+<pre>status = lp_heartbeat(lp_handle, num_reconnects, num_minutes)</pre>
+<h4>Description</h4>
+<p>
+Exchanges heartbeat messages with the server. If the server goes down and later comes 
+back up, 
+lp_heartbeat() 
+will automatically reconnect and check the license out. On 
+failure, returns the number of failed attempts to reconnect to the server. On failure, 
+applications should at a minimum notify the user of the failure. For a restrictive policy, 
+applications may exit after a certain number of failures. In addition, applications may 
+want to exit if reconnections succeed more than 3 or 4 times in a relatively short period 
+(e.g. 10 minutes), which may indicate a user restarting the license server in an attempt 
+to acquire extra licenses.<p>
+<p>
+<I>lp_heartbeat()</I> should not be called unless LM_MANUAL_HEARTBEAT is set in the 
+<I>lp_checkout()</I> call. If LM_MANUAL_HEARTBEAT is not set, then 
+lp_heartbeat() is 
+called automatically by the 
+FLEXlm<I></I> client library.<p>
+<h4>Return</h4>
+<dl><dt>(int) 
+<I>status</I><dd>0 if successful. Otherwise, it returns the number of failed 
+attempts to reconnect to the server.</dl><h4>Parameter</h4>
+<dl><dt>(LP_HANDLE *) lp_handle<dd>The handle from the 
+<I>lp_checkout()</I> call.<dt>(int *) num_reconnects<dd>The number of reconnections in the last 
+<I>num_</I><I>minutes</I> minutes. This value is returned. If 
+set to 0, no value is returned.<dt>(int) num_minutes<dd>Number of minutes for 
+num_reconnects. If 0, 
+num_reconnects is not returned.</dl><h4>Return</h4>
+<dl><dt>(int) 
+<I>status</I><dd>0 if successful. Otherwise, it returns the number of 
+failed attempts to reconnect to the server.<a name="Controlling Licensing Behavior Of Your Application"></a></dl><h4>See also</h4>
+<ul><li><a href="#12681: 2Head: 4.8.1 LM_MANUAL_HEARTBEAT">Section 4.7.1,`LM_MANUAL_HEARTBEAT,' on page 32</a></ul><a name="_IX_66"></a><a name="6.7"></a><h2>6.7  lp_perror</h2>
+<h4>	Syntax</h4>
+<pre>lp_perror(lp_handle, string)</pre>
+<h4>Description</h4>
+<p>
+Presents 
+<I>string</I> and a description of the most recent error to the user. On Windows this 
+appears in a dialog; on other systems, it prints to stderr.<p>
+<h4>Parameters</h4>
+<dl><dt>(LP_HANDLE *) lp_handle<dd>The handle from the 
+<I>lp_checkout()</I> call.<dt>(char *) 
+<I>string<dd><dd><dd></I>A string describing the error context<dd>.</dl><a name="_IX_67"></a><a name="6.8"></a><h2>6.8  lp_pwarn</h2>
+<h4>	Syntax</h4>
+<pre>lp_pwarn(lp_handle, string)</pre>
+<h4>Description</h4>
+<p>
+Presents 
+<I>string</I> and a description of the most recent warning to the user. On Windows 
+this appears in a dialog; on other systems, it prints to stderr. This is useful with policy 
+set to LM_LENIENT or LM_FAILSAFE. Nothing is printed if there is no warning.<p>
+<h4>Parameters</h4>
+<dl><dt>(LP_HANDLE *) lp_handle<dd>The handle from the 
+<I>lp_checkout()</I> call.<dt>(char *) 
+<I>string</I><dd>A string describing the error context.</dl><a name="_IX_68"></a><a name="6.9"></a><h2>6.9  lp_warning</h2>
+<h4>Syntax</h4>
+<pre>string = lp_warning(lp_handle)</pre>
+<h4>Description</h4>
+<p>
+Returns a string describing the last 
+FLEXlm<I></I> warning.<p>
+<h4>Parameters</h4>
+<dl><dt>(LP_HANDLE *) lp_handle<dd>The handle from the 
+<I>lp_checkout()</I> call.</dl><h4>Return</h4>
+<dl><dt>(char *) 
+<I>string</I><dd>An explanatory string. This is useful with policy 
+
+set to LM_LENIENT or LM_FAILSAFE</dl><a name="Chapter 7"></a><hr><h1>Chapter 7 <a name="_IX_69"></a>
+Java API</h1>
+<p>
+The Java implementation of the 
+FLEXlm<I></I> client library allows applets and applications 
+written in Java to use 
+FLEXlm<I></I> licensing. The Java API is similar to the Simple API.<p>
+<p><hr>
+Note:	Any of your Java classes which invoke 
+FLEXlm<I></I> methods must `import flexlm.*;'. 
+<hr><p>
+<a name="_IX_70"></a><a name="7.1"></a><h2>7.1  Methods</h2>
+<p>
+The license class has the following methods. All methods are instance methods of the 
+`license' class.<p>
+<h3>7.1.1	 license class constructor</h3>
+<h4>Syntax</h4>
+<pre>public license(String name, int d1, int d2, int k1, int k2, int k3, int k4) </pre>
+<h4>Description</h4>
+<p>
+Creates an instance of the license class, using the specified vendor name, encryption 
+seeds, and vendor keys.<p>
+<h4>Parameters</h4>
+<dl><dt>String name<dd>the vendor daemon name<dt>int d1<dd>the XOR of vendor key 5 and encryption seed 1 
+<dt>int d2<dd>the XOR of vendor key 5 and encryption seed 2 
+<dt>int k1<dd>vendor key 1<dt>int k2<dd>vendor key 2<dt>int k3<dd>vendor key 3<dt>int k4<dd>vendor key 4</dl><p><hr>
+Note:	The encryption seeds are numbers you make up and keep secret. The vendor keys are 
+numbers given to you by Globetrotter. See 
+<a href="#13483: chap head: Installing the Distribution Kit">Section Chapter 2,`Installing the 
+Distribution Kit,' on page 12</a> for more information.<hr><p>
+<p><hr>
+Note:	It is wise not to store your encryption seeds in variables, but rather to mention them 
+only in an expression where they are XOR'd with vendor key 5. Given that 
+expressions are evaluated at compile time, this makes it harder for somebody to 
+discover your encryption seeds by decompiling your classes.<hr><p>
+<h3>7.1.2	 <a name="_IX_71"></a>checkout</h3>
+<h4>Syntax</h4>
+<pre>public int checkout(int policy, String feature,String version,</pre>
+<pre>						int nlic, String licpath);</pre>
+<h4>Description</h4>
+<p>
+Acquire a license for a feature.<p>
+<h4>Parameters</h4>
+<dl><dt>int policy<dd>See<a href="#41941: 1Head: 4.7 License Policies">, `License Policies' on page 31</a> for a list of valid 
+policies. Example LM.RESTRICTIVE.<dt>String feature<dd><dd>The feature name to be checked out.<dt>String version<dd>The version of the feature to check out. This is a string in 
+
+floating point format (e.g., `12345.123'). If the license in 
+
+the license file has the same version number, or a higher 
+
+version number, the checkout will succeed.
+GLOBEtrotter recommends that this version number be a 
+
+license version level and not the application's version 
+
+number. This version number should only be changed 
+
+when you want old licenses to no longer work with a new 
+
+version of the software.<dt>int nlic<dd> 
+<dd>The number of licenses to check out. Usually this 
+
+is 1.<dt>String licpath<dd>The location of the license file. This may be a filename, a 
+[port]@host specification, or a colon-separated list of 
+filenames and/or [port]@host specifications. Note that 
+there is no Java equivalent for environment variables, so 
+LM_LICENSE_FILE is not used in the Java version.</dl><h4>Return</h4>
+<dl><dt>int<dd>0 if successful, else 
+FLEXlm<I></I> error number.</dl><h3>7.1.3	 <a name="_IX_72"></a>checkin</h3>
+<h4>Syntax</h4>
+<pre>public void checkin()</pre>
+<h4>Description</h4>
+<p>
+Checks in (releases) the licenses acquired with checkout().<p>
+<h4>Parameters</h4>
+<p>
+	none<p>
+<h4>Return</h4>
+<p>
+none<p>
+<h3>7.1.4	 <a name="_IX_73"></a>heartbeat</h3>
+<h4>syntax</h4>
+<pre>public int heartbeat(int[] ret_reconnects, int num_minutes) </pre>
+<h4>Description</h4>
+<p>
+Exchanges heartbeat messages with the server. If the server goes down and later comes 
+
+back up, heartbeat() will automatically reconnect and check the license out. On 
+
+failure, returns the number of failed attempts to reconnect to the server. On failure, 
+
+applications should at least notify the user of the failure. For a restrictive policy, 
+
+applications may exit after a certain number of failures. In addition, applications may 
+
+want to exit if reconnections succeed more than 3 or 4 times in a relatively short period, 
+
+say 10 minutes, which may indicate a user restarting the license server in an attempt to 
+
+acquire extra licenses.<p>
+<p><hr>
+Note:	There is no automatic heartbeat in 
+FLEXlm<I></I>/Java; the heartbeat() method 
+<I>must</I> be 
+called periodically by your Java code.<hr><p>
+<h4>Parameters</h4>
+<dl><dt>int[] ret_reconnects<dd>is an array of length 1, or null. If non-null, 
+<dd><dd><dd>the number of 
+reconnects in the last `num_minutes' 
+<dd><dd><dd>minutes is returned 
+in the 0'th element of this array. 
+<dd><dt>int num_minutes<dd>the number of minutes over which to count reconnections 
+returns: 
+<dd>The number of unsuccessful reconnection attempts 
+since the last 
+<dd>successful heartbeat. Zero indicates that the 
+last heartbeat was 
+<dd>successful. Note that if the license policy 
+is LM.RETRY_RESTRICTIVE, 
+<dd>the application exits after 
+5 unsuccessful heartbeat attempts.</dl><h4>return</h4>
+<p>
+0 if successful; otherwise the number of failed reconnect attempts since the last 
+heartbeat response was received.<p>
+<h3>7.1.5	 <a name="_IX_74"></a>get_errstring</h3>
+<h4>Syntax</h4>
+<pre>String get_errstring()</pre>
+<h4>Description</h4>
+<p>
+Returns the string describing the most recent 
+FLEXlm<I></I> error. The returned string 
+contains a text string describing the error, a `major' numeric error code corresponding 
+to the error, and a `minor' numeric error code which indicates to Globetrotter technical 
+support exactly where in the source code the error occurred.<p>
+<h3>7.1.6	 <a name="_IX_75"></a>warning</h3>
+<h4>Syntax</h4>
+<pre>String warning()</pre>
+<h4>Description</h4>
+<p>
+Returns a string describing the most recent 
+FLEXlm<I></I> error, or null if no error has 
+occurred. Similar to get_errstring(), but useful when the policy is LENIENT or 
+FAILSAFE, and the result of get_errstring() is null.<p>
+<a name="7.2"></a><h2>7.2  Public Constants</h2>
+<p>
+All constants are declared `public static final int' in class LM.<p>
+<h3>7.2.1	 <a name="76873: 2Head: 7.2.1 Policies"></a>Policies</h3>
+<p>
+These values are used in the 
+<I>policy</I> argument in the checkout method. The meaning of 
+these policies can be found in 
+<a href="#41941: 1Head: 4.7 License Policies">`License Policies' on page 31</a>.<p>
+<p>
+The four policies available in the JAVA API are: LM.RESTRICTIVE, LM.QUEUE, 
+LM.LENIENT, and LM.FAILSAFE. The one policy modifier, which can be ORed 
+with the policy, is LM.RETRY_RESTRICTIVE. Note that the JAVA policies substitute 
+a `.' in place of the leading `_' for the Trivial/Simple APIs.<p>
+<p><hr>
+Note:	The LM_MANUAL_HEARTBEAT modifier from non-Java 
+FLEXlm<I></I> is not 
+implemented in 
+FLEXlm<I></I>/Java. All heartbeats are manual in 
+FLEXlm<I></I>/Java.<hr><p>
+<h3>7.2.2	 Error Codes</h3>
+<p>
+See Appendix D of the 
+FLEXlm<I></I> 
+<I>Reference Manua</I>l for a list of 
+FLEXlm<I></I> error codes.<p>
+<a name="_IX_76"></a><a name="7.3"></a><h2>7.3  Java and Security</h2>
+<p>
+There are special security considerations for companies using FLEXlm for Java, since 
+Java applications can be relatively easily decompiled. For this reason we recommend 
+that licenses and license servers for Java applications be different than non-Java 
+applications. Otherwise, compromising security through a Java application would 
+imply compromised security for non-Java applications.<p>
+<a name="Chapter 8"></a><hr><h1>Chapter 8 <a name="40917: ChapTitle: Chapter 7 Configuring License Daemons"></a>
+License Daemons</h1>
+<a name="lmgrd"></a><a name="8.1"></a><h2>8.1  lmgrd</h2>
+<p>
+The purpose of 
+<I>lmgrd</I> is to:<p>
+<ul><li>start and maintain all the vendor daemons listed in the 
+<a name="_IX_77"></a>VENDOR lines of the 
+license file(s),<li>refer application checkout (or other) requests to the correct vendor daemon, and<li>establish and maintain communications between redundant servers.</ul><p>
+<I>lmgrd</I> is a standard component of 
+FLEXlm<I></I> that neither requires nor allows for vendor 
+customization. The license daemon allows the license file location and a few other 
+parameters to be set by the end-user. These options are set by command line arguments 
+when starting 
+<TT>lmgrd</TT>. The most common command line for 
+<TT>lmgrd</TT> is:<p>
+<pre>	lmgrd [-app] [-c <I>license_</I>list] [-l <I>logfile</I>][-x lmdown|lmremove]</pre>
+</ol></ul><p>
+If 
+<I>license_list</I> is more than once license file, it needs to be a list, separated by colon on 
+Unix, or semi-colon on Windows. If a directory is specified, 
+<I>*.lic</I> in that directory is 
+used.<p>
+<p>
+A complete description of 
+<I>lmgrd</I> options is contained in the 
+FLEXlm Reference Manual<I></I>.<p>
+<p><hr>
+Note:	<I>lmgrd</I> is not used on Netware 
+or VMS 
+Systems.<hr><p>
+<a name="84465: 1head: 4.3 Configuring Your Vendor Daemon"></a><a name="8.2"></a><h2>8.2  Configuring Your Vendor Daemon</h2>
+<p>
+You have configured and built your vendor daemon if you followed the procedures in 
+<a href="#13483: chap head: Installing the Distribution Kit">Chapter 2, `Installing the Distribution Kit'</a> and 
+<a href="#19073: ChapTitle: Chapter 3 Your First FLEXlm Application">Chapter 3, `Evaluating FLEXlm and 
+Your First FLEXlm Application'</a>. If you need to re-build your 
+<a name="_IX_78"></a>vendor daemon, you 
+must supply the following information:<p>
+<ul><li>Your encryption seed(s)<li>Your 
+FLEXlm<I></I> vendor keys<li>The name of the daemon 
+ -  VENDOR_NAME in 
+<TT>lm_code.h</TT></ul><p>
+Although normally not required, your vendor daemon may require customization by 
+editing 
+<I>lsvendor.c</I><p>
+<p>
+When you have completed the necessary edits to 
+<I><a name="_IX_79"></a>lsvendor.c</I>, the makefile will create 
+<I><a name="_IX_80"></a>lm_new.o</I><TT> 
+</TT>(lm_new.obj) and then build your vendor daemon and lmclient, the demo 
+client application, and the license generators, lmcrypt and makekey. One of the 
+functions of 
+<I>lm_new.o</I><TT> 
+</TT>is to remove the vendor name and encryption seeds from the 
+executables; they are constructed at run-time.<p>
+<h3>8.2.1	 <a name="14208: 2Head: 7.2.1 Building Your Vendor Daemon\xd1 Unix Systems"></a>Building Your Vendor Daemon - Unix<I></I> Systems</h3>
+<p>
+To build your 
+<a name="_IX_81"></a>vendor daemon (assuming the 
+FLEXlm<I></I> kit is in<I> 
+</I><TT>/usr/gsi/flexlm/v6.1):</TT><p>
+<pre><TT>	% cd /usr/gsi/flexlm/v6.1/arch_os</TT></pre>
+</ol></ul><p>
+(Edit 
+<TT>lm_code.h</TT>, and 
+<TT>lsvendor.c</TT> if needed).<p>
+<pre><TT>	% make</TT></pre>
+<h3>8.2.2	 <a name="29454: 1Head: 7.4 Building Your Vendor Daemon\xd1 Windows NT Systems"></a>Building Your Vendor Daemon 
+ -  
+Windows NT Systems</h3>
+<p>
+To build your vendor daemon, first edit ls_vendor.c and lm_code.h, then enter the 
+following commands (assuming the 
+FLEXlm<I></I> kit is in 
+<TT>C:\Program Files\FLEXlm\v7.0\</TT>):<p>
+<pre>	C:&gt; cd \Program Files\FLEXlm\v7.0\i86_n3</pre>
+<pre>	C:&gt; build</pre>
+<h3>8.2.3	 Building Your Vendor Daemon 
+ - <a name="_IX_82"></a> Netware Systems</h3>
+<p>
+To build your vendor daemon, first edit ls_vendor.c and lm_code.h, then enter the 
+following commands (assuming the 
+FLEXlm<I></I> kit is in 
+<TT>D:\FLEX_SDK</TT>):<p>
+<pre>	D:&gt; cd \FLEX_SDK\i86_Z3</pre>
+<pre>	D:&gt; build</pre>
+<p><hr>
+Note:	For Netware systems, you must have the Watcom compiler and Novell Netware 
+SDK.<hr><p>
+<a name="_IX_83"></a><a name="8.3"></a><h2>8.3  Redundant License Servers</h2>
+<p>
+FLEXlm<I></I> supports a set of three license servers to be used in a redundant manner. If any 
+two of the three license servers are up and running, the system is functional and hands 
+out its total complement of licenses (Two out of three license servers is referred to as 
+a `quorum'). 
+<p>
+<p><hr>
+Note:	The 
+VMS and 
+Netware versions of 
+FLEXlm<I></I> do not support redundant servers.<hr><p>
+<h3>8.3.1	 Selecting Server Nodes</h3>
+<a name="_IX_84"></a><a name="_IX_85"></a><p>
+If all end-user data resides on a single file server, there is no need for 
+<a name="_IX_86"></a>redundant servers, 
+and 
+GLOBEtrotter Software<I></I> recommends the use of a single server node for the 
+FLEXlm<I></I> daemons. If the end-user's data is split among two or more server nodes and 
+work is still possible when one of these nodes goes down or off the network, then 
+multiple server nodes can be employed. In all cases, an effort should be made to select 
+stable systems as server nodes; in other words, do not pick systems that are frequently 
+rebooted or shut down.<p>
+<h3>8.3.2	 Generating a license file for redundant servers.</h3>
+<p>
+To generate a license file that uses redundant servers, specify three servers when you 
+create your license. Unlike independent servers, each SERVER line will require a port 
+number, which can be any number from 1024 to 32000 which is unused at the end-user 
+site. Note that the use of two license servers is not recommended, since a license file 
+with two servers would require that you always had both running.<p>
+<p>
+When redundant servers are started, they elect a 
+<I>master, 
+</I>which performs all licensing 
+operations. The other one or two servers are there to provide a secure licensing 
+mechanism in the event of hardware failure or if the master server node needs to be 
+rebooted. Should the master fail, if two servers are still running, one of the remaining 
+two will be elected master, and licensing operations will continue.<p>
+<p>
+The order of 
+<a name="_IX_87"></a>SERVER lines in the license file (for redundant servers) specifies the end-user's desired selection order for the master server node. If the order of the SERVER 
+lines do not agree in all license files, 
+FLEXlm<I></I> uses alphabetical order to determine the 
+master and the following messages are generated in the debug log file:<p>
+<pre>	6/26 11:00 (lmgrd) License File SERVER line order mismatch.</pre>
+<pre>	6/26 11:00 (lmgrd) Using alphabetical order </pre>
+</ol></ul><p>
+If the server order does not match, the daemons will come up initially, but reconnection 
+in the event of server node failure may not work, depending on which node fails and 
+who was the master before the failure. If the automatic failover in the event of node 
+failure is important, ensure that the order of the server lines is consistent on all server 
+nodes.<p>
+<p>
+When only two of the three license server machines are up, it is possible for the client 
+to experience a timeout before connecting to the license server. Specifically, if the first 
+license server in the license file is down, the client will timeout before attempting to 
+connect to the second server in the license file. This timeout is set to 10 seconds by 
+default, so there will be a 10-second delay before the license is granted. If the first 
+server is to be down for a while, the order of the SERVER lines in the license file which 
+the client reads could be changed to avoid this timeout.<p>
+<a name="Chapter 9"></a><hr><h1>Chapter 9 <a name="13237: ChapTitle: Chapter 8 Software Vendor Utility Programs"></a>
+Software Vendor Utility Programs</h1>
+<a name="84652: 1head: 8.1 makekey"></a><a name="_IX_88"></a><a name="9.1"></a><h2>9.1  makekey</h2>
+<p>
+The 
+FLEXlm<I></I> distribution kit includes the 
+<TT>makekey</TT> utility program used for the 
+creation of license files. 
+<TT>makekey</TT> is the easiest way to get started, since it asks a few 
+questions and creates a correct license file. Once you have become familiar with the 
+license file format, which is described in detail in the 
+FLEXlm Reference Manual<I></I>, you 
+may want to use the 
+<TT>lmcrypt</TT> utility to generate your 
+<a name="_IX_89"></a>license keys from a template file.<p>
+<p>
+<TT>makekey</TT> is a stand-alone license file generator. 
+<TT>makekey</TT> can be used `as-is' to 
+generate license files for your customers or it can be used as an example for you to 
+create your own customized license file generation program. If customizing, note that 
+the essential function call is 
+lc_cryptstr(). 
+<p>
+<p>
+<TT>makekey</TT> asks a number of questions and then generates the<a name="_IX_90"></a> license file for the specific 
+end-user.<p>
+<p>
+<TT>makekey</TT> allows you to enter all data for a customer's license file from scratch or use 
+an existing customer license file to update the feature lines.<p>
+<p>
+The license file is left in the current directory with the name 
+<TT>license.dat</TT>.<p>
+<p>
+Licenses can be generated to be compatible with older versions (i.e., not using any of 
+the features of the newer versions) by using 
+<p>
+<pre>	% makekey -verfmt n</pre>
+</ol></ul><p>
+where n is 2,3, 4, 5, or 5_1.<p>
+<p>
+Licenses can have shorter or longer lines with the -maxlen argument:<p>
+<pre>	% makekey -maxlen n</pre>
+</ol></ul><p>
+This is normally used to generate files with short lines so they'll be less likely to have 
+newlines inserted by mailers. For this a length of 50 is common.<p>
+<a name="95762: 1head: 8.2 lmcrypter"></a><a name="_IX_91"></a><a name="_IX_92"></a><a name="9.2"></a><h2>9.2  lmcrypt</h2>
+<p>
+Once you know the format of the license file FEATURE or INCRMENT lines that you 
+need to create, 
+<TT>lmcrypt</TT> is an easier way to create your 
+<a name="_IX_93"></a>license keys than 
+<TT>makekey</TT>. 
+<TT>lmcrypt</TT> replaces the license key, which can be simply '0', in a license file with the 
+correct key, which is then ready to ship to a customer. To use 
+<TT>lmcrypt</TT>, you need to 
+either understand the 
+FLEXlm<I></I> license file syntax or use an example license file. 
+Examples are available in the 
+<I>examples/licenses</I> directory.<p>
+<p>
+Usage:<p>
+<pre>lmcrypt [<I>files</I>][-i <I>infile</I>] [-o <I>outfile</I>] [-verfmt <I>n</I>] [-maxlen <I>n</I>] 
+	[-e <I>errfile</I>]</pre>
+</ol></ul><p>
+If no input file is specified, or if specified as `-' or stdin, standard input is used. If no 
+output file is specified, or if specified as `-'<TT> 
+</TT>or stdout, standard output is used. 
+<I>files</I> are 
+read and written back in place. If no file arguments are specified, 
+<TT>lmcrypt</TT> reads stdin 
+and writes stdout. All license keys are recomputed. 
+<I>lmcrypt</I> will only work on lines that 
+have a daemon name matching the vendor's daemon name.<p>
+<p>
+LIcenses can be generated to be compatible with older versions by using `-verfmt 
+<I>n'</I>, 
+where 
+<I>n</I> is 2, 3, 4, 5, 5_1 or 6. If this is not possible, an error is produced, and the 
+affected license line is left unaltered.<p>
+<p>
+The maximum line length is controlled with `-maxlen 
+<I>n</I>'. A value of 50 is commonly 
+used to make shorter lines less subject to mailers inserting newlines.<p>
+<p>
+	The simplest way to use 
+<TT>lmcrypt</TT> is:<p>
+<ul><li>copy an existing good file to another name, say 
+<TT>newlicense</TT><li>edit 
+<TT>newlicense</TT>, and make any desired changes, such as changing the feature 
+name, or number of licenses, or adding new features, and save the file<li>type the following</ul><pre>	% lmcrypt <I>newlicense</I></pre>
+<dl><dt><dd><TT>newlicense</TT> is then filled with correct license keys and is 
+usable by a customer</dl><p>
+Comments are passed through unaltered.<p>
+<p>
+See 
+<I>lmcrypt.c</I> in the machind directory.<p>
+<h4>Error Returns</h4>
+<p>
+Errors are printed to 
+<I>stderr</I>, or as specified with -e. Most errors will prevent generation 
+of license keys and the text will be output unchanged from the input. An example of 
+error reporting: If -e is not used, the error messages also appear at the top of the output 
+file.<p>
+<p>
+Input:<p>
+<pre>FEATURE f1 demo 1.a50 01-jan-99 0 0 HOSTID=08002b32b161</pre>
+</ol></ul><p>
+Error reported:<p>
+<pre>stdin:line 1:Bad version number - must be floating point number, with no letters</pre>
+<h4>See also</h4>
+<ul><li><a href="#45129: ChapTitle: Chapter 9 The License File">`The License File' on page 60</a></ul><a name="_IX_94"></a><a name="9.3"></a><h2>9.3  makepkg</h2>
+<p>
+The 
+<TT>makepkg</TT> utility is similar to 
+<TT>makekey</TT> and is used to make 
+<a name="_IX_95"></a>PACKAGE lines for 
+license files. The reason this utility is separate from 
+<TT>makekey</TT> is that you will often 
+want to ship PACKAGE lines with your product and issue enabling FEATURE or 
+INCREMENT lines later when the product is sold to individual customers.<p>
+<p>
+The source for 
+<TT>makepkg</TT>, 
+<TT>makepkg.c</TT>, is in the machind directory. You are 
+encouraged to modify this source as needed.<p>
+<p><hr>
+Note:	PACKAGE lines can also be created with the 
+<TT>lmcrypt</TT> utility, but not with 
+<TT>makekey</TT>.<hr><p>
+<a name="14846: 1Head: 9.4 Genlic.exe"></a><a name="_IX_96"></a><a name="9.4"></a><h2>9.4  genlic32.exe (Windows only)</h2>
+<p>
+GENLIC.EXE is a visual license generation program provided with the evaluation kit. 
+After experimenting with the license files that come with the demo, you may wish to 
+generate you own license files using genlic32.exe. While GENLIC32 can generate 
+most common license types, it cannot generate every license type which FLEX<I>lm</I> 
+supports. The range of license types which GENLIC23 can generate has been limited 
+in order to make it easier for you to get started. If you need a license which GENLIC32 
+cannot generate, you will need to use 
+<I>lmcrypt 
+</I><I>or</I><I> 
+</I><I>the 
+</I><I>lc_cryptstr() function</I>.<B><img src="2.0 internal inset"></B><p>
+<p>
+You must edit lm_code.h and insert your demo vendor codes to use GENLIC.EXE. If 
+you don't, GENLIC.EXE will run but will warn you that the licenses you generate will 
+not be valid.<p>
+<p>
+To use GENLICE.EXE, fill out the form for the type of license you want, then click 
+the `Make License' button. The text of the license file will appear in the window. To 
+create multiple features, edit the form and click `Make License' again. Each feature 
+will be appended to the window. Click `Save' to save your work.<p>
+<p>
+The main screen consists of the following:<p>
+<p>
+<B>Feature Name</B> 
+ -  name of the feature to be licensed. Characters must be alpha-numeric and/or '_'.<p>
+<p>
+<B>Expiration Date</B> 
+ -  date the license will expire. Valid date format is dd-mmm-yy[yy] 
+(example 01-nov-2007 or 30-dec-2007). If the 
+<I>Permanent 
+</I>box is checked, the license 
+will never expire and it has the date of 1-jan-0 (or `permanent') in the license file.<p>
+<p>
+<B>License Type</B> 
+ -  any of the four following license types:<p>
+<p>
+<B>Floating</B> 
+ -  Anyone on the network can use the licensed software, up to the 
+allowed number of licenses. The floating license type requires the following 
+fields:<p>
+<p>
+Number of Licenses 
+ -  total number of licenses that can be checked out at any 
+given time.<p>
+<p>
+Server Host Name 
+ -  name of the license server.<p>
+<p>
+Server Host ID 
+ -  Ethernet address or Disk Volume Serial Number of the 
+license server. The information for your machine is available in the drop-down menu.<p>
+<p>
+<B>Demo 
+</B> -  The licensed software will run on any system (it uses DEMO as the host 
+ID). The licensed software is in DEMO mode.<p>
+<p>
+<B>Node-Locked</B> 
+ -  The licensed software can only run on one particular computer. 
+The node-locked license requires the following field:<p>
+<p>
+Node-Lock Host ID - Ethernet address, Dongle ID, or Disk Volume Serial 
+Number of a particular system on the network (workstation). This 
+information for your system is available in the drop-down menu.<p>
+<p>
+<B>Run Anywhere 
+</B> -  The licensed software will run on any system (it uses ANY as 
+the host ID). The licensed software is in normal mode. (The difference between 
+the ANY and DEMO host id is that the licensed software can check for demo 
+feature lines, and then alter the behavior as desired.)<p>
+<p>
+<B>License File</B> 
+ -  name and path to the license file. To activate the BROWSE feature, 
+leave the field blank and click on the SAVE button.<p>
+<p>
+<B>Make License</B> 
+ -  generate a feature line without saving to a file.<p>
+<p>
+<B>Save</B> 
+ -  write the licenses window to a license file.<p>
+<p>
+<B>Clear</B> 
+ -  reset the content of the licenses window.<p>
+<p>
+<B>Quit</B> 
+ -  exits the program.<p>
+<p>
+<B>Advanced</B> 
+ -  settings concerning the vendor information and license server data.<p>
+<p>
+<B>Version</B> 
+ -  Feature's version that is supported by the current license file.<p>
+<p>
+<B>Start Date</B> - Date the current license file will take effect. This date will be 
+authenticated.<p>
+<p>
+<B>Use Decimal Format 
+</B> -  This allows you to generate the decimal format of the 
+license file (easier to read numbers over the telephone)<p>
+<p>
+<B>License Sharing 
+</B> -  This allows you to specify how multiple license requests 
+share licenses.<p>
+<p>
+None<B> 
+</B> -  Disable license sharing feature (default).<p>
+<p>
+User<B> 
+</B> -  Allows multiple copies with the same user to share the same license.<p>
+<p>
+Host 
+ -  Allows multiple copies on the same computer to share the same 
+license.<p>
+<p>
+User and Host 
+ -  Allows multiple copies of the same user on one computer 
+to share the same license.<p>
+<p>
+Site<B> 
+</B> -  Allows any system on the network to share the same feature 
+(Unlimited use at one site).<p>
+<p>
+<B>Vendor Data</B> (optional) 
+ -  Information that can be recorded on the license line.<p>
+<p>
+<B>Optional</B> - <p>
+<p>
+<B>TCP Port</B> 
+ -  Optional port number (&gt; 1024 &lt; 64000) to use on the SERVER line.<p>
+<p>
+<B>SPX Address</B> 
+ -  If using a 
+FLEXlm<I></I> Novell server, Port number for IPX/SPX 
+protocol to use on the SERVER line.<p>
+<p>
+<B>Vendor Name:</B> 
+ -  `demo' by default. This is used in the VENDOR line. The 
+name will change with modification to 
+<TT>lm_code.h</TT> for VENDOR_NAME `.....'<p>
+<p>
+<B>Vendor Daemon 
+</B> -  Path to the vendor daemon. This is used in the 
+<a name="_IX_97"></a>VENDOR 
+line.<p>
+<p><hr>
+Note:	After the advanced or optional features are SAVE(d), they will be used for all future 
+license files until they are changed.<hr><p>
+<a name="9.5"></a><h2>9.5  Integrating the License Certificate Manager</h2>
+<p>
+The License Certificate Manager supports automatic downloading and installation of 
+license files over the internet. This is enabled by default. It can be disabled using the 
+FLEXible API, as described in the Reference Manual.<p>
+<a name="Chapter 10"></a><hr><h1>Chapter 10 <a name="45129: ChapTitle: Chapter 9 The License File"></a>
+The License File</h1>
+<a name="26348: 1Head: 10.1 Format of the License File"></a><a name="10.1"></a><h2>10.1  Format of the License File</h2>
+<p>
+A license file consists of the following sections:<p>
+<ol><li>Optional license server section, with information about the node where the 
+SERVER (or redundant SERVERs) is running, along with a list of all vendor-specific 
+<a name="_IX_98"></a>VENDOR(s) that run on the license server node(s). This section is 
+required if any features are 
+<I>counted</I>.<li>Optional USE_SERVER section, indicating that client applications should not 
+process the rest of the license file, but should checkout the license directly from 
+the server. Globetrotter recommends the use of USE_SERVER, particularly where 
+performance is important.<li>Features section, consisting of any combination of FEATURE, INCREMENT, 
+UPGRADE, or PACKAGE lines. This section is required for 
+<TT>lmgrd</TT>. When client 
+applications read a license file, this section is required, unless USE_SERVER is 
+used.<li>Comments. The convention is to begin comments with a '#' character. However, 
+in practice all lines not beginning with a 
+FLEXlm<I></I> reserved keyword are 
+considered comments.<li>Long lines can be broken up. It is customary to use a '\' line continuation 
+character, but in v7+ this is not required, particularly since newlines are often 
+added by emailers.</ol>
+<p>
+Vendors and license administrators will read the license file to understand how the 
+licensing will behave, e.g.: what features are licensed, the number of licenses, and 
+whether these licenses are node-locked. The options are very broad for what can be 
+specified in a license file.<p>
+<p>
+End-users often need to edit the license file. Nearly all of the file is authenticated; if 
+these portions are edited by the license administrator, an 
+<a name="_IX_99"></a><TT>LM_BADCODE</TT> error will 
+result. However, license administrators often edit the license file for the following 
+reasons:<p>
+<ul><li>To change the 
+<a name="_IX_100"></a>SERVER nodename<li>To change the (optional) SERVER TCP/IP 
+<a name="_IX_101"></a>port number<li>To change the (optional) path to the vendor daemon(s)</ul><p>
+Any amount of white space of any type can separate the components of license file 
+lines; data can be entered via any text editor. Vendors can therefore distribute license 
+data via 
+<I>Fax</I> or telephone.<p>
+<p>
+The only data items in the license file that are editable by the end-user are:<p>
+<ul><li>hostnames on SERVER lines<li>(optional) port numbers on SERVER or VENDOR lines<li>(optional) pathnames on VENDOR lines<li>(optional) options file pathnames on VENDOR lines<li>(optional) Decnet object numbers on VENDOR lines (VMS only)</ul><p><hr>
+Note:	The SERVER hostid(s) and everything on the FEATURE line (except the daemon 
+name) are input to the authentication algorithm to generate the 
+<a name="_IX_102"></a>license key for that 
+FEATURE.<hr><p>
+<p>
+The License file format is documented in detail in the 
+FLEXlm Reference Manual<I></I>.<p>
+<h3>10.1.1	 Example 
+<a name="_IX_103"></a>License File</h3>
+<p>
+The following example illustrates the license file for a single vendor with two features, 
+and a set of three server nodes, any two of which must be running for the system to 
+function:<p>
+<pre>	SERVER pat 17003456 27009
+	SERVER lee 17004355 27009
+	SERVER terry 17007ea8 27009
+	VENDOR demo
+	FEATURE f1 demo 1.0 1-jan-1996 10 1AEEFC8F9003
+	FEATURE f2 demo 1.0 1-jan-1996 10 0A7E8C4F561F</pre>
+<a name="35936: 1head: 9.2 Locating the License File"></a><a name="_IX_104"></a><a name="10.2"></a><h2>10.2  Locating the License File</h2>
+<p>
+	Client applications use the following rules for locating a license file.<p>
+<ol><li>If either $LM_LICENSE_FILE or $<I><a name="_IX_105"></a>VENDOR</I>_LICENSE_FILE (where 
+<I>VENDOR</I> is the ISVs vendor-daemon name) environment variable is set, they are 
+used. $<I>VENDOR</I>_LICENSE_FILE is used first. $<I>VENDOR</I>_LICENSE_FILE is 
+used only by products from $<I>VENDOR</I> and by lmutil and lmtools.exe<li>LM_LICENSE_FILE and/or $VENDOR_LICENSE_FILE can also be set in the 
+Windows registry or, on Unix, in $HOME/.flexlmrc. The Windows registry is in 
+\HKEY_LOCAL_MACHINE\SOFTWARE\FLEXlm License Manager. These 
+locations are also automatically set upon successful checkout.<li>The license location(s) can be set the 
+<I>CHECKOUT()</I> or 
+<I>lp_checkout()</I> calls. This 
+is searched after $LM_LICENSE_FILE and/or $<I>VENDOR</I>_LICENSE_FILE.<li>FLEXlm<I></I> utilities accept 
+<TT>-c 
+<a name="_IX_106"></a>license_file_path</TT> argument, which specifies the license 
+path(s). If this is set, the environment variables are ignored.<li>If none of the other locations are specified, then a `backup'/default location is 
+used:</ol>
+<p>
+Unix:<p>
+<pre>	/usr/local/flexlm/licenses/license.dat</pre>
+</ol></ul><p>
+Windows: 
+<p>
+<pre>	C:\FLEXLM\LICENSE.DAT</pre>
+<p><hr>
+Note:	In practice, use of the default location is discouraged, since it is not searched if the 
+applications specifies a different default, or the user has a license-path environment 
+variable set. That is, the default location, which may have successfully worked for an 
+application, will fail once $LM_LICENSE_FILE is set (unless, of course, 
+$LM_LICENSE_FILE includes the default location).<hr><p>
+<h3>10.2.1	 License specification</h3>
+<p>
+Wherever a license path can be specified, it can consist of<p>
+<ul><li>a single file<li>a list of files, separated by a colon on Unix, a semi-colon on Windows.<li>a directory, where 
+<I>dir</I>/*.lic are used in alphabetical order, as if specified like a 
+license file list.<li><a name="_IX_107"></a>@<I>host</I>, where 
+<I>host</I> is the hostname of the license server, when the SERVER has 
+no port number, or the number is between 27000 and 27009. (<I>New</I> in v6 - unsupported in older versions.)<li><I><a name="_IX_108"></a>port</I>@<I>host</I>, where port is the port number and hostname come from the SERVER 
+line<li><I>port</I>@<I>host</I>,<I>port</I>@<I>host</I>,<I>port</I>@<I>host</I>, when a 3-server redundant server is being 
+used.<li>The actual license file text, with `<a name="_IX_109"></a>START_LICENSE\n' as a prefix, and 
+`\n<a name="_IX_110"></a>END_LICENSE' as suffix, where the embedded newlines are required. While 
+awkward to specify in most shells, this is most useful inside a program.</ul><p>
+Examples:<p>
+<pre>	% setenv LM_LICENSE_FILE license.dat</pre>
+</ol></ul><p>
+Only one file is specified.<p>
+<pre>	% setenv LM_LICENSE_FILE license.dat:/usr/local/flexlm/licenses</pre>
+</ol></ul><p>
+license.dat and /usr/local/flexlm/licenses/*.lic are used.<p>
+<pre>	% setenv LM_LICENSE_FILE @localhost:.:/proddir/licenses</pre>
+</ol></ul><p>
+If the server is running on the same system on a `default' port, @localhost will find it. 
+After that it looks for 
+<I>./*.lic 
+</I>and /<I>proddir</I>/licenses/*.lic<p>
+<p><hr>
+Note:	Before v5, both the client and server needed to read the 
+<I>same</I> license file, since the 
+client passes the license key from the FEATURE line to the vendor daemon. With 
+FLEXlm<I></I> v5+, port@host or USE_SERVER solves this problem, since the client 
+never reads the license file features in these cases.<hr><p>
+<a name="42751: 1head: 9.3 Host Ids for FLEXlm Supported Machines"></a><a name="_IX_111"></a><a name="10.3"></a><h2>10.3  Hostids for FLEXlm<I></I> Supported Machines</h2>
+<p>
+FLEXlm<I></I> uses different machine identifications for different machine architectures. 
+For 
+example, all Sun Microsystems machines have a unique integer 
+<a name="_IX_112"></a>hostid, whereas all 
+DEC machines do not. 
+The program 
+<TT>lmhostid</TT> will print the exact hostid that 
+FLEXlm<I></I> 
+expects to use on any given machine. The 
+FLEXlm Reference Manual<I></I> lists alternate 
+methods of determining the hostid for common machine architectures.<p>
+<a name="license file"></a><a name="10.4"></a><h2>10.4  <TT></TT>Types of License Files</h2>
+<p>
+Depending on the information in this file, the contents will be interpreted differently 
+by 
+FLEXlm<I></I>. The license file supports network licensing, node locking, network 
+licensing on a limited set of hosts, and demo/evaluation software.<p>
+<p>
+Following are license file examples, starting with the simplest. In the examples, the 
+changes from the previous example are in 
+<B>bold</B> text.<p>
+<h3>10.4.1	 <a name="23330: 2Head: 9.4.1 Simple Uncounted License"></a>Simple 
+<a name="_IX_113"></a>Uncounted License</h3>
+<pre>FEATURE f0 demo 2.0 permanent uncounted AB0CC0C16807 HOSTID=FLEXID=8-...</pre>
+<ul><li>Uncounted licenses have unlimited use on the hostid specified. Uncounted 
+licenses require no server.<li>When the expiration date is `permanent' (or if a date is specified with a year of 
+0), the license never expires. 
+<li>This license supports versions 0.0 through 2.0 (inclusive).</ul><h3>10.4.2	 Expiring Demo License</h3>
+<pre>FEATURE f0 demo 2.0 <B>3-mar-97</B> uncounted AB0CC0C16807 HOSTID=<B>DEMO</B></pre>
+<ul><li>This license expires on 3 March, 1997.<li>If an expiration date has a 2-digit year, the actual expiration date is these two 
+digits + 1900. You can use all four digits for this expiration date, so the example 
+above could be written with an expiration date of `3-mar-1997'. For a license 
+which expires after 1999, use all four digits, e.g. `1-jan-2001'.<li>The DEMO hostid indicates that this license allows f0 to run on any system. In 
+addition, the client application can also detect that it is in `demo' mode, and 
+could behave differently.</ul><h3>10.4.3	 <a name="10652: 2Head: 9.4.3 Simple floating (counted) license"></a>Simple 
+<a name="_IX_114"></a>Floating (Counted) License</h3>
+<pre><B>SERVER speedy 08002b32b161 
+VENDOR demo
+</B>FEATURE f1 demo 2.0 permanent <B>9</B> DBCC10416777</pre>
+<ul><li>Server and Daemon lines required<li>Unexpiring<li>Floating 
+ -  runs on any node. No hostid on FEATURE line.<li>Limited to 9 concurrent licenses.<li>Server restricted to hostid 
+<I>08002b32b161</I>. To remove this restriction, use hostid 
+of ANY (e.g. 
+<TT>SERVER speedy 
+</TT><B>ANY</B><TT> 2837).</TT></ul><p>
+The breakdown of the SERVER and VENDOR lines is illustrated here:<p>
+<ul><li>Hostname can be changed by the end-user. If hostname is `<I>this_host</I>', clients 
+running on the same node as the server will work fine. Clients on other nodes will 
+fail unless the hostname is changed, or the clients use @host (or port@host if a 
+port number is specified on the SERVER line) to find the server.<li>Path to daemon can be changed by the end-user. If unspecified, lmgrd uses the 
+PATH environment variable, or the current directory to find the vendor-daemon 
+binary.<li>Nothing else can be changed on these 2 lines. Everything else is authenticated by 
+the 
+<a name="_IX_115"></a>license key.</ul><h3>10.4.4	 <a name="_IX_116"></a>INCREMENT</h3>
+<pre>SERVER speedy 08002b32b161
+VENDOR demo
+<B>INCREMENT</B> f1 demo 2.0 permanent <B>1</B> 2B8F621C172C
+<B>INCREMENT</B> f1 demo 2.0 permanent <B>2</B> 2B9F124C142C</pre>
+<ul><li>INCREMENT 
+ -  the server adds up licenses for all lines for the same feature 
+name. The concurrent usage limit is 3 (= 1 + 2).<li>The first INCREMENT line could be a FEATURE line and the behavior would 
+be the same.<li>INCREMENT lines must differ in some way 
+ -  otherwise only one will be used.</ul><h3>10.4.5	 INCREMENT, node-locked</h3>
+<pre>SERVER speedy 08002b32b161
+VENDOR demo
+INCREMENT f1 demo 2.0 permanent 1 7B9F02AC0645 HOSTID=<B>80029a3d
+</B>INCREMENT f1 demo 2.0 permanent 2 6BAFD2BC1C3D HOSTID=<B>778da450</B></pre>
+<ul><li>One license is available on hostid 80029a3d.<li>Two licenses are available on 778da450.<li>The server tracks these licenses independently, in separate 
+<I>pools</I>.<li>This behavior ONLY works with INCREMENT, not FEATURE, since with 
+FEATURE, the server only recognizes the first FEATURE line for a given feature 
+name.</ul><h3>10.4.6	 Mixed 
+<a name="_IX_117"></a>Floating (Counted) and Uncounted</h3>
+<pre>SERVER speedy 08002b32b161
+<B>VENDOR demo
+</B><TT></TT>FEATURE f1 demo 2.0 permanent 1 7B9F02AC0645 HOSTID=80029a3d
+INCREMENT f1 demo 2.0 permanent 2 6BAFD2BC1C3D HOSTID=778da450
+<B>FEATURE f0 demo 2.0 permanent uncounted AB0CC0C16807 HOSTID=554066fa</B></pre>
+<ul><li>Checkouts of f0, since it is 
+<I>uncounted</I>, may not communicate with the server 
+ -  
+they only verify that the client is on node 
+554066fa, and that the version is &lt;= 2.0. 
+If USE_SERVER is specified, or either 
+<I><a name="_IX_118"></a>VENDOR</I>_LICENSE_FILE or 
+LM_LICENSE_FILE is set to @host (or port@host if a port number is specified 
+on the SERVER line), then checkouts do require a server and their usage is 
+logged.<li>The f0 line does not require the SERVER or VENDOR lines, and in fact could 
+reside in another license file altogether.</ul><h3>10.4.7	 Optional FEATURE attributes</h3>
+<pre>SERVER speedy 08002b32b161
+VENDOR demo
+<TT></TT>INCREMENT f1 demo 2.0 permanent 4 DBCC10416777
+INCREMENT f1 demo 2.0 permanent 3 BBDC1081492A
+UPGRADE f1 demo 2.0 3.0 permanent 5 3B8C60B10227
+FEATURE pkg2 demo 1.0 permanent 1 BB9C4071436D \
+	<B>VENDOR_STRING=vd HOSTID=12345678 OVERDRAFT=1 \
+</B>	<B>DUP_GROUP=UHD ISSUER=issuer NOTICE=notice\
+	START=1-jan-2000 vendor_info=vi dist_info=di\
+	user_info=ui asset_info=ai ck=161</B></pre>
+<ul><li>Most optional attributes are in 
+<I>keyword=value</I> format.<li>The following keywords (which are printed in lowercase by the license 
+generators) can be modified by the user, and are 
+<I>not</I> part of the 
+<a name="_IX_119"></a>license key: 
+asset_info, dist_info, user_info, vendor_info, and ck.</ul><h4>Attributes in Detail</h4>
+<pre>VENDOR_STRING=vd</pre>
+</ol></ul><p>
+The vendor-defined string is used for customization by the vendor, often to license 
+subfeatures.<p>
+<pre>HOSTID=FLEXID=8-12345678</pre>
+</ol></ul><p>
+Use locked to hostid FLEXID=8-12345678 (a node with the hardware key with id 
+8-12345678 attached).<p>
+<pre>OVERDRAFT=1 </pre>
+</ol></ul><p>
+			Usage is limited to number-of-users (1) plus OVERDRAFT (1) = 2. The 
+application can detect this state, and it is logged in the REPORTLOG.<p>
+<pre>DUP_GROUP=UHD</pre>
+</ol></ul><p>
+All usage by the same user on the same host and display are counted as a single 
+use.<p>
+<pre>START=1-jan-2000</pre>
+</ol></ul><p>
+	Optional start date.<p>
+<pre>ISSUER=issuer NOTICE=notice vendor_info=vi dist_info=di\</pre>
+<pre>	 user_info=ui asset_info=ai</pre>
+</ol></ul><p>
+Unused by 
+FLEXlm<I></I>. Can be used for customization by vendor or end-user.<p>
+<pre>ck=161</pre>
+</ol></ul><p>
+A checksum, used by the 
+<TT>lmcksum</TT> utility to validate the line.<p>
+<h3>10.4.8	 <a name="_IX_120"></a>PACKAGE 
+</h3>
+<pre><B>PACKAGE pkg demo 1.0 504091605DCF\
+	COMPONENTS="comp1 comp2 comp3 comp4 comp5 comp6 comp7 comp8"
+</B>FEATURE pkg demo 1.0 permanent uncounted DB5CC00101A7 HOSTID=778da450</pre>
+</ol></ul><p>
+The 2 lines above are a more efficient way of delivering:<p>
+<pre>FEATURE comp1 demo 1.0 permanent uncounted D03F02432106 HOSTID=778da450
+FEATURE comp2 demo 1.0 permanent uncounted 99375F40FD85 HOSTID=778da450
+FEATURE comp3 demo 1.0 permanent uncounted 68FAC130DB90 HOSTID=778da450
+FEATURE comp4 demo 1.0 permanent uncounted D3D617E2075A HOSTID=778da450
+FEATURE comp5 demo 1.0 permanent uncounted 5A91D6EFB68C HOSTID=778da450
+FEATURE comp6 demo 1.0 permanent uncounted 8F75798EB975 HOSTID=778da450
+FEATURE comp7 demo 1.0 permanent uncounted 790545E90575 HOSTID=778da450
+FEATURE comp8 demo 1.0 permanent uncounted 9EE9E788087F HOSTID=778da450</pre>
+<ul><li>The Feature line 
+<I>enables</I> the Package line.<li>The COMPONENTS all inherit the information from the enabling FEATURE 
+line. In this example, they all inherit the expiration date, number of licenses, and 
+hostid.<li>The enabling FEATURE line must match the name, version, and vendor name of 
+the PACKAGE.<li>The PACKAGE line is usually shipped with the product, since it contains no 
+customer-specific fields.<li>PACKAGE lines can be shipped in a separate file that never needs user editing, 
+so long as the file is include in the license-file-list.</ul><h3>10.4.9	 <a name="_IX_121"></a>SUITE</h3>
+<pre>PACKAGE <B>office</B> demo 1.0 00504091605D <B>OPTIONS=SUITE</B> \</pre>
+<pre>		COMPONENTS="<B>write paint draw</B>"</pre>
+<pre>FEATURE <B>office</B> demo 1.0 permanent 3 DB5CC00101A7</pre>
+<ul><li>There is no equivalent in FEATURE lines for this behavior.<li>The client application checks out both a component feature, and, automatically, 
+a copy of a feature called `office'. Without OPTIONS=SUITE, this additional 
+checkout would not occur.<li>A feature called `office' is created, in addition to all the components.<li>This license file indicates that after 
+<I>any</I> three licenses of any of the components 
+are used, no further licenses are available for checkout. Without the 
+OPTIONS=SUITE qualifier, there would be three licenses of 
+<I>each</I> of the three 
+components.</ul><a name="10.5"></a><h2>10.5  License in a buffer</h2>
+<p>
+The license file does not need to be located on disk - it can be specified in the program 
+itself. The license-path in 
+<I>CHECKOUT</I>, or 
+<I>lp_checkout()</I> can specify the actual license, 
+as in this example:<p>
+<pre>CHECKOUT(LM_RESTRICTIVE,"f1","1.0", 
+	"START_LICENSE\n\
+	FEATURE f1 demo 1.0 permanent \
+	uncounted 50A35101C0F3 HOSTID=ANY \
+	VENDOR_STRING="Acme Inc"\n\
+	END_LICENSE");</pre>
+</ol></ul><p>
+The license must begin with `START_LICENSE\n' and end with 
+`\nEND_LICENSE', where the embedded newlines are required.<p>
+<p>
+This can also be a license-file-list; as in the following example:<p>
+<pre>CHECKOUT(LM_RESTRICTIVE,"f1","1.0", 
+	"path/to/license.dat:START_LICENSE\n\
+	FEATURE f1 demo 1.0 permanent \
+	uncounted 50A35101C0F3 HOSTID=ANY \
+	VENDOR_STRING="Acme Inc"\nEND_LICENSE"</pre>
+</ol></ul><p>
+In this example, `path/to/license.dat' is first in the list, followed by the license in the 
+string.<p>
+<p>
+License in a buffer is particularly useful when selling libraries if a separate license file 
+is not desirable, or as a final `fail-safe' license in the event that the license server is not 
+running.<p>
+<a name="_IX_122"></a><a name="10.6"></a><h2>10.6  Decimal Format Licenses</h2>
+<p>
+Licenses can be represented in format, to make license delivery easier for customers 
+without access to e-mail. Decimal has the advantage that it's simpler to type in, and 
+often the licenses are much shorter. There are notable exceptions, however, which are 
+explained below.<p>
+<p>
+To generate a decimal format license, use the 
+<I>-decimal</I> arg for 
+<TT>lmcrypt</TT> or 
+<TT>makekey</TT><TT>.</TT><p>
+<p>
+To convert an existing license to decimal, use 
+<TT>lmcrypt</TT> -decimal, or<p>
+<pre>	% <a name="_IX_123"></a>lminstall -i <I>infile </I>-o <I>outfile</I> -odecimal</pre>
+</ol></ul><p>
+If needed, decimal lines can be mixed with readable format lines.<p>
+<p>
+End-users will normally use the 
+<TT><a name="_IX_124"></a>lminstall</TT> command to install decimal format licenses. 
+Note that lminstall converts the decimal lines to readable format. 
+<TT>lminstall</TT> does not, 
+however, know where your application expects to find the license file. You will need to 
+make the license-file location clear to the user. Please see the 
+FLEXlm Reference Manual<I></I> for a more complete description of the decimal format. Refer to the 
+FLEXlm End-User Manual<I></I> for more information on 
+<TT>lminstall</TT>.<p>
+<h4>See also</h4>
+<ul><li><a href="#15020: 2Head: 12.3.5 lminstall">Section 13.3.5, `lminstall,' on page 83</a></ul><a name="Chapter 11"></a><hr><h1>Chapter 11 
+FLEXlock and License Certificate Manager (Windows only)</h1>
+<a name="11.1"></a><h2>11.1  FLEXlock</h2>
+<p>
+FLEXlock is a new feature in FLEXlm designed to make it extremely easy to add `try 
+before you buy' licensing to a product that uses FLEXlm. After enabling FLEXlock in 
+a FLEXlm licensed product, FLEXlock automatically allows a trial period after the 
+initial installation along with explanatory warnings and dialogs explaining the 
+evaluation system to the user. At the completion of the trial period, the user has the 
+option to either stop using or purchase the product. Upon purchasing, the user is given 
+a license file that will enable your product to run in a normal FLEXlm manner. During 
+the evaluation period it is possible to detect if the user has made unlicensed copies.<p>
+<p>
+To use the FLEXlock functionality you need to:<p>
+<ol><li>Enable the functionality in your program.<li>Determine the operation and parameters of the `try before you buy' functionality.<li>Run 
+<TT>flsetup.exe</TT> to define these FLEXlock parameters and create the FLEXlock 
+distribution file `<TT>fldata.ini</TT>'.</ol>
+<h3>11.1.1	 Enabling the FLEXlock Features</h3>
+<p>
+To enable the functionality of the FLEXlock you will need to specify to FLEXlm that 
+you will be permitting this functionality.<p>
+<p>
+If you are using the TRIVIAL or SIMPLE APIs of FLEXLM, you will simply specify 
+an additional License Policy of LM_FLEXLOCK to your checkout call, i.e.<p>
+<pre>	CHECKOUT(LM_RESTRICTIVE | LM_FLEXLOCK,"myfeature","1.0", 
+		"license.dat");</pre>
+<h3>11.1.2	 Security</h3>
+<p>
+We've made every effort to make the FLEXlock feature secure. However, due to the 
+type of security technology used for FLEXlock, it is less secure than the rest of 
+FLEXlm. This is why it is disabled by default. You should only enable FLEXLOCK if 
+the convenience of FLEXlock licensing is more important than the reduced security it 
+exposes your product to.<p>
+<p>
+For additional security, you will need to use the FLEXible API, and 
+LM_A_FLEXLOCK_INSTALL_ID and LM_A_FLEXLOCK, as outlined there.<p>
+<h3>11.1.3	 The FLEXlock Configuration Editor</h3>
+<p>
+To define the operation of FLEXlock features, you must run the flsetup.exe program 
+and generate the `fldata.ini' file. Flsetup.exe allows developers to quickly define:<p>
+<ul><li>The type of product trial including:</ul><ul><li>fixed number of days<li>fixed numbers of executions<li>expiration on a fixed date</ul><ul><li>How to behave when the trial expires:</ul><ul><li>don't run<li>run with a warning</ul><ul><li>The greeting given when the product is first executed<li>The greeting given during the trial phase<li>The message given when the trial phase expires including instructions on how to 
+purchase the product<li>Product's Attributes:</ul><ul><li>product name<li>company name<li>copyright notice</ul><p>
+After configuring these parameters and saving the file, run the `File-&gt;Create 
+Distribution Files'. This generates the 
+<TT>fldata.ini</TT> file that will need to be shipped 
+with the product. Also the 
+<TT>flcflxA.dll</TT> file will need to be shipped with the 
+product as well. These files should be placed in the same directory as your program 
+executable.<p>
+<p>
+FLEXlock has been designed to work with LCM, so software vendors may have a fully 
+automated try-before-you-buy program, coupled to a web-based unlocking and 
+payment system. With the use of GLOBEtrack Licensing, it is possible to obtain a 
+license file over the internet, and have it automatically installed without user 
+intervention of copying and pasting.<p>
+<a name="11.2"></a><h2>11.2  License Certificate Manager (LCM)</h2>
+<p>
+LCM requires use of GLOBEtrack Licensing. If the instructions in GT Licensing are 
+followed correctly, the application will automatically support it. 
+<p>
+<p>
+When a license is unavailable for an application, a dialog appears and one option is to 
+download the license from the internet. If they select this option, the URL and key are 
+prompted for. 
+<p>
+<p>
+To demo the LCM, use the lmclient sample program with feature `lcm'.<p>
+<p>
+The default URL for the LCM can be changed, but only with the FLEXible API. See 
+LM_A_LCM_URL in the Reference Manual. By default the LCM URL is 
+www.globetrotter.com/<I>vendorname</I>, where 
+<I>vendorname</I> is your vendor daemon name.<p>
+<a name="Chapter 12"></a><hr><h1>Chapter 12 
+Integration Guidelines</h1>
+<p>
+The following sections describe some things to consider when you integrate 
+FLEXlm<I></I>.<p>
+<a name="12.1"></a><h2>12.1  Where to Install Your Licensing Software</h2>
+<p>
+When your installation procedure installs the 
+FLEXlm<I></I> software at your end-user site, 
+there are some things you should keep in mind:<p>
+<ul><li>All license server executables (<TT>lmgrd</TT> and vendor daemons) should be LOCAL 
+on the system(s) that will run them. A corollary of this is that you should not run 
+license servers on diskless nodes.<li>There should be a 
+<I>local copy</I> of the license file on each server node. It is fine to 
+<a name="_IX_125"></a>NFS-mount the license file for client access, but each server node should have a 
+local copy. A better approach is to set either the 
+<I><a name="_IX_126"></a>VENDOR</I>_LICENSE_FILE or 
+<a name="_IX_127"></a><TT>LM_LICENSE_FILE</TT> environment variable to<I> 
+<a name="_IX_128"></a>@host 
+</I>(or 
+<I>port@host</I> if a port 
+number is specified on the SERVER line) for all clients. In fact, for large license 
+files, 
+<I>@host</I> is more efficient, since it doesn't need to read the license file. For 
+more information, see 
+<a href="#35936: 1head: 9.2 Locating the License File">Section 10.2, `Locating the License File,' on page 61</a>.<li>It is poor policy to configure 
+<a name="_IX_129"></a>redundant servers and then keep only one copy of 
+either the daemons or license file 
+ -  in this case you still have a single point of 
+failure. Place a copy of 
+<TT>lmgrd</TT>, your vendor daemon, and the license file(s) on the 
+disk of each license server node.</ul><a name="12922: 1head: 11.2 Redundant vs. single-server licensing"></a><a name="_IX_130"></a><a name="12.2"></a><h2>12.2  Redundant vs. Single-server licensing</h2>
+<p>
+You will have to help your end-user decide how many server nodes to run, as the 
+<a name="_IX_131"></a>license keys are partially derived from the list of server node hostids.<p>
+<p>
+One server node is recommended, unless the network and/or server machines on the 
+network regularly go down. In this case, use three server nodes, so that any one server 
+can go down and still allow the software to run. Note that the server nodes do not have 
+to be of the same machine architecture; all 
+FLEXlm<I></I> platforms (except 
+<a name="_IX_132"></a>VMS) can 
+operate in a heterogeneous manner.<p>
+<a name="12.3"></a><h2>12.3  Keeping Your Software Secure</h2>
+<p>
+No software is completely 
+<a name="_IX_133"></a>secure. 
+FLEXlm<I></I> is no exception. While 
+GLOBEtrotter Software<I></I> has made every effort to ensure the integrity of 
+FLEXlm<I></I>, all points of attack 
+can never be anticipated. The following lists known points of vulnerability in 
+FLEXlm<I></I> 
+in increasing order of difficulty to break. Globetrotter Software also maintains a list of 
+techniques for making your implementation more secure 
+ -  please contact technical 
+support (support@globes.com) for a description of these techniques.<p>
+<h4>Easy</h4>
+<ul><li>Running the debugger on the application code if it is released 
+with unstripped 
+executables (on Unix) or 
+as a debug version (on Windows).</ul><h4>Difficult, depending on application policy</h4>
+<ul><li>Killing the daemons, since 
+a majority of daemons must be up in order for 
+anything to run, and 
+a dead daemon is detected within the timer interval in a 
+client. If, however, you do not use one of the built-in timers and you do not call 
+<I>HEARTBEAT()</I>, then your software protection could be bypassed by someone 
+who kills the daemons each time that the application reaches the maximum 
+license limit, as the applications would never detect that the daemon went down.</ul><p>
+To reduce the potential for theft by killing and starting daemons:<p>
+<ul><li>Call 
+HEARTBEAT() at least every 120 seconds (but not more often than 
+every 30 seconds).<li>Once reconnection is being attempted, notify the user and take whatever 
+action is appropriate.</ul><h4>Very Difficult</h4>
+<ul><li>Guessing the 
+<a name="_IX_134"></a>license keys that belong in the license file. 
+FLEXlm<I></I>'s standard 
+authentication algorithm takes the user-visible data fields (number of licenses, 
+expiration date, version number, vendor-defined string, feature name, host IDs of 
+all servers, plus any optional authenticated fields) and combines them with the 
+vendor's private encryption seeds to produce a license key. The algorithm used is 
+a proprietary one-way block chaining encypherment of all the input data.<li>Writing a new daemon that emulates your vendor daemon. 
+FLEXlm<I></I> encrypts the 
+traffic between client and vendor daemon to make this point of attack much more 
+difficult.<li>Running the debugger on 
+a stripped (Unix) or 
+a non-debug (Windows) 
+executable. This requires someone to find the 
+FLEXlm<I></I> calls without any symbol 
+table knowledge.</ul><a name="Chapter 13"></a><hr><h1>Chapter 13 
+<a name="19683: chap head: End-User License Administration"></a>End-User License Administration</h1>
+<a name="76230: 1head: 11.1 End-User Options"></a><a name="Options"></a><a name="13.1"></a><h2>13.1  End-User Options File</h2>
+<p>
+End-users can 
+<a name="_IX_135"></a>customize software usage via the daemon options file provided by 
+FLEXlm<I></I>. 
+This options file allows the end-user to reserve licenses for specified users or 
+groups of users, to allow or disallow software usage to certain people, to set software 
+timeouts. 
+The daemon options file can be specified in the license file on the VENDOR 
+line as the last parameter as follows:<p>
+<a name="_IX_136"></a><pre>VENDOR <I>daemon-name</I> <I>[optional-path]</I> [<I>options-file</I>]</pre>
+</ol></ul><p>
+In addition (<I>new</I> in version 6), the options file does not need to be specified if:<p>
+<ol><li>the options file is named 
+<I>vendor</I>.opt, and<li>The options file is located in the same directory as the vendor-daemon binary.</ol>
+<p>
+A daemon options file consists of lines in the following format:<p>
+<pre><TT>	</TT>INCLUDE <I>feature[:qualifier] \</I></pre>
+<pre>		{USER|HOST|DISPLAY|GROUP|HOSTGROUP|INTERNET} name</pre>
+<pre>	INCLUDEALL {USER|HOST|DISPLAY|GROUP|HOSTGROUP|INTERNET} <I>name</I></pre>
+<pre>	EXCLUDE <I>feature[:qualifier] \</I></pre>
+<pre>		{USER|HOST|DISPLAY|GROUP|HOSTGROUP|INTERNET} name</pre>
+<pre><TT>	</TT>EXCLUDEALL {USER|HOST|DISPLAY|GROUP|HOSTGROUP|INTERNET} <I>name</I></pre>
+<pre>	GROUP <I>name user1 user2 ...</I></pre>
+<pre>	LINGER <I>feature[:qualifier] seconds</I></pre>
+<pre>	MAX #lic feature[:qualifier] \</pre>
+<pre>		{USER|HOST|DISPLAY|GROUP|HOSTGROUP|INTERNET} name</pre>
+<pre>	MAX_OVERDRAFT <I>feature</I> <I>maximum</I></pre>
+<pre>	NOLOG {IN|OUT|DENIED|QUEUED}</pre>
+<pre>	REPORTLOG <I>file</I></pre>
+<pre>	RESERVE <I>#lic feature[:qualifier] \</I></pre>
+<pre>		{USER|HOST|DISPLAY|GROUP|HOSTGROUP|INTERNET} name</pre>
+<pre>	TIMEOUT <I>feature[:qualifier] timeout_in_seconds</I> </pre>
+<pre>	TIMEOUTALL <I>timeout_in_seconds</I> </pre>
+</ol></ul><p>
+Lines beginning with a pound sign character (#) are ignored and can be used as 
+comments. If the filename in the REPORTLOG line starts with a `+' character, the old 
+report log file will be opened for append.<p>
+<p>
+Any reference to a feature name can, optionally, specify a specific line that refers to a 
+specific FEATURE or INCREMENT line (as of v5). The syntax is:<p>
+<pre><I>	feature</I>:<I>attribute</I>=<I>value</I></pre>
+</ol></ul><p>
+For example:<p>
+<pre>	INCLUDE f1:VERSION=2.0 USER daniel</pre>
+</ol></ul><p>
+If the license file contains 
+two 
+INCREMENT lines, one for v2 and one for v3, this 
+INCLUDE line will only pertain to the v2 licenses. The attribute qualifier can any one 
+of the following:<p>
+<pre>	VERSION</pre>
+<pre>	HOSTID</pre>
+<pre>	EXPDATE</pre>
+<pre>	KEY</pre>
+<pre>	VENDOR_STRING</pre>
+<pre>	ISSUER</pre>
+<pre>	NOTICE</pre>
+<pre>	dist_info</pre>
+<pre>	user_info</pre>
+<pre>	asset_info</pre>
+</ol></ul><p>
+Feature names can also be 
+<a name="_IX_137"></a>PACKAGE names, and the operation applies to all the 
+package components.<p>
+<p>
+Lines can be up to 2000 characters. With v7+ clients and servers, newlines are ignored 
+by licenses, so long as comment lines are prefixed with '#' and FEATURE or 
+INCREMENT appear at the beginning of a line. This is because mailers often insert 
+newlines (though they don't delete them). Prior to v7, '\' line continuation character is 
+required where newlines are added. Line continuation characters are still added by the 
+license generators (lmcrypt).<p>
+<p><hr>
+Note:	Versions prior to 4.0 did not support the backslash '\' continuation character. 
+Versions prior to 
+FLEXlm<I></I> v3.0 had a line limit of 200 characters.<hr><p>
+<dl><dt><TT></TT><a name="_IX_138"></a><a name="_IX_139"></a>EXCLUDE 
+<dd>Allows the end-user to deny certain users a particular 
+feature. EXCLUDE overrides INCLUDE.<a name="_IX_140"></a><dt>EXCL<a name="_IX_141"></a>UDEALL 
+<dd>Allows the end-user to deny certain users all features.<dt><TT></TT><a name="_IX_142"></a>G<a name="_IX_143"></a>ROUP 
+<dd>Defines a group of users for use in the other commands. 
+Multiple GROUP lines for the same group name will have 
+the effect of concatenating all members specified on all the 
+GROUP lines. (Prior to 
+FLEXlm<I></I> v3.0, only the last 
+GROUP line for a given name was effective.)<a name="_IX_144"></a><dt>HOST<a name="_IX_145"></a>GROUP<dd>Allows the specification of a group of hosts for use in the 
+other commands. Multiple HOSTGROUP lines for the 
+same group name will have the effect of concatenating all 
+members specified on all the HOSTGROUP lines.<a name="_IX_146"></a><a name="_IX_147"></a><dt>INCLUDE 
+<dd>Allows the end-user to specify a list of users who are 
+allowed access to a particular feature. EXCLUDE 
+overrides INCLUDE.<a name="_IX_148"></a><dt>INCLU<a name="_IX_149"></a>DEALL 
+<dd>Allows the end-user to specify a list of users who are 
+allowed access to all features your daemon supports.<dt><TT></TT><a name="_IX_150"></a>LING<a name="_IX_151"></a>ER 
+<dd>Causes licenses to be held by the vendor daemon for a 
+period after the application checks them in or exits.<a name="_IX_152"></a><a name="_IX_153"></a><dt>M<a name="_IX_154"></a>AX<dd>Indicates maximum usage for a particular GROUP. You can 
+also specify USER, HOST, HOST_GROUP, etc. as with all 
+end-user options. If a checkout exceeds the maximum, the 
+following error message will be displayed:</dl><pre>			Checkout exceeds MAX specified in options 
+			file (-87,147)</pre>
+<dl><a name="_IX_155"></a><dt>MAX_OVER<a name="_IX_156"></a>DRAFT<dd>Limits an OVERDRAFT to the specified amount.<a name="_IX_157"></a><a name="_IX_158"></a><dt>NOLOG 
+<dd>causes messages of the specified type to be filtered out of 
+the debug log output; useful to save disk space.<a name="_IX_159"></a><dt>REP<a name="_IX_160"></a>ORTLOG 
+<dd>Specifies that a logfile be written suitable for use by the 
+FLEXadmin<I></I> report writer. Users with the LM_PROJECT 
+environment variable set will have this value logged in this 
+file with each transaction, so reporting can be done by user-project.<a name="_IX_161"></a><a name="_IX_162"></a><dt>RE<a name="_IX_163"></a>SERVE 
+<dd>Ensures that your application software will always be 
+available to one or more users or on one or more host 
+computer systems.<a name="_IX_164"></a><dt>TIME<a name="_IX_165"></a>OUT 
+<dd>Allows idle licenses to return to the free pool, for use by 
+someone else. This only works if supported by the 
+application. TIMEOUT requires that the application not 
+send heartbeats when it is idle. If the application uses 
+FLEXlm<I></I> timers (<TT>LM_MANUAL_HEARTBEAT</TT> not set), a 
+TIMEOUT specification will be ineffective. If 
+FLEXlm<I></I> 
+timers are disabled, then the application must ensure that it 
+calls 
+HEARTBEAT() regularly when active, and does not 
+call it when inactive. If 
+HEARTBEAT() is not called 
+regularly when active, the TIMEOUT option can cause the 
+client to lose its license.<a name="_IX_166"></a><dt>TIME<a name="_IX_167"></a>OUTALL 
+<dd>Like TIMEOUT, but applies to all features.</dl><p>
+All the INCLUDE and EXCLUDE family of options take an internet address in 
+addition to USER, HOST, DISPLAY, and GROUP. The keyword is 
+<a name="_IX_168"></a>INTERNET and 
+the address is specified as follows:<p>
+<pre>	a.b.c.d</pre>
+</ol></ul><p>
+where any of a, b, c, d can be `*'. For example:<p>
+<pre>	INCLUDEALL INTERNET 144.*.*.*</pre>
+</ol></ul><p>
+This allows any user from network number 144 to access any feature supported by this 
+daemon.<p>
+<p>
+The following options file would reserve a copy of feature compile for user pat, three 
+copies for user lee, and a copy for anyone on a computer with the hostname of terry, 
+and would cause QUEUED messages to be omitted from the log file. In addition, user 
+joe would not be allowed to use the compile feature:<p>
+<pre>	RESERVE 1 compile USER pat</pre>
+<pre>	RESERVE 3 compile USER lee</pre>
+<pre>	RESERVE 1 compile HOST terry</pre>
+<pre>	EXCLUDE compile USER joe</pre>
+<pre>	NOLOG QUEUED</pre>
+</ol></ul><p>
+If this data were in file 
+<TT>/usr/local/flexlm/options/local.options</TT>, 
+then you would modify the license file VENDOR line as follows:<p>
+<pre>VENDOR XXX options=/usr/local/flexlm/options/local.options</pre>
+<h4>See also</h4>
+<ul><li><a href="#84465: 1head: 4.3 Configuring Your Vendor Daemon">Section 8.2, `Configuring Your Vendor Daemon,' on page 50</a></ul><a name="57661: 1head: 11.2 License Administration Tools"></a><a name="13.2"></a><h2>13.2  License Administration Tools - lmutil (UNIX)</h2>
+<p>
+All license administration tools are contained in the single executable 
+<TT><a name="lmutil"></a>lmutil</TT>. 
+<TT>lmutil</TT> 
+contains the following utility programs:<p>
+<ul><li><TT></TT><a name="_IX_169"></a>lmcksum 
+<li>lmdiag<li>lmdown<li>lmhostid<li>lminstall<li>lmremove<li>lmreread<li>lmswitchr<li>lmstat</ul><p>
+<TT>lmutil</TT> behavior is determined by its first argument, or its argv[0] name. 
+<TT>lmutil</TT> renamed 
+to 
+<TT>lmstat</TT> will behave the same as 
+<TT>`lmutil lmstat'</TT>. The 
+installation 
+creates hard 
+links from 
+<TT>lmutil</TT> to all program names listed when you install your 
+FLEXlm<I></I> kit. You 
+should also create the hard links when your software is installed on your customer's 
+system.<p>
+<p>
+All utilities take the following arguments:<p>
+<dl><dt>-v<dd>print version and exit<dt>-c 
+<I>license_file</I><dd>operate on `license file'</dl><a name="_IX_170"></a><a name="13.3"></a><h2>13.3  License Administration Tools  -  LMUTIL (Windows, NT)</h2>
+<p>
+<TT>LMUTIL.EXE</TT> command line program 
+similar to the UNIX version previously 
+described 
+is provided. It is accessed by 
+<TT>LMUTIL.EXE</TT> 
+<I>Function</I>, where 
+<I>Function</I> is 
+<TT>lmstat</TT>, 
+<TT>lmdiag</TT>, etc. A Windows Graphics Interface program called 
+<TT>LMTOOLS</TT>.<TT>EXE</TT> 
+is also provided. LMTOOLS has the same functionality as 
+<TT>LMUTIL.EXE</TT> but is 
+graphically-oriented. Simply run the program and choose a button for the functionality 
+required. Refer to the following sections for information about the options of each 
+feature.<p>
+<p><hr>
+Note:	The 
+<TT>lmdown</TT>, 
+<TT>lmremove</TT>, and 
+<TT>lmreread</TT> commands are `privileged'. If you have 
+started 
+<TT>lmgrd</TT> with the `-p -2' switch, you must be a `license administrator' to run 
+any of these three utilities. A `license administrator' is a member of the 
+Unix<I></I> 
+`lmadmin' group, or, if the lmadmin group does not exist, a member of group 0. In 
+addition, 
+<TT>lmgrd -x</TT> can disable 
+<TT>lmdown</TT> and/or 
+<TT>lmremove</TT>.<hr><p>
+<h3>13.3.1	 <a name="28319: 2head: 11.2.1 lmborrow"></a><TT></TT>l<a name="_IX_171"></a>mcksum</h3>
+<p>
+<TT>lmcksum</TT> performs a checksum of a license file. This is useful to verify data entry 
+errors at your customer's location. 
+<TT>lmcksum</TT> will print a line-by-line checksum for the 
+file as well as an overall file checksum. If the license file contains `<TT>cksum=nn</TT>' 
+attributes, the bad lines will be automatically indicated.<p>
+<p>
+<TT>lmcksum</TT> will ignore all fields that do not enter into the 
+<a name="_IX_172"></a>license key computation; thus, 
+the server node name and port number, as well as the daemon pathname and options 
+file names are not checksummed. In addition, 
+<TT>lmcksum</TT> will treat non-case-sensitive 
+fields correctly (in general, 
+<TT>lmcksum</TT> is not case-sensitive). 
+<TT>lmcksum</TT> takes the `-k' 
+switch to force the license key checksum to be case-sensitive. 
+<p>
+<p>
+<TT>lmcksum</TT> takes an optional daemon name; if specified, only license file lines for the 
+selected daemon are used to compute the checksums.<p>
+<p>
+By default, 
+<TT>lmcksum</TT> operates on 
+<TT>license.dat</TT> in the current directory. Specify 
+<I>-c</I> 
+<I>license_file</I> if you want to checksum another license file. Example output is:<p>
+<pre>lmcksum - Copyright (C) 1989, 1994 GLOBEtrotter Software<I></I>, Inc.</pre>
+<pre>lmcksum: using license file"/usr/local/flexlm/licenses/license.dat"</pre>
+<pre>189: SERVER speedy 08002b32b161 2837</pre>
+<pre>166: VENDOR demo /u/gsi/lmgr/src/testsuite/demo </pre>
+<pre>8: FEATURE f1 demo 1.000 01-jan-99 0 3B2BC33CE4E1"" 08002b32b161</pre>
+<pre>109: (overall file checksum)</pre>
+<h3>13.3.2	 <a name="36648: 1head: 8.4 lmdiag"></a>l<a name="_IX_173"></a>mdiag</h3>
+<p>
+<TT>lmdiag</TT> allows 
+	you to diagnose problems when you cannot check out a license.<p>
+<pre>lmdiag [-c <I>license_list</I>] [-n] [<I>feature</I>[:specification=value]]</pre>
+</ol></ul><p>
+<p>
+<dl><dt>-c 
+<I>license_list</I><dd>path to the file(s) to diagnose. If more than one file, use 
+colon separator of Unix, or semi-colon on PC.<dt>-n 
+<dd>run in non-interactive mode; 
+<TT>lmdiag</TT> will not prompt for 
+any input in this mode. In this mode, extended connection 
+diagnostics are not available. 
+<dt><I>feature</I><dd>diagnose this feature only. 
+<dt><I>specification=value<dd></I>If a license file contains multiple lines for a particular 
+feature, you can select a particular line for lmdiag to report 
+on. For example:</dl><pre>				lmdiag f1:HOSTID=12345678</pre>
+<dl><dt><dd>will attempt a checkout on the line with the hostid limited 
+to 12345678. 
+<I>specification 
+</I>can be one of the following: 
+VERSION, HOSTID, EXPDATE, KEY, 
+VENDOR_STRING, ISSUER.<dt><dd></dl><p>
+If no 
+<I>feature</I> is specified, 
+<TT>lmdiag</TT> will operate on all features in the license file(s) in 
+your path. 
+<TT>lmdiag</TT> will first print information about the license, then attempt to check 
+out each license. If the checkout succeeds, 
+<TT>lmdiag</TT> will indicate this. If the checkout 
+fails, 
+<TT>lmdiag</TT> explains the reason for the failure. If the checkout fails because 
+<TT>lmdiag</TT> 
+cannot connect to the license server, then you have the option of running `extended 
+connection diagnostics'. 
+<p>
+<p>
+Extended connection diagnostics attempt to connect to each port on the license server 
+node and can detect if the port number in the license file is incorrect. 
+<TT>lmdiag</TT> will 
+indicate each port number that is listening, and if it is an 
+<TT>lmgrd</TT> process, 
+<TT>lmdiag</TT> will 
+indicate this as well. If 
+<TT>lmdiag</TT> finds the vendor daemon for the feature being tested, 
+then it will indicate the correct port number for the license file to correct the problem. 
+<p>
+<h3>13.3.3	 <a name="88547: 2head: 11.2.2 lmdown"></a>lmdo<a name="_IX_174"></a>wn</h3>
+<p>
+<TT>lmdown</TT> allows a graceful shutdown of all 
+<a name="_IX_175"></a>license daemons (both 
+<TT>lmgrd</TT> and all vendor 
+daemons) on all nodes. The syntax is:<p>
+<pre><TT>	% lmdown [-c </TT><I>license-list</I><TT>] [-vendor </TT><TT>name</TT><TT>] [-q] [-all]</TT></pre>
+</ol></ul><p>
+<p>
+<dl><dt><I>license-list</I><dd>path to the file(s) to shutdown<dt><I>name</I><dd>If -vendor 
+<I>name</I> is used, only this vendor daemon will be 
+shutdown, and 
+<TT>lmgrd</TT> will not be shutdown.<dt>-q<dd>Does not prompt `Are you sure?'<dt>-all<dd>Shuts down all license servers in the license-list without 
+prompting.</dl><p>
+If you wish to restrict the use of 
+<TT>lmdown</TT> to license administrators, start 
+<TT>lmgrd</TT> with the 
+`<TT>-2 -p</TT>' switch. It is reasonable to restrict the execution of<B> 
+</B><TT>lmdown</TT>, since shutting 
+down the servers will cause loss of licenses. 
+To disable 
+<TT>lmdown</TT>, the license 
+administrator can use 
+<I>lmgrd -x lmdown</I>.<p>
+<p>
+To stop and restart a single vendor daemon, use 
+<I>lmdown -vendor name</I> (and then you 
+can, for example edit the options file), then 
+<I>lmreread -vendor name</I>, which restarts a 
+vendor daemon if it's not already running.<p>
+<h4>See also</h4>
+<ul><li><a href="#lmgrd">Section 8.1,`lmgrd,' on page 50</a><li><a href="#34993: 2Head: 12.3.7 lmreread">Section 13.3.7,`lmreread,' on page 85</a></ul><h3>13.3.4	 <a name="36467: 1head: 4.4 lmhostid"></a><a name="lmhostid"></a>lmh<a name="_IX_176"></a>ostid</h3>
+<p>
+<TT>lmhostid</TT> is used to print the correct 
+<a name="hostid"></a>hostid value on any machine supported by 
+FLEXlm<I></I>. The syntax is:<p>
+<pre><TT>	lmhostid [</TT><I>type</I><TT>]</TT></pre>
+</ol></ul><p>
+<p>
+<dl><dt><I>type</I><dd>the type of hostid to print. 
+<I>Type</I> must be one of 
+<dt><dd><TT>-flexid</TT> (dongle)<dt><dd><TT>-vsn</TT> (volume serial number)<dt><dd><TT>-ether</TT> (ethernet address)<dt><dd><TT>-long 
+</TT>(32-bit integer)<dt><dd><TT>-internet</TT> (internet address in #.#.#.# format)<dt><dd>-cpu (32-bit Pentium III CPU-ID) -cpu64 and -cpu96 also 
+available. The 64 and 96-bit versions are potentially more 
+unique than the 32-bit.<dt><dd>These arguments are only useful on Windows, NT, SCO 
+and HP700. On the SCO and HP700, they exist for 
+backwards compatibility with older hostid types. On 
+Windows and NT, these are the 4 hostid types provided by 
+FLEXlm<I></I> 
+ -  the default is 
+<I>ether</I><I>.</I></dl><p>
+The output from 
+<I>lmhostid</I> will be similar to the following: 
+<p>
+<pre>	lmhostid - Copyright (C) 1989, GLOBEtrotter Software<I></I>, Inc. </pre>
+<pre>	The FLEXlm host ID of this machine is"1200abcd"</pre>
+<h4>See also</h4>
+<ul><li>FLEXlm Reference Manual<I></I> section on machine-specific hostids.</ul><h3>13.3.5	 <a name="_IX_177"></a><a name="_IX_178"></a><a name="15020: 2Head: 12.3.5 lminstall"></a>lminstall</h3>
+<p>
+New in version 6, 
+<TT>lminstall</TT> is designed primarily for typing in 
+<a name="_IX_179"></a>decimal format licenses 
+to generate a readable format license file<p>
+<pre>	lminstall [-i {infile | -}] [-o outfile] [-maxlen <I>n</I>]\
+		[-overfmt {2, 3, 4, 5, 5.1, or 6}] [-odecimal]</pre>
+</ol></ul><p>
+Normally, users will simply type lminstall. The user is first prompted for the name of 
+the output license file. The default name is today's date in yyyyddmm.lic format. The 
+file should be moved to your application's default license file directory, if specified. 
+Otherwise, the user can use xx_LICENSE_FILE to specify the directory where the 
+*.lic files are located.<p>
+<p>
+Decimal format input is verified by checksum of each line.<p>
+<p>
+To finish entering, type Q on a line by itself, or enter 2 blank lines.<p>
+<p>
+If `infile' is a dash ('-'), it takes input from stdin.When '-i' is used, default output is 
+stdout; otherwise if -o is not specified, lminstall prompts the user for an output file 
+name.<p>
+<h4>lminstall As A Conversion Tool:</h4>
+<p>
+lminstall can alternatively be used to convert licenses between decimal and readable 
+format, and between different versions of 
+FLEXlm<I></I> license formats.<p>
+<p>
+To convert from readable to decimal:<p>
+<pre>	% lminstall -i infile -o outfile -odecimal</pre>
+</ol></ul><p>
+To convert to 
+FLEXlm<I></I> Version 2 format:<p>
+<pre>	% lminstall -i infile -o outfile -verfmt 2</pre>
+</ol></ul><p>
+Conversion errors are reported as necessary. lminstall has a limit of 1000 lines of input.<p>
+<p>
+To enforce a maximum line length of 50 (to discourage mailers from inserting 
+newlines):<p>
+<pre>	% lminstall -maxlen 50</pre>
+<h3>13.3.6	 <a name="90930: 2head: 11.2.4 lmremove"></a><a name="lmremove"></a>lmrem<a name="_IX_180"></a>ove</h3>
+<p>
+<TT>lmremove</TT> allows the system administrator to 
+<a name="_IX_181"></a>remove a single user's license for a 
+specified feature. This is sometimes required in the case where the licensed user was 
+running the software on a node that subsequently crashed 
+ -  in these cases, due to a 
+limitation in the way 
+<a name="_IX_182"></a>TCP works, it can take several hours for the license server to 
+detect that the user is gone. This situation will sometimes cause the license to remain 
+unusable.<p>
+<p><hr>
+Note:		If the application is active when it is removed with 
+<I>lmremove</I>, it will simply checkout 
+the license again (assuming the applications 
+FLEXlm<I></I> timers are enabled or 
+HEARTBEAT() is called). 
+<TT>lmremove</TT> therefore cannot be used to `steal' licenses.<hr><p>
+<p>
+<I>lmremove</I> will allow the license to return to the pool of available licenses. The syntax 
+is:<p>
+<pre>	lmremove [ -c <I>file_list</I> ] <I>feature</I> <I>user</I> <I>host</I> <I>display</I></pre>
+</ol></ul><p>
+The 
+<I>user host display</I> information must be obtained from the output of 
+<TT>lmstat -a</TT>.<p>
+<p>
+<I>lmremove</I> removes all instances of 
+<I>user</I> on 
+<I>host</I> on 
+<I>display</I> from usage of 
+<I>feature</I>. If the 
+optional -c 
+<I>file</I> is specified, the indicated file is used as the license file. The end-user 
+system administrator should protect the execution of 
+<I>lmremove</I><B> 
+</B>since removing a user's 
+license can be disruptive.<p>
+<p>
+An alternate usage, which makes use of the license handle in the vendor daemon, is:<p>
+<pre>	lmremove [-c <I>file_list</I>] -h <I>feature</I> <I>serverhost</I> <I>port</I> <I>handle</I></pre>
+</ol></ul><p>
+This variation uses the serverhost, port, and license handle, as reported by 
+<TT>lmstat -a</TT>. Consider this example 
+<TT>lmstat -a</TT> output:<p>
+<pre>joe cloud7 /dev/ttyp5 (v1.000) (cloud9/7654 102), start Fri 10/29 18:40</pre>
+</ol></ul><p>
+In this example, the serverhost is `cloud9', the port is `7654', and the license handle 
+is 102. To remove this license, issue the following command:<p>
+<pre>	lmremove -h f1 cloud9 7654 102</pre>
+</ol></ul><p>
+	or<p>
+<pre>	lmremove f1 joe cloud7 /dev/ttyp5</pre>
+</ol></ul><p>
+When removing by handle, if licenses are grouped as duplicates, all duplicate licenses 
+will also be removed.<p>
+<h4>See also</h4>
+<ul><li><a href="#47746: 2head: 11.2.6 lmstat">Section 13.3.8,`lmstat,' on page 85</a></ul><h3>13.3.7	 <a name="_IX_183"></a><a name="34993: 2Head: 12.3.7 lmreread"></a>lmreread</h3>
+<p>
+<TT>lmreread</TT> causes the license daemon to reread the license file and start any new vendor 
+daemons that have been added. In addition, all currently running daemons will be 
+signaled to re-read the license file for changes in feature licensing information. If the 
+optional daemon name is specified, only the named daemon will re-read the license file 
+(in this case, 
+<TT>lmgrd</TT> does not re-read the license file either).<p>
+<p>
+The syntax is:<p>
+<pre>	lmreread [-vendor <I>name</I>] [ -c <I>license-file-list</I> ] [-all]</pre>
+</ol></ul><p>
+<p>
+<dl><dt><I>license-list</I><dd>path to the file(s) to find the lmgrd server.<dt><I>name</I><dd>If -vendor 
+<I>name</I> is used, only this vendor daemon will 
+reread the license file. If the vendor daemon is not running, 
+<TT>lmgrd</TT> will start it.<dt>-all<dd>rereads all servers in the 
+<I>license-file-list</I></dl><p>
+To disable 
+<TT>lmreread</TT>, the license administrator can use 
+<I>lmgrd -x lmreread</I>.<p>
+<p>
+To stop and restart a single vendor daemon, use 
+<I>lmdown -vendor name</I> (and then you 
+can, for example edit the options file), then 
+<I>lmreread -vendor name</I>, which restarts a 
+vendor daemon if it's not already running.<p>
+<p><hr>
+Note:	If the -c option is used, the license file specified will be read by 
+<TT>lmreread</TT>, not by 
+<TT>lmgrd</TT><I>; 
+</I><TT>lmgrd</TT> re-reads the file it read originally. Also, 
+<TT>lmreread</TT> cannot be used to 
+change server node names or port numbers. Vendor daemons will not re-read their 
+option files as a result of 
+<TT>lmreread</TT>.	<hr><p>
+<h4>See also</h4>
+<ul><li><a href="#lmgrd">Section 8.1,`lmgrd,' on page 50</a><li><a href="#88547: 2head: 11.2.2 lmdown">Section 13.3.3,`lmdown,' on page 82</a></ul><h3>13.3.8	 <a name="47746: 2head: 11.2.6 lmstat"></a><a name="_IX_184"></a>lmstat</h3>
+<p>
+License 
+<a name="_IX_185"></a>administration is simplified by the 
+<TT>lmstat</TT> utility. 
+<TT>lmstat</TT> allows the user of 
+FLEXlm<I></I> to instantly monitor the status of all network licensing activities. 
+<TT>lmstat</TT> 
+allows a license administrator to monitor license management operations including:<p>
+<ul><li>Daemons that are running<li>Users of individual features<li>Users of features served by a specific VENDOR</ul><p>
+Except for the 
+<I>-i</I> option, 
+<I>lmstat</I> prints information that it receives from the license 
+server. Therefore, if no server is running because all features are 
+<I>uncounted</I>, 
+<I>lmstat</I> will 
+not show anything. Prior to v5, lmstat only showed information for 
+<I>counted</I> features.<p>
+<p>
+The syntax is:<p>
+<pre>	lmstat 	[-a] [-S <I>daemon</I>] [-f <I>feature</I>] [-i <I>feature</I>] </pre>
+<pre>		[-s [<I>server</I>]] [-t <I>value</I>] [-c <I>license_file_list</I>] [ -A ] </pre>
+<dl><dt>-a<dd>Displays everything<dt>-A<dd>Lists all active licenses only<dt>-c 
+<I>license_file_list</I><dd>Uses 
+<I>license_file(s)</I><dt>-S [<I>daemon</I>]<dd>Restricts output to one 
+<I>daemon</I>, and the features and users 
+of that 
+<I>daemon</I><dt>-f [<I>feature_name</I>]<dd>Lists users of 
+<I>feature</I>(s)<dt>-i [<I>feature_name</I>]<dd>Prints information about the named 
+<I>feature</I>, or all features 
+if no feature name is given. Note that lmstat -i does 
+<I>not</I> 
+communicate with the server, and therefore reports raw 
+data from the license file, which may differ from what the 
+server actually supports.<dt>-s [<I>server_name</I>]<dd>Displays status of 
+<I>server</I> node(s)<dt>-t 
+<I>value</I><dd>Sets 
+<TT>lmstat</TT> timeout to 
+<I>value</I></dl><TT>lmstat -a</TT><I> 
+</I>is a potentially expensive command. With many active users, this can 
+generate a lot of network activity, and therefore should not be used too often.<TT>lmremove</TT> requires the output of<TT> 
+</TT>`<TT>lmstat -a</TT>.'<h3>13.3.9	 <a name="_IX_186"></a>lmswitchr</h3>
+<p>
+<TT>lmswitchr</TT> switches the 
+FLEXadmin<I></I> (REPORTLOG) log file for the specified feature. 
+<p>
+<p>
+The syntax is:<p>
+<pre>	lmswitchr [-c <I>license_file_list</I>] {<I> feature </I>|<I> daemon </I>}<I> new-file</I></pre>
+<h4>See also</h4>
+<ul><li><a href="#76230: 1head: 11.1 End-User Options">Section 13.1, `End-User Options File,' on page 76</a> for 
+<a name="_IX_187"></a>REPORTLOG</ul><h3>13.3.10	 <a name="_IX_188"></a>lmver</h3>
+<p>
+<TT>lmver</TT> reports the 
+FLEXlm<I></I> version of a library or binary. The syntax is:<p>
+<pre>	lmver [<I>filename</I>]</pre>
+</ol></ul><p>
+If a filename is specified, the 
+FLEXlm<I></I> version incorporated into this file is displayed; 
+otherwise 
+<TT>lmver</TT> looks for the library file 
+liblmgr.a to detect its version.<p>
+<a name="_IX_189"></a><a name="13.4"></a><h2>13.4  Switching the Debug Log File Under Unix<I></I></h2>
+<p>
+The 
+FLEXlm<I></I> daemons create an ascii Debug log file on stdout. There are several 
+processes in a parent-child hierarchy which are sharing the same file pointer, so this 
+log file cannot be changed after the vendor daemons have been started, since each 
+process has a copy of the current offset, etc.<p>
+<p>
+There is another way to switch the log file output data however; this involves piping 
+the stdout of 
+<TT>lmgrd</TT> to a shell script that appends each line to a file. This is done as 
+follows:<p>
+<p>
+Instead of the `normal' startup:<p>
+<pre>	% <a name="_IX_190"></a>lmgrd &gt; LOG</pre>
+</ol></ul><p>
+Start 
+<TT>lmgrd</TT> this way:<p>
+<pre>	% lmgrd -z | sh -c 'while read line; do echo"$line" &gt;&gt; LOG ; done'</pre>
+</ol></ul><p>
+With this startup method, the output file `LOG' can be renamed and a new log file will 
+be created. You could even make `LOG' a symbolic link and change the value of the 
+link to `switch' the log file.<p>
+<a name="Chapter 14"></a><hr><h1>Chapter 14 
+<a name="35653: chap head: End-User Installation"></a>End-User Installation Instruction Template</h1>
+<p>
+To ensure that your customers can use your 
+FLEXlm<I></I>-managed product easily and 
+successfully, use the information in this chapter as a guideline about what they need 
+and what information they need to know.<p>
+<a name="14.1"></a><h2>14.1  Binaries Your Customers Will Require</h2>
+<p>
+When your application software is built with the calls to 
+FLEXlm<I></I>, you will need to ship 
+the following 
+four (or 
+five) files in addition to the files that you normally ship in your 
+installation kit:<p>
+<dl><dt><I><a name="_IX_191"></a>vendor.lic</I><dd>The license file, customized for your customer.<a name="_IX_192"></a><dt>lmgrd (or 
+lmgrd.exe)<B><dd></B>The License Manager daemon (license daemon).<a name="_IX_193"></a><dt>lmutil (or lmtools.exe)<dd>FLEXlm<I></I> utility program(s).<dt>lcmflxa.dll<dd>If you're using the LCM feature.<dt>flckflxa.dll<dd>If you're using the FLEXlock feature.<dt>xyzd (or 
+xyzd.exe)<dd>Your vendor daemon.</dl><a name="14.2"></a><h2>14.2  Information Every Customer Needs to Know</h2>
+<p>
+In addition to installing your software, your customer will need to do the following 
+steps.<p>
+<h3>14.2.1	 Install the license file</h3>
+<p>
+We recommend that the application specify a default location directory in the installed 
+`product hierarchy,' for example `<I>installed-path</I>/licenses', where 
+<I>installed-path</I> is 
+determined by the end-user during installation, and licenses is a directory. At run time 
+<I>installed-path</I> is determined (many applications do this with an environment variable 
+or global internal character string), and the default location directory is specified in 
+<I>CHECKOUT()</I>, 
+<I>lp_checkout() 
+</I>or<I> lc_set_attr(key, 
+</I>LM_A_LICENSE_DEFAULT<I>,...)</I>. 
+<p>
+<p>
+The license file be installed in that directory with a `.lic' suffix. A useful system is to 
+name the file the date of installation, in 
+<I>yyyymmdd</I> format. For example, if the license 
+is generated 10 January, 1998, it can be installed as<p>
+<pre>	<I>installed-path</I>/licenses/19980110.lic</pre>
+</ol></ul><p>
+Since your application has specified a directory, it does not need to know the exact 
+name of the file, only that it ends with `.lic', and lies in the directory.<p>
+<p>
+We recommend the license file be delivered by email. If delivered by email, the entire 
+email message can be saved in the specified location; email headers and extraneous 
+text are automatically ignored by 
+FLEXlm<I></I>.<p>
+<p>
+If delivered in decimal format, the end-user should use 
+<TT>lminstall</TT>. lminstall will request 
+the license location, and will default to a license file called `<I>yyyymmdd</I>.lic'. This file 
+should then be moved to the 
+<I>installed-path</I>/licenses directory.<p>
+<h4>LCM on Windows</h4>
+<p>
+LCM (`License Certificate Manager') automatically handles internet-based license 
+fulfillment. This works in combination with 
+GLOBEtrotter Software<I></I>'s Globetrack 
+Web-Licensing.<p>
+<h3>14.2.2	 If licenses are 
+<I>counted</I>, install lmgrd and vendor-daemon<I> 
+</I></h3>
+<p>
+These can be installed wherever the end-user prefers. 
+<TT>lmgrd</TT> will need to find the 
+vendor-daemon in the same directory, or in it's 
+<I>$PATH</I>. Otherwise, the user will need 
+to edit the license file to add the path to the vendor-daemon to the VENDOR line.<p>
+<h3>14.2.3	 If licenses are 
+<I>counted</I>, start lmgrd</h3>
+<p>
+First, make sure the vendor-daemon is in the same directory, or lmgrd's $PATH, or it's 
+in the same directory as lmgrd, or the user has edited the license file to include the path 
+to the vendor daemon on the 
+<a name="_IX_194"></a>VENDOR line.<p>
+<p>
+Start the license daemon as follows:<p>
+<pre>	% lmgrd -c <a name="_IX_195"></a>license_file_path	(Unix)
+	C&gt; lmgrd -app -c license_file_list (NT and Windows 95)</pre>
+</ol></ul><p>
+where 
+<I>license_file_list</I> is the full pathname to the license file or a delimited 
+license-file list.<p>
+<h3>14.2.4	 If licenses are 
+<I>counted</I>, install lmgrd to start at boot.</h3>
+<p>
+On Unix, edit the appropriate boot script, which may be 
+<TT>/etc/rc.boot</TT>, 
+<TT>/etc/rc.local, /etc/rc2.d/Sxxx, /sbin/rc2.d/Sxxxx, etc.</TT> 
+Remember that these scripts are run in /bin/sh, so do not use the 
+<I>csh</I> `&gt;&amp;' redirection 
+syntax.<p>
+<p>
+Each Unix operating system can have some quirks in doing this, but the following 
+script has been successfully tested for HP700 systems. See the notes following for a 
+full explanation.<p>
+<pre>	/bin/su daniel -c 'echo"starting lmgrd" &gt; \
+		/home/flexlm/v5.12/hp700_u9/boot.log'
+	
+	/bin/nohup /bin/su daniel -c"umask 022; \
+		/home/flexlm/v5.12/hp700_u9/lmgrd -c \
+		/home/flexlm/v5.12/hp700_u9/license.dat &gt;&gt;&amp; \
+		/home/flexlm/v5.12/hp700_u9/boot.log"
+
+	/bin/su daniel -c 'echo"sleep 5" &gt;&gt; \
+		/home/flexlm/v5.12/hp700_u9/boot.log'
+	/bin/sleep 5</pre>
+<pre> </pre>
+<pre>	/bin/su daniel -c 'echo"lmdiag" &gt;&gt;\
+		/home/flexlm/v5.12/hp700_u9/boot.log'
+
+	/bin/su daniel -c '/home/flexlm/v5.12/hp700_u9/lmdiag -n -c\
+		/home/flexlm/v5.12/hp700_u9/license.dat &gt;&gt; \
+		/home/flexlm/v5.12/hp700_u9/boot.log'
+	/bin/su daniel -c 'echo"exiting" &gt;&gt;\
+		/home/flexlm/v5.12/hp700_u9/boot.log'</pre>
+</ol></ul><p>
+Please note the following about how this script was written:<p>
+<ul><li>All paths are specified in full, since no paths can be assumed at boot time.<li>Since no paths are assumed, the vendor daemon must be in the same directory as 
+lmgrd, or the 
+<a name="_IX_196"></a>VENDOR lines must be edited to include the full path to the vendor-daemon binary file.<li>The `su' command is used to run lmgrd as a non-root user, `daniel'. We 
+recommend that lmgrd not be run as root, since it can be a security risk to run any 
+program that does not require root permissions, and lmgrd does not require root 
+permissions.<li>Daniel has a csh login, so all commands executed as daniel must be in csh syntax. 
+All commands not executed as daniel must be in /bin/sh syntax, since that's 
+what's used by the boot scripts.<li>The use of `nohup' and `sleep' are required on some operating systems, notably 
+HPUX and Digital Unix, for obscure technical reasons. These are not needed on 
+Solaris and some other operating systems, but are safe to use on all.<li><TT>lmdiag</TT> is used as a diagnostic tool to verify that the server is running and serving 
+licenses.</ul><p><hr>
+Note:	On IBM RS6000 systems, /etc/rc cannot be used, because TCP/IP is not installed 
+when this script is run. Instead, /etc/inittab must be used. Add a line like this to 
+/etc/inittab after the lines which start networking:
+		 
+  <TT>     rclocal:2:wait:/etc/rc.local &gt; /dev/console 2&gt;&amp;1</TT><hr><p>
+<p><hr><a name="_IX"></a><h1>Index</h1><p>
+<li><a href="#_IX_152"></a>
+<li><a href="#_IX_107">@host:locating license file</a>
+<li><a href="#_IX_128">@host:software installation</a>
+<li><a href="#_IX_185">administration:with &lt;Empahsis&gt;lmstat</i></a>
+<li><a href="#_IX_72">checkin:java syntax</a>
+<li><a href="#_IX_53">CHECKIN:syntax</a>
+<li><a href="#_IX_71">checkout:java syntax</a>
+<li><a href="#_IX_50">CHECKOUT:syntax</a>
+<li><a href="#_IX_15">client library</a>
+<li><a href="#_IX_3">client:definition</a>
+<li><a href="#_IX_85">configuring FLEXlm:number of server nodes</a>
+<li><a href="#_IX_135">customization:by end users</a>
+<li><a href="#_IX_138">daemon options file:EXCLUDE option</a>
+<li><a href="#_IX_140">daemon options file:EXCLUDEALL option</a>
+<li><a href="#_IX_145">daemon options file:HOSTGROUP option</a>
+<li><a href="#_IX_146">daemon options file:INCLUDE option</a>
+<li><a href="#_IX_149">daemon options file:INCLUDEALL option</a>
+<li><a href="#_IX_151">daemon options file:LINGER option</a>
+<li><a href="#_IX_154">daemon options file:MAX option</a>
+<li><a href="#_IX_156">daemon options file:MAX_OVERDRAFT option</a>
+<li><a href="#_IX_158">daemon options file:NOLOG option</a>
+<li><a href="#_IX_160">daemon options file:REPORTLOG option</a>
+<li><a href="#_IX_163">daemon options file:RESERVE option</a>
+<li><a href="#_IX_165">daemon options file:TIMEOUT option</a>
+<li><a href="#_IX_167">daemon options file:TIMEOUTALL option</a>
+<li><a href="#_IX_4">daemon:definition</a>
+<li><a href="#_IX_179">Decimal format licenses:lminstall</a>
+<li><a href="#_IX_122">Decimal format licenses</a>
+<li><a href="#_IX_178">Decimal format:lminstall</a>
+<li><a href="#_IX_37">Directory Naming for Java</a>
+<li><a href="#_IX_33">dongle:Windows hostids</a>
+<li><a href="#_IX_110">END_LICENSE:locating license file</a>
+<li><a href="#_IX_54">ERRSTRING:syntax</a>
+<li><a href="#_IX_38">Example Applications</a>
+<li><a href="#_IX_139">EXCLUDE option</a>
+<li><a href="#_IX_141">EXCLUDEALL option</a>
+<li><a href="#_IX_1">feature:definition</a>
+<li><a href="#_IX_22">FLEXible API:FLEXlm APIs</a>
+<li><a href="#_IX_32">FLEXid:Windows hostids</a>
+<li><a href="#_IX_114">floating license: example</a>
+<li><a href="#_IX_117">floating:example license</a>
+<li><a href="#_IX_96">GENLIC32</a>
+<li><a href="#_IX_74">get_errstring:java syntax</a>
+<li><a href="#_IX_143">GROUP option</a>
+<li><a href="#_IX_142">GROUP</a>
+<li><a href="#_IX_73">heartbeat:java syntax</a>
+<li><a href="#_IX_55">HEARTBEAT:syntax</a>
+<li><a href="#_IX_41">Heartbeats:Client Heartbeats and License Server Failures</a>
+<li><a href="#_IX_112">Host ID:determining with lmhostid</i></a>
+<li><a href="#_IX_111">Host ID:on different machine types</a>
+<li><a href="#_IX_144">HOSTGROUP option</a>
+<li><a href="#_IX_25">I86_N3</a>
+<li><a href="#_IX_147">INCLUDE</a>
+<li><a href="#_IX_148">INCLUDEALL</a>
+<li><a href="#_IX_116">INCREMENT:example</a>
+<li><a href="#_IX_168">INTERNET</a>
+<li><a href="#_IX_69">Java API:description</a>
+<li><a href="#_IX_23">Java API:FLEXlm APIs</a>
+<li><a href="#_IX_35">liblmgr.a</a>
+<li><a href="#_IX_34">liblmgr_as.a</a>
+<li><a href="#_IX_18">license administration tools</a>
+<li><a href="#_IX_8">license daemon:definition</a>
+<li><a href="#_IX_175">license daemon:shutting down</a>
+<li><a href="#_IX_12">license file list:definition</a>
+<li><a href="#_IX_51">license file path:CHECKOUT()</a>
+<li><a href="#_IX_106">license file path:general</a>
+<li><a href="#_IX_61">license file path:lp_checkout()</a>
+<li><a href="#_IX_10">license file:definition</a>
+<li><a href="#_IX_11">license file:definition</a>
+<li><a href="#_IX_103">license file:example</a>
+<li><a href="#_IX_90">license file:generating  with makekey</i></a>
+<li><a href="#_IX_92">license file:generating with lmcrypt</a>
+<li><a href="#_IX_19">license file:How FLEXlm works</a>
+<li><a href="#_IX_104">license file:location</a>
+<li><a href="#_IX_102">license key:authentication</a>
+<li><a href="#_IX_115">license key:authentication</a>
+<li><a href="#_IX_119">license key:authentication</a>
+<li><a href="#_IX_13">license key:definition</a>
+<li><a href="#_IX_172">license key:lmcksum</a>
+<li><a href="#_IX_40">license key:lmcrypt</a>
+<li><a href="#_IX_93">license key:lmcrypt</a>
+<li><a href="#_IX_89">license key:makekey</a>
+<li><a href="#_IX_131">license key:redundant servers</a>
+<li><a href="#_IX_134">license key:security issues</a>
+<li><a href="#_IX_14">license server:definition</a>
+<li><a href="#_IX_2">license:definition</a>
+<li><a href="#_IX_195">license_file_path:and lmgrd</a>
+<li><a href="#_IX_150">LINGER</a>
+<li><a href="#_IX_171">lmcksum:description</a>
+<li><a href="#_IX_169">lmcksum</a>
+<li><a href="#_IX_91">lmcrypt</a>
+<li><a href="#_IX_173">lmdiag:description</a>
+<li><a href="#_IX_174">lmdown:description</a>
+<li><a href="#_IX_192">lmgrd:Binaries your customer will require</a>
+<li><a href="#_IX_7">lmgrd:definition</a>
+<li><a href="#_IX_16">lmgrd:How FLEXlm works</a>
+<li><a href="#_IX_190">lmgrd:switching debug log file under Unix</a>
+<li><a href="#_IX_176">lmhostid:description</a>
+<li><a href="#_IX_177">lminstall:description</a>
+<li><a href="#_IX_123">lminstall</a>
+<li><a href="#_IX_124">lminstall</a>
+<li><a href="#_IX_180">lmremove:description</a>
+<li><a href="#_IX_183">lmreread:description</a>
+<li><a href="#_IX_184">lmstat:description</a>
+<li><a href="#_IX_186">lmswitchr:description</a>
+<li><a href="#_IX_193">lmutil:Binaries your customer will require</a>
+<li><a href="#_IX_170">LMUTIL</a>
+<li><a href="#_IX_188">lmver:description</a>
+<li><a href="#_IX_99">LM_BADCODE:what can be changed in license</a>
+<li><a href="#_IX_44">LM_FAILSAFE:definition</a>
+<li><a href="#_IX_45">LM_LENIENT:definition</a>
+<li><a href="#_IX_127">LM_LICENSE_FILE:software installation</a>
+<li><a href="#_IX_47">LM_MANUAL_HEARTBEAT:definition</a>
+<li><a href="#_IX_80">lm_new.o</a>
+<li><a href="#_IX_29">lm_new</a>
+<li><a href="#_IX_30">lm_new</a>
+<li><a href="#_IX_36">lm_new</a>
+<li><a href="#_IX_43">LM_QUEUE:definition</a>
+<li><a href="#_IX_42">LM_RESTRICTIVE:definition</a>
+<li><a href="#_IX_48">LM_RETRY_RESTRICTIVE:definition</a>
+<li><a href="#_IX_189">log file:switching under Unix</a>
+<li><a href="#_IX_63">lp_checkin:syntax</a>
+<li><a href="#_IX_60">lp_checkout:syntax</a>
+<li><a href="#_IX_64">lp_errstring:syntax</a>
+<li><a href="#_IX_65">lp_heartbeat:syntax</a>
+<li><a href="#_IX_66">lp_perror:syntax</a>
+<li><a href="#_IX_67">lp_pwarn:syntax</a>
+<li><a href="#_IX_68">lp_warning:syntax</a>
+<li><a href="#_IX_79">lsvendor.c</a>
+<li><a href="#_IX_31">l_n36_buf</a>
+<li><a href="#_IX_39">makekey:source</a>
+<li><a href="#_IX_88">makekey</a>
+<li><a href="#_IX_94">makepkg</a>
+<li><a href="#_IX_153">MAX</a>
+<li><a href="#_IX_155">MAX_OVERDRAFT</a>
+<li><a href="#_IX_70">Methods:Java</a>
+<li><a href="#_IX_82">Netware:building vendor daemon</a>
+<li><a href="#_IX_125">NFS:and license file location</a>
+<li><a href="#_IX_113">Node-Locked</a>
+<li><a href="#_IX_157">NOLOG</a>
+<li><a href="#_IX_137">PACKAGE:and end-user options file</a>
+<li><a href="#_IX_120">PACKAGE:license example</a>
+<li><a href="#_IX_95">PACKAGE:makepkg</a>
+<li><a href="#_IX_56">PERROR:syntax</a>
+<li><a href="#_IX_46">Policy Modifiers</a>
+<li><a href="#_IX_101">port address:what can be changed in license</a>
+<li><a href="#_IX_108">port@host:locating license file</a>
+<li><a href="#_IX_57">PWARN:syntax</a>
+<li><a href="#_IX_130">redundant servers:integration guidelines</a>
+<li><a href="#_IX_83">redundant servers:overview</a>
+<li><a href="#_IX_129">redundant servers:software installation</a>
+<li><a href="#_IX_86">redundant servers</a>
+<li><a href="#_IX_181">removing a license</a>
+<li><a href="#_IX_187">REPORTLOG:lmswitchr</a>
+<li><a href="#_IX_159">REPORTLOG</a>
+<li><a href="#_IX_161">RESERVE option</a>
+<li><a href="#_IX_162">RESERVE</a>
+<li><a href="#_IX_133">security guidelines</a>
+<li><a href="#_IX_76">Security: Java</a>
+<li><a href="#_IX_9">server node:definition</a>
+<li><a href="#_IX_84">server nodes:deciding number of</a>
+<li><a href="#_IX_87">SERVER:redundant servers</a>
+<li><a href="#_IX_100">SERVER:what can be changed in license</a>
+<li><a href="#_IX_59">Simple API:description</a>
+<li><a href="#_IX_21">Simple API:FLEXlm APIs</a>
+<li><a href="#_IX_109">START_LICENSE:locating license file</a>
+<li><a href="#_IX_121">SUITE:license example</a>
+<li><a href="#_IX_182">TCP</a>
+<li><a href="#_IX_164">TIMEOUT</a>
+<li><a href="#_IX_166">TIMEOUTALL</a>
+<li><a href="#_IX_49">Trivial API:description</a>
+<li><a href="#_IX_20">Trivial API:FLEXlm APIs</a>
+<li><a href="#_IX_81">vendor daemon:building</a>
+<li><a href="#_IX_78">vendor daemon:configuring</a>
+<li><a href="#_IX_5">vendor daemon:definition</a>
+<li><a href="#_IX_6">vendor daemon:definition</a>
+<li><a href="#_IX_17">vendor daemon:How FLEXlm works</a>
+<li><a href="#_IX_191">vendor.lic:end-user installation instruction template</a>
+<li><a href="#_IX_136">VENDOR:and end-user options file</a>
+<li><a href="#_IX_194">VENDOR:editing path to vendor daemon</a>
+<li><a href="#_IX_97">VENDOR:GENLIC</a>
+<li><a href="#_IX_77">VENDOR:line and lmgrd</a>
+<li><a href="#_IX_196">VENDOR:path to vendor daemon</a>
+<li><a href="#_IX_98">VENDOR:what can be changed in license</a>
+<li><a href="#_IX_118">VENDOR_LICENSE_FILE:@host and logging uncounted licenses</a>
+<li><a href="#_IX_105">VENDOR_LICENSE_FILE:env var and locating license file</a>
+<li><a href="#_IX_52">VENDOR_LICENSE_FILE:environment variable and checkout</a>
+<li><a href="#_IX_62">VENDOR_LICENSE_FILE:environment variable and lp_checkout</a>
+<li><a href="#_IX_126">VENDOR_LICENSE_FILE:license file location</a>
+<li><a href="#_IX_132">VMS</a>
+<li><a href="#_IX_75">warning:java syntax</a>
+<li><a href="#_IX_58">WARNING:syntax</a>
+<li><a href="#_IX_26">Windows 95:installation</a>
+<li><a href="#_IX_24">Windows NT:installation</a>
+<li><a href="#_IX_27">Windows NT:installation</a>
+<li><a href="#_IX_28">Windows NT:installation</a>
+</body></html>

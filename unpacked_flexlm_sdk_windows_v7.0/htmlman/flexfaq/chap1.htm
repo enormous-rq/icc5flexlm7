@@ -1,0 +1,159 @@
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+</HEAD>
+<BODY>
+<P><A HREF="TOC.htm">Table of Contents</A>
+ * <A HREF="chap2.htm">Next Chapter</A>
+
+</P>
+<H1>Q1.   Introduction to FLEXlm</H1>
+<HR>
+<A NAME="Q1.1"></A>
+<H2>Q1.1  What is FLEXlm?</H2>
+<P>
+FLEXlm is the software licensing <I>defacto standard</I>, that allows the 
+implementation of a wide variety of licensing policies.</P>
+<P>
+
+FLEXlm is <A NAME="IX1">available</A> on 
+:</P>
+<UL>
+<LI> Unix</LI>
+<LI>VMS</LI>
+<LI>JAVA</LI>
+<LI> 
+Windows
+
+<UL>
+<LI>Windows 3.11</LI>
+<LI>Windows for Workgroup 3.11</LI>
+<LI>Windows 95/98</LI>
+<LI>Windows NT 3.5, 3.51, and 4.0</LI>
+<LI>Alpha NT 3.51</LI>
+<LI>Netware 3.12 and 4.X</LI>
+</UL>
+</LI>
+</UL>
+<P>
+Networking is required only for floating/concurrent use licenses. 
+<A NAME="Q1.2"></A></P>
+<H2>Q1.2  What is a license file, vendor daemon, lmgrd, etc.?</H2>
+<P>
+The following terms are used to describe 
+FLEXlm<I></I> concepts and software components:</P>
+
+<A NAME="IX2">VENDOR DAEMON NAME</A>
+<BR>
+Usually some short form of the Company Name. Each company is guaranteed to have a unique vendor name. Although, some companies have multiple vendor names.
+<P><A NAME="IX3">FEATURE
+</A><BR>
+Any functionality requiring licensing. The meaning of a 
+feature will depend entirely on how it is used by each 
+application. For example, a feature could 
+represent any of the following:
+</P>
+<UL>
+<LI>An application software system consisting of hundreds 
+of programs</LI>
+<LI>A single program (regardless of version)</LI>
+<LI>A specific version of a program</LI>
+<LI>A part of a program</LI>
+<LI>A piece of data</LI>
+</UL>
+<P>CLIENT
+<BR>
+An application program requesting or receiving a license.
+</P>
+<P><A NAME="IX4">DAEMON</A><BR>
+A process that must continuously run in the &quot;background&quot;, and is often designed to respond to requests from other processes across a network.  The word &quot;daemon&quot; is common on UNIX, but not on Windows. Daemon comes form the Greek word &quot;ghost&quot;.  On Windows NT, daemons are called &quot;services&quot;. When services respond to requests, they are known as the &quot;SERVER&quot; half of a client/server architecture. 
+</P>
+<P><A NAME="IX5">VENDOR DAEMON
+</A><BR>
+The 
+daemon/service/server that dispenses licenses for the requested 
+features. This daemon is built by a software provider with FLEXlm libraries supplied by 
+GLOBEtrotter Software.
+</P>
+<P><A NAME="IX6">LMGRD</A><BR>
+The 
+daemon process, or license server, that directs client 
+processes to the correct vendor daemon. The same lmgrd can be shared by 
+all applications from all vendors, as this daemon neither 
+authenticates nor dispenses licenses. Lmgrd processes few 
+user requests on its own, but forwards these requests to 
+other daemons (the vendor daemons).
+</P>
+<P>SERVER NODE
+<BR>
+ 
+A computer system running the license server software. 
+The server node will contain all site-specific information 
+regarding all feature usage. Multiple server nodes used for 
+redundancy can logically be considered the<I> server node</I>.</P>
+<P><A NAME="IX7">LICENSE FILE
+</A><BR>
+A file distributed with software which enables and restricts the usage of specified features and behaviors. The restrictions can include concurrent usage limits, specific computers by hostid or IP-address, and more.
+</P>
+<P><A NAME="IX8">LICENSE FILE LIST</A><BR>
+A list of license files separated with a colon ':' on Unix and  a 
+semi-colon ';' on Windows. A 
+<I>license 
+file list</I> can be accepted in most places where a license file 
+is appropriate. When a directory is specified, all files 
+matching 
+<I>*.lic</I> in that directory are automatically used, as if 
+specified as a list(v6+ only).
+</P>
+<P><A NAME="IX9">LICENSE KEY </A>
+<BR>
+A 12- or 20-character hexadecimal number which 
+`authenticates' the readable license file text, ensuring that 
+the license text has not been modified. 
+
+</P>
+<P>LICENSE SERVER
+<BR>
+The lmgrd and vendor daemon processes. License server 
+refers to the processes, not the computer which runs these processes.
+
+<A NAME="Q1.3"></A></P>
+<H2>Q1.3  How does FLEXlm work?</H2>
+<P>
+FLEXlm is a client-server application toolkit. The software/client requests a 
+license from the license server and is either granted or denied the license. FLEXlm is also often used simply to &quot;node-lock&quot;, without a license server.  In this case, the license is authenticated by the FLEXlm libraries compiled into the software application.
+</P>
+<P>
+
+The five main components in 
+FLEXlm are:
+</P>
+<UL>
+<LI>Client library (embedded in the license-managed application)</LI>
+<LI><I>lmgrd</I></LI>
+<LI>License file</LI>
+<LI>Vendor daemon(s)</LI>
+<LI>
+license administration tools(lmutil, lmdiag, lmstat, etc.)</LI>
+</UL>
+<P>
+The end-user installs 
+<I>lmgrd</I> and the vendor daemon on the computer specified in the licenses. Once 
+the license file(s) and the daemons are in place, the only requirement is to start lmgrd. 
+The daemon is typically started when the machine boots (in the UNIX &quot;.rc&quot; scripts,  
+or on Windows as a system service), but can also be started manually by any user.
+
+<A NAME="Q1.4"></A></P>
+<H2>Q1.4  Where do I go to download the most current version?</H2>
+<P>
+Go to our<A NAME="IX10"> web site:</A> http://www.globetrotter.com/lmgrd.htm
+</P>
+<P>
+<HR>
+<A HREF="TOC.htm">Table of Contents</A>
+ * <A HREF="chap2.htm">Next Chapter</A>
+</P>
+<P>&nbsp;
+</P>
+</BODY>
+</HTML>

@@ -1,0 +1,55 @@
+5/25/92:						 Last update: 10/7/97
+
+THIS DIRECTORY CONTAINS UNSUPPORTED PROGRAMS, AND THESE PROGRAMS MAY NOT
+EXIST ON FUTURE FLEXlm DISTRIBUTION KITS.
+
+This directory contains several example program directories.  These 
+programs are intended to provide instruction in the use of various 
+FLEXlm features.  
+
+While we have made every effort to insure that these examples are 
+correct, they are not intended to be release-quality debugged 
+products.  In other words, USE THESE EXAMPLES AT YOUR OWN RISK! 
+
+For developers new to FLEXlm, please read Chapters 1-3 of the 
+Programmers Guide.  For introductory source code examples, please use 
+lmclient.c (Trivial API), lmsimple.c (Simple API) and lmflex.c 
+(FLEXible API).  To build these introductory examples, cd to
+the binary directory for your system (for example, ../sun4_u5)
+and type 
+
+	% make lmclient 
+	% make lmsimple
+	% make lmflex
+
+Other directories:
+
+	licenses -- 	Examples licenses, useful for lmcrypt
+
+Advanced examples provided include:
+
+	child -- 	Child process which checks out a license and 
+			communicates status with parent.  Optional 
+                        encryption of traffic with parent.  A 
+                        possible solution for Unix programs that 
+                        cannot use SIGALRM, but need regular 
+                        heartbeats.  
+
+	java --		Java examples
+
+	vendor_hostid - Example of vendor-defined hostid code.
+
+
+	vendor_info -- 	example of using lc_get_attr(job, LM_A_VD_FEATINFO...).
+
+	advanced -- 	Other Advanced examples, including:
+
+			exinstal.c -- example license installer
+					program.
+
+			lc_co_ex.c -- vendor-daemon checkout filter 
+					(ls_checkout)
+
+			get_dir.c -- gets directory in $PATH command
+				is in; useful for default license file 
+				location

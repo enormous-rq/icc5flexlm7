@@ -1,0 +1,109 @@
+<HTML>
+<HEAD>
+<TITLE>FLEXlm Frequently Asked Questions: Q11.     FLEXlm utilities (lmutil - lmstat, etc.) </TITLE>
+</HEAD>
+<BODY>
+<P><A HREF="TOC.htm">Table of Contents</A>
+ * <A HREF="chap10.htm">Previous Chapter</A>
+ * <A HREF="chap12.htm">Next Chapter</A>
+</P>
+<P>&nbsp;
+</P>
+<H1>Q11.     FLEXlm utilities (<A NAME="IX58">lmutil</A> - lmstat, etc.) </H1>
+<HR>
+<P>
+PC NOTE: On all platforms, the utilities can be invoked with the 
+lmutil command: 
+lmutil lmstat, 
+lmutil lmremove, etc. On the PC, this is the only way to access the utilities. So where you see, 
+for example, the 
+lmstat command, read 
+lmutil lmstat.
+</P>
+<P> On a PC, you also have the option of using lmtools if it was included in your distribution package.  lmtools is a Graphic Interface utility with the same functionality as lmutil.
+<A NAME="Q11.1"></A></P>
+<H2>Q11.1  How do I tell who's currently using a<A NAME="IX59"> feature</A>? </H2>
+<P>
+Use lmstat. This is a utility shipped to vendors and intended for distribution to end-users. 
+</P>
+<PRE>% lmstat -a -c <I>license_file_path</I> </PRE>
+<P>
+will list all the current information available from the server. Note that uncounted licenses are 
+NOT reported by lmstat 
+ -  only counted licenses. 
+<A NAME="Q11.2"></A></P>
+<H2>Q11.2  How do I see historical usage of a feature?</H2>
+<P>
+Correct usage information can be obtained using FLEXadmin's reporting capability.</P>
+
+<A NAME="Q11.3"></A>
+<H2>Q11.3  lmstat sometimes skips features, why?</H2>
+<P>
+This happens for 2 reasons: 
+</P>
+<UL>
+<LI>Uncounted features (number of licenses = 0) aren't shown by lmstat, since the 
+number of users isn't relevant</LI>
+<LI>If an uncounted line has a daemon name of `none', there is a bug that lmstat will ignore 
+subsequent counted features of the same name. To fix, simply change `none' to a valid 
+daemon name.</LI>
+</UL>
+<A NAME="Q11.4"></A>
+<H2>Q11.4  How do I tell if I've typed in the license file <A NAME="IX60">correctly</A>? </H2>
+<P>
+Use lmcksum (copy lmstat to lmcksum if you can't find lmcksum 
+ - See Q8.3). lmcksum -c 
+`license-file'. If you have a v4.0+ license file, and the vendor has included `ck=nnn' on the 
+FEATURE lines, lmcksum will simply report OK or BAD next to each FEATURE line. 
+Otherwise, numbers are reported, and you can ask your supplier to run the same command on 
+the original file, and compare numbers. </P>
+<A NAME="Q11.5"></A>
+<H2>Q11.5   I'm getting `Cannot Connect' errors. How do I determine what's <A NAME="IX61">wrong</A>?</H2>
+<P>
+Use the lmdiag utility. (If you can't find lmdiag, copy a v4.0+ version of lmstat to lmdiag, and 
+you'll have it.) lmdiag will analyze the problem, and, if requested, determine if the problem is 
+that the server is running on a different port than indicated in the license file. 
+</P>
+<P>
+lmdiag also prints out a description of the license file in easily understandable English. 
+</P>
+<P>
+In summary, lmdiag attempts a checkout of the feature, and if it fails, reports why. 
+<A NAME="Q11.6"></A></P>
+<H2>Q11.6  <A NAME="IX62">lmremove</A> doesn't seem to work: after freeing a license, it becomes checked out shortly after. Why? </H2>
+<P>
+That's because lmremove is not intended to free licenses. It has one purpose: when a client node 
+crashes, the license is not freed immediately, and can sometimes take a full day to release the 
+license. This is because when the node crashes the networking also fails. </P>
+<P>
+If you free a license with lmremove for an active process, the application will detect this shortly, 
+and re-checkout the license. 
+<A NAME="Q11.7"></A></P>
+<H2>Q11.7  How do I prevent users at my site from being able to use lmdown? </H2>
+<P>Start the server with the lmgrd -x lmdown switch. This disables 
+the lmdown command. 
+<A NAME="Q11.8"></A></P>
+<H2>Q11.8  If I can't use <A NAME="IX63">lmdown</A>, how do I shutdown the servers? </H2>
+<P>
+In UNIX, use kill, without a flag. DON'T use kill -9. If you use kill without a flag, the server is able to 
+shutdown cleanly, the same, in fact, as if lmdown had been used.
+</P>
+<P>
+In Windows, use the stop button under the FLEXlm License Manager in the Control Panel or lmutil lmdown in DOS.  If all fails to shut down, Crtl-Alt-Del, END TASK(not recommended).<A NAME="Q11.9"></A></P>
+<H2>Q11.9  When I run lmdown on redundant servers, it doesn't seem to work. Why? </H2>
+<P>
+With redundant servers, lmdown returns immediately, but the servers, after having received the 
+request, wait one full minute before actually shutting down. (This is in order to avoid a race 
+condition where a second server would attempt to re-establish quorum with the server that shut 
+down.) Be patient, wait the minute, and you'll see it works. 
+</P>
+<P>
+<HR>
+<A HREF="TOC.htm">Table of Contents</A>
+ * <A HREF="chap10.htm">Previous Chapter</A>
+ * <A HREF="chap12.htm">Next Chapter</A>
+</P>
+<P>&nbsp;
+</P>
+</BODY>
+</HTML>

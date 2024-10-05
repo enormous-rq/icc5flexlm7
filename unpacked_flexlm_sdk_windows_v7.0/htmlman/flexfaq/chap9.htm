@@ -1,0 +1,87 @@
+<HTML>
+<HEAD>
+<TITLE>FLEXlm Frequently Asked Questions: Q9.     Common Debug Log errors</TITLE>
+</HEAD>
+<BODY>
+<P><A HREF="TOC.htm">Table of Contents</A>
+ * <A HREF="chap8.htm">Previous Chapter</A>
+ * <A HREF="chap10.htm">Next Chapter</A>
+</P>
+<P>&nbsp;
+</P>
+<H1>Q9.     Common Debug Log errors</H1>
+<HR>
+<A NAME="Q9.1"></A>
+<H2>Q9.1  Retrying socket bind</H2>
+<P>
+This means the TCP number is already in use port number. Almost always, this means the lmgrd 
+is already running, and you've tried to start it twice. Sometimes (rarely) it means that another 
+program is using this TCP port number. The number is listed on the SERVER line in the license 
+file as the last item. You can change the number and restart lmgrd, but only do this if you don't 
+already have an lmgrd running for this license file. This is improved by using the most current <I>lmgrd</I>.
+<A NAME="Q9.2"></A></P>
+<H2>Q9.2  License manager:<A NAME="IX55"> can't initialize</A>: Cannot find license file</H2>
+<P>
+You've started lmgrd on a non-existent file. There's 2 ways to specify the file for lmgrd to use:
+</P>
+<UL>
+<LI><B>-c</B> license-file</LI>
+<LI>LM_LICENSE_FILE environment variable.</LI>
+</UL>
+<P>
+In either case, the license specified doesn't exist.
+<A NAME="Q9.3"></A></P>
+<H2>Q9.3  <A NAME="IX54">Invalid license key</A> (inconsistent encryption code for `f1')</H2>
+<P>
+This happens for 3 different reasons:
+</P>
+<UL>
+<LI>The license file has been typed in incorrectly (cutting and pasting from email is a safe 
+way to avoid this)</LI>
+<LI>The license was generated incorrectly. Your license supplier will have to generate a 
+new license if this is the case.</LI>
+<LI>(Rare): The license vendor changed encryption seeds. This is actually an incorrectly 
+generated license, but it may be because the company generating the licenses has, in 
+effect, 2 different kinds of license generators. Again, only the license supplier can 
+resolve this.</LI>
+</UL>
+<A NAME="Q9.4"></A>
+<H2>Q9.4  <A NAME="IX53">MULTIPLE</A> `vendor-daemon-name' servers running.</H2>
+<P>
+There's 2 lmgrd and vendor-daemons running for this license file. Only one process per vendor-daemon/per node is allowed by FLEXlm to run. Sometimes this can happen because the lmgrd 
+was killed with a -9 signal (which should not be done!). The lmgrd was then not able to bring 
+the vendor-daemon process down, so it's still running, although not able to serve licenses. If an 
+lmgrd is killed with a -9, the vendor-daemons also then must be killed with a -9 signal. In 
+general, lmdown should be used. If kill is used, you should use kill without a -9 argument. Using the most current <I>lmgrd</I> will help this problem.
+<A NAME="Q9.5"></A></P>
+<H2>Q9.5  Vendor daemon can't talk to lmgrd</H2>
+<P>
+This means a pre-v3.0 lmgrd is being used with a v3.0+ vendor daemon. Simply use the latest 
+version of lmgrd (MUST be a version equal to or greater than the vendor daemon version).
+</P>
+<P>
+(Rare): This can also happen if TCP networking doesn't function on the node where you're 
+trying to run lmgrd.
+<A NAME="Q9.6"></A></P>
+<H2>Q9.6  Vendor daemon died with status n...Since this is an unknown status, lmgrd will attempt to re-start the vendor daemon.</H2>
+<P>
+Often this is accompanied by printing a port number which increases over and over.
+</P>
+<P>
+lmgrd tries to start the vendor daemon using the VENDOR line in the license file, which looks 
+like:
+</P>
+<PRE>VENDOR demo /usr/flexlm/<I>v</I>6.1/<I>platform</I>/demo</PRE>
+<P>
+The /usr/flexlm/<I>v</I>6.1/<I>platform</I>/demo is a path to a binary, and there's something wrong with either the path or the 
+binary itself. One way to debug this is to run vendor daemon directly, using this path, and 
+problem then becomes more apparent.
+<HR>
+<A HREF="TOC.htm">Table of Contents</A>
+ * <A HREF="chap8.htm">Previous Chapter</A>
+ * <A HREF="chap10.htm">Next Chapter</A>
+</P>
+<P>&nbsp;
+</P>
+</BODY>
+</HTML>

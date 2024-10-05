@@ -1,0 +1,151 @@
+<HTML>
+<HEAD>
+<TITLE>FLEXlm Frequently Asked Questions: Q8.     Redundant Servers </TITLE>
+</HEAD>
+<BODY>
+<P><A HREF="TOC.htm">Table of Contents</A>
+ * <A HREF="chap7.htm">Previous Chapter</A>
+ * <A HREF="chap9.htm">Next Chapter</A>
+</P>
+<P>&nbsp;
+</P>
+<H1>Q8.     Redundant Servers </H1>
+<HR>
+<A NAME="Q8.1"></A>
+<H2>Q8.1  What are FLEXlm <A NAME="IX50">redundant servers</A>? </H2>
+<P>
+There's 2 kind of redundancy available through FLEXlm: true redundant servers, and use license-file list with $LM_LICENSE_FILE. 
+</P>
+<P>
+Redundant servers are a set of 3 nodes designated to serve the same license file. The license file 
+has 3 SERVER lines. lmgrd is started on all 3 nodes. One of the servers starts out as the master 
+server and serves licenses. If the master goes down, another server takes over as master. 
+Redundant servers require a quorum of 2 servers to be up, or no licenses are served. 
+</P>
+<P>
+With $LM_LICENSE_FILE list redundancy, each one of a group of license servers 
+serves a subset of the total licenses. The end-user sets LM_LICENSE_FILE to a list of 
+license files, where each license file refers to one of the license servers. The application 
+then tries each server in the list, in order, until it succeeds or gets to the end of the list.
+<A NAME="Q8.2"></A></P>
+<H2>Q8.2  How do I start up redundant servers? Is there a time-limit for starting all the servers? </H2>
+<P>
+There is no time limit. Simply start the servers as convenient. The first server started of the first 
+2 listed in the license file becomes the master. For example, 
+
+</P>
+<PRE>SERVER node1 12345678 2937</PRE>
+
+<PRE>SERVER node2 55489789 2937</PRE>
+
+<PRE>SERVER node3 87564543 2937</PRE>
+<P>
+The first to start of node1 or node2 becomes the master. node3 is never the master - it's there 
+only to maintain quorum. 
+<A NAME="Q8.3"></A></P>
+<H2>Q8.3  Why is a <A NAME="IX51">quorum </A>of 2 servers required?</H2>
+<P>
+Without a quorum, you could easily steal licenses. Here's how: request licenses from redundant 
+servers for 3 nodes each of which are on separate networks. Start each of the 3 nodes. If quorum 
+is not required, they'll each become master, and 3 times the number of licenses purchased will 
+be available. With quorum, this is impossible. 
+<A NAME="Q8.4"></A></P>
+<H2>Q8.4  When are redundant servers recommended? </H2>
+<P>
+For mission critical applications where there's a system administrator available. A good 
+example is a Wall Street trading floor, where a lost server can mean a lost trade. 
+</P>
+<P>
+The reason an administrator is recommended is the following: since a quorum of 2 servers is 
+required, when one server goes down, there are suddenly 2 points of failure. That is, with 2 
+servers up, if EITHER goes down, licenses are denied. In this state, the mathematical reliability 
+of the system is twice as bad as it would be WITHOUT redundant servers, where only one of 
+those 2 nodes would cause failure. Therefore, it's the administrators job to detect when any of 
+the 3 servers are down, and bring it back up as soon as possible. This job is made easier with 
+FLEXadmin, where detection is automatic. </P>
+<A NAME="Q8.5"></A>
+<H2>Q8.5  What hosts should be used for 3-server redundant servers?</H2>
+<P>
+The servers can be mixed platforms: NT, Sun, etc. So, the 3 servers can consist of NT, Sun and 
+HP. The only important thing is that they be reliable and that they have excellent and reliable 
+communications between the 3 systems. The latter requirement is because the servers send 
+periodic heartbeats to each other, and if these heartbeats fail, the servers may have blackout 
+periods, and are generally less reliable. Therefore, placing servers geographically far apart, or 
+in different subnets or domains, is discouraged.</P>
+<A NAME="Q8.6"></A>
+<H2>Q8.6  When are redundant servers discouraged?</H2>
+<OL>
+<LI>At sites without system administrators.</LI>
+<LI>When the software relies on a single host. In this case, there's a single point of failure, 
+and redundant FLEXlm servers only complicates administration and does not add any 
+redundancy to the overall system. 
+</LI>
+</OL>
+<A NAME="Q8.7"></A>
+<H2>Q8.7  Is it OK to NFS-mount license files when using redundant servers?</H2>
+<P>
+If the license file is located only on one node, the redundancy is being defeated. That is, there's 
+a single point of failure, and the redundant servers only complicate administration. 
+<A NAME="Q8.8"></A></P>
+<H2>Q8.8  How can the <A NAME="IX52">license-file list</A> in $LM_LICENSE_FILE be used for redundancy? </H2>
+<P>
+Suppose a customer wants 20 licenses for feature 'f1'. The license distributor can ship 2 license 
+files for 10 licenses each of 'f1', each with one SERVER line, for 2 different hostids. 
+</P>
+<P>
+For example: 
+</P>
+<P>
+File 1:</P>
+<PRE>SERVER node1 12345678 2837</PRE>
+
+<PRE>DAEMON demo /usr/local/flexlm/demo</PRE>
+
+<PRE>FEATURE f1...</PRE>
+<P>
+File 2:
+</P>
+<PRE>SERVER node2 87654321 2837</PRE>
+
+<PRE>DAEMON demo /usr/local/flexlm/demo</PRE>
+
+<PRE>FEATURE f1...</PRE>
+<P>
+The user sets LM_LICENSE_FILE to file1:file2 (or 2837@node1:2837@node2). When a 
+checkout for f1 is attempted it first attempts a checkout from node1. If this fails for any reason, 
+a checkout is attempted from node2. 
+</P>
+<P>
+For PC:</P>
+<P>
+Use `,' (comma) instead of `:' to separate license paths. As of v5 (available Q1, 1996), the 
+comma will change to `;' (semi-colon).
+<A NAME="Q8.9"></A></P>
+<H2>Q8.9  Are there any drawbacks to using the license-file list for redundancy? </H2>
+<P>
+Yes. By default, once an application has successfully checked out a license from one host, all 
+subsequent checkouts must be satisfied from the same host. If the application requires more than 
+one FEATURE, then this could result in a license denial when the license may be available on 
+another server. An application can bypass this restriction with the use of multiple FLEXlm 
+`license jobs', but in practice, few applications do at this time.
+</P>
+<P>
+If the application supports license queueing, all licenses are only queued from the first host on 
+the list. 
+<A NAME="Q8.10"></A></P>
+<H2>Q8.10  When is it recommended to use license-file list for redundancy rather than true redundant servers? </H2>
+<P>
+When there's less system administration available to monitor license servers, when the 
+applications are not mission- critical, and for WAN's. The license-file list has some other advantages: it's 
+more forgiving if you lose quorum; it's not limited to 3 servers (any number will work); and for 
+wide-area networks, you can make servers available locally, with remote servers available as 
+backup. 
+<HR>
+<A HREF="TOC.htm">Table of Contents</A>
+ * <A HREF="chap7.htm">Previous Chapter</A>
+ * <A HREF="chap9.htm">Next Chapter</A>
+</P>
+<P>&nbsp;
+</P>
+</BODY>
+</HTML>
