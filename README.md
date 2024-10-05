@@ -1,9 +1,9 @@
-##### The Goal
+### The Goal
 Get an ancient Intel cpp compiler for linux compiling again. I suppose the best way to do this would be to build a license generator (if only I was smart). Said compiler is protected by FlexLM licensing (now defunct & it's modern ancestor revenera that owns the portfolio of the company that owned the portfolio of the original Globetrotters flexlm offers zero support for things this old. Intel also offers zero support)
 
 This is the compiler that we can't get going. Against all odds we were able to source this file:
 
-[cc010911rh71.tar](cc010911rh71.tar)
+[cc010911rh71.tar](intel-cpp-compiler-5,0,1/cc010911rh71.tar)
 
 We were able to successfully install it on a redhat 7.1 UTM/QEMU emulation using the bundled install script. Not entirely sure using that old of an environment is even necessary, but I would imagine something 32bit would probably be key. After install, there's a variable setting script that can be run. All of the good setup-related stuff is outlined in [this document](intel-cpp-compiler-5,0,1/iccinstructions.md) I translated from a Japanese page. It includes
 
@@ -76,6 +76,10 @@ SERVER localhost.localdomain ANY
 DAEMON intelpto /opt/intel/compiler50/flexlm/intelpto
 FEATURE l_cpp intelpto 5.01 permanent uncounted 4AE8033BCA13B HOSTID=ANY
 ```
+
+---
+
+### Addtl resources
 
 ---
 
