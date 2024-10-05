@@ -26,9 +26,9 @@ setenv PATH ${PATH}:${HOME}:/usr/local/bin:/opt/intel/compiler50/ia32/bin
 source /opt/intel/compiler50/ia32/bin/iccvars.csh
 ```
 
-You can start the license daemon (either using script in above guide or simply `daemon /opt/intel/compiler50/flexlm/lmgrd -c /opt/intel/licenses/license.dat -l /opt/intel/licenses/license.log`)
+You can start the license daemon (either by calling the script from the above guide or call it directly with `daemon /opt/intel/compiler50/flexlm/lmgrd -c /opt/intel/licenses/license.dat -l /opt/intel/licenses/license.log`)
 
-Then, go simply run `icc` and run into the following error:
+Then, simply run `icc` and run into the following error:
 
 ```
 % icc
