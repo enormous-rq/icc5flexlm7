@@ -1,4 +1,4 @@
-### The Goal
+## The Goal
 Get an ancient Intel cpp compiler for linux compiling again. I suppose the best way to do this would be to build a license generator (if only I was smart). Said compiler is protected by FlexLM licensing (now defunct & it's modern ancestor revenera that owns the portfolio of the company that owned the portfolio of the original Globetrotters flexlm offers zero support for things this old. Intel also offers zero support)
 
 This is the compiler that we can't get going. Against all odds we were able to source this file:
@@ -17,7 +17,7 @@ _Note - I was having weird issues until I renamed the license file license.lic b
 
 --- 
 
-##### The Problem
+## The Problem
 
 As for demonstrating being walled off by FlexLM, after placing a sample license file in `/opt/intel/licenses/license.lic` & sourcing the `icc` command into your shell using:
 
@@ -80,7 +80,7 @@ FEATURE l_cpp intelpto 5.01 permanent uncounted 4AE8033BCA13B HOSTID=ANY
 
 ---
 
-### Addtl resources
+## Addtl resources
 
 ---
 
