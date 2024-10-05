@@ -28,7 +28,7 @@ source /opt/intel/compiler50/ia32/bin/iccvars.csh
 
 You can start the license daemon (either using script in above guide or simply `daemon /opt/intel/compiler50/flexlm/lmgrd -c /opt/intel/licenses/license.dat -l /opt/intel/licenses/license.log`)
 
-You can simply run `icc` and run into the following error:
+Then, go simply run `icc` and run into the following error:
 
 ```
 % icc
