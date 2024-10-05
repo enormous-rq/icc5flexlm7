@@ -86,7 +86,7 @@ https://gbppr.net/greythorne/crackz/Flexlm.htm
 
 The above website seems to be the single-biggest repository of still-alive links to essays and tools around the subject. Most of the tools are Windows tools, and I am unable to source a Windows version of ICC 5.0.1's installation media so I've been unable to pursue most of this. But I have tried some and I'm just not sure I'm hunting for the right things, I've been at this mercilously for a week now and it's robbed me of my sanity. 
 
-There is a tool in here that looks like it does it all (Flexgen) but I read quite a few posts on it not being able to reliable generate licenses (plus it sticks weird piracy-group name attribution to the license file). I had no luck with hit myself. 
+There is a tool in here that looks like it does it all (Flexgen) but I read quite a few posts on it not being able to generate working licenses (it also doesn't include the vendor I'm interested in & it sticks weird piracy-group name attribution to the license file. What an era the early 2000s was). I had no luck with hit myself. 
 
 Note: Essays/tools by Nolan Blender appear to be really solid. Siulflex's essay, from what I've gathered, was like the original infamous first-pass at defeating FlexLM. I don't recall what version that was for, but it sounds like he/she got the ball rolling. In that essay there is a perl script he provides to do the disassembly/memory stuff (things people probably use Ollydbg, IDA for now). The archiving/restoring of this site however has seemingly nerfed the code, but I think I successfully restored it [here](maybe_useful_guides_tools/dasm.pl). 
 
